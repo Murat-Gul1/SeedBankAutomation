@@ -117,10 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BasariBaslik" xml:space="preserve">
+    <value>Başarılı</value>
+  </data>
+  <data name="btnGirisYap_Text" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
   <data name="btnGiris_ToolTip" xml:space="preserve">
     <value>Kullanıcı Girişi</value>
   </data>
+  <data name="btnKaydol_Text" xml:space="preserve">
+    <value>Kayıt Ol</value>
+  </data>
+  <data name="btnKayitOl_Text" xml:space="preserve">
+    <value>Hesabınız yok mu? Kayıt Olun</value>
+  </data>
+  <data name="btnKayitTemizle_Text" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
+  <data name="btnTemizle_Text" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Tohum Bankası Otomasyonu</value>
+  </data>
+  <data name="FormGiris_Title" xml:space="preserve">
+    <value>Kullanıcı Girişi</value>
+  </data>
+  <data name="FormKayitOl_Title" xml:space="preserve">
+    <value>Kullanıcı Kaydı</value>
+  </data>
+  <data name="GenelHata" xml:space="preserve">
+    <value>Kayıt sırasında beklenmedik bir hata oluştu:</value>
+  </data>
+  <data name="HataBaslik" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="KayitBasariliMesaj" xml:space="preserve">
+    <value>Kaydınız başarıyla tamamlandı. Şimdi giriş yapabilirsiniz.</value>
+  </data>
+  <data name="KullaniciAdiMevcutHata" xml:space="preserve">
+    <value>Bu kullanıcı adı zaten alınmış. Lütfen farklı bir kullanıcı adı deneyin.</value>
+  </data>
+  <data name="labelKayitAd" xml:space="preserve">
+    <value>Ad:*</value>
+  </data>
+  <data name="labelKayitEmail" xml:space="preserve">
+    <value>E-posta:</value>
+  </data>
+  <data name="labelKayitKullaniciAdi" xml:space="preserve">
+    <value>Kullanıcı Adı: *</value>
+  </data>
+  <data name="labelKayitSifre" xml:space="preserve">
+    <value>Şifre: *</value>
+  </data>
+  <data name="labelKayitSifreTekrar" xml:space="preserve">
+    <value>Şifre Tekrar: *</value>
+  </data>
+  <data name="labelKayitSoyad" xml:space="preserve">
+    <value>Soyad:*</value>
+  </data>
+  <data name="labelKullaniciAdi" xml:space="preserve">
+    <value>Kullanıcı Adı:</value>
+  </data>
+  <data name="labelSifre" xml:space="preserve">
+    <value>Şifre:</value>
+  </data>
+  <data name="SifreEslesmeHata" xml:space="preserve">
+    <value>Girdiğiniz şifreler birbiriyle eşleşmiyor.</value>
+  </data>
+  <data name="ZorunluAlanlarHata" xml:space="preserve">
+    <value>Yıldızlı (*) alanların tamamı doldurulmalıdır.</value>
   </data>
 </root>

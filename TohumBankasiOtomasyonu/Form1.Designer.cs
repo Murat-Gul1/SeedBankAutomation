@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             pnlToolbar = new DevExpress.XtraEditors.PanelControl();
+            btnGiris = new DevExpress.XtraEditors.SimpleButton();
             btnDil = new DevExpress.XtraEditors.SimpleButton();
             pnlDilSecenekleri = new DevExpress.XtraEditors.PanelControl();
             btnIngilizce = new DevExpress.XtraEditors.SimpleButton();
             btnTurkce = new DevExpress.XtraEditors.SimpleButton();
-            btnGiris = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)pnlToolbar).BeginInit();
             pnlToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pnlDilSecenekleri).BeginInit();
@@ -50,6 +50,19 @@
             pnlToolbar.Size = new System.Drawing.Size(668, 56);
             pnlToolbar.TabIndex = 0;
             pnlToolbar.Click += pnlToolbar_Click;
+            // 
+            // btnGiris
+            // 
+            btnGiris.Dock = System.Windows.Forms.DockStyle.Left;
+            btnGiris.ImageOptions.Image = Properties.Resources.useraccount;
+            btnGiris.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            btnGiris.Location = new System.Drawing.Point(2, 2);
+            btnGiris.LookAndFeel.UseDefaultLookAndFeel = false;
+            btnGiris.Name = "btnGiris";
+            btnGiris.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            btnGiris.Size = new System.Drawing.Size(61, 52);
+            btnGiris.TabIndex = 1;
+            btnGiris.Click += btnGiris_Click;
             // 
             // btnDil
             // 
@@ -95,18 +108,6 @@
             btnTurkce.TabIndex = 0;
             btnTurkce.Text = "Türkçe";
             btnTurkce.Click += btnTurkce_Click;
-            // 
-            // btnGiris
-            // 
-            btnGiris.Dock = System.Windows.Forms.DockStyle.Left;
-            btnGiris.ImageOptions.Image = Properties.Resources.useraccount;
-            btnGiris.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            btnGiris.Location = new System.Drawing.Point(2, 2);
-            btnGiris.LookAndFeel.UseDefaultLookAndFeel = false;
-            btnGiris.Name = "btnGiris";
-            btnGiris.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            btnGiris.Size = new System.Drawing.Size(61, 52);
-            btnGiris.TabIndex = 1;
             // 
             // Form1
             // 

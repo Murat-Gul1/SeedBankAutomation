@@ -209,5 +209,49 @@ namespace TohumBankasiOtomasyonu
             UygulaDil();
             pnlDilSecenekleri.Visible = false;
         }
+
+        private void btnGiris_Click(object sender, EventArgs e)
+        {
+
+            // Bu bayrak, kullanıcı giriş yapana veya 'X'e basıp vazgeçene kadar
+            // döngünün devam etmesini sağlar.
+
+            // This flag keeps the loop running
+            // until the user logs in or clicks 'X' to cancel
+            bool girisIslemiTamamlandi = false;
+
+            while (!girisIslemiTamamlandi)
+            {
+                // 1. ADIM: GİRİŞ FORMUNU AÇ
+                // STEP 1: Open the login form
+                FormGiris frmGiris = new FormGiris();
+                frmGiris.ShowDialog();
+
+                // 2. ADIM: GİRİŞ FORMU KAPANDI. NEDEN KAPANDIĞINI KONTROL ET.
+                // STEP 2: THE LOGIN FORM HAS CLOSED. CHECK WHY IT CLOSED.
+
+                if (frmGiris.KayitOlmakIstiyor)
+                {
+
+                    FormKayitOl frmKayit = new FormKayitOl();
+                    frmKayit.ShowDialog(this); 
+
+
+                    if (frmKayit.KayitBasarili)
+                    {
+
+                        continue;
+                    }
+                    else
+                    {
+                        girisIslemiTamamlandi = true;
+                    }
+                }
+                else
+                {
+                    girisIslemiTamamlandi = true;
+                }
+            }
+        }
     }
 }

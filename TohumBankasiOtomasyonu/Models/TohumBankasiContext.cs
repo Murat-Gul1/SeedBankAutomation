@@ -83,11 +83,13 @@ public partial class TohumBankasiContext : DbContext
             entity.HasIndex(e => e.KullaniciAdi, "IX_Kullanicilar_KullaniciAdi").IsUnique();
 
             entity.Property(e => e.KullaniciId).HasColumnName("KullaniciID");
+            entity.Property(e => e.Ad).IsRequired();
             entity.Property(e => e.KullaniciAdi).IsRequired();
             entity.Property(e => e.KullaniciTipi)
                 .IsRequired()
                 .HasDefaultValue("Kullanici");
             entity.Property(e => e.SifreHash).IsRequired();
+            entity.Property(e => e.Soyad).IsRequired();
         });
 
         modelBuilder.Entity<SahteBlokzincir>(entity =>
