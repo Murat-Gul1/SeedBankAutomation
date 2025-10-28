@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
+using System.Globalization;
 
 namespace TohumBankasiOtomasyonu
 {
@@ -54,6 +56,25 @@ namespace TohumBankasiOtomasyonu
                     this.Size = Properties.Settings.Default.WindowSize;
                 }
             }
+            UygulaDil();
+        }
+
+        // Bu metot, formdaki tüm metinleri o an seçili olan dile göre
+        // .resx sözlük dosyasından yeniden yükler.
+        // This method reloads all texts on the form from the
+        // .resx dictionary file according to the currently selected language.
+
+        private void UygulaDil()
+        {
+            // Sözlükten verileri çek
+            // 'Resources' sınıfı, bizim .resx dosyalarımız için otomatik olarak oluşturuldu.
+            // O anki dile (Culture) göre doğru sözlüğü kendisi seçer.
+            // Fetch data from the dictionary  
+            // The 'Resources' class was automatically generated for our .resx dictionary files.  
+            // It automatically selects the correct dictionary based on the current language (Culture).
+
+            this.Text = Resources.Form1_Title;
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -159,11 +180,29 @@ namespace TohumBankasiOtomasyonu
 
         private void btnTurkce_Click(object sender, EventArgs e)
         {
+            // 1. Programın aktif dilini "Türkçe" (tr-TR) olarak ayarla
+            // 1. Set the program's active language to "Turkish" (tr-TR)
+
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("tr-TR");
+
+            // 2. Formdaki tüm metinleri sözlükten yeniden yükle
+            // 2. Reload all texts on the form from the dictionary.
+
+            UygulaDil();
             pnlDilSecenekleri.Visible = false;
         }
 
         private void btnIngilizce_Click(object sender, EventArgs e)
         {
+            // 1. Programın aktif dilini "İngilizce" (en-US) olarak ayarla
+            // 1. Set the program's active language to "English" (en-US)
+
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+
+            // 2. Formdaki tüm metinleri sözlükten yeniden yükle
+            // 2. Reload all texts on the form from the dictionary.
+
+            UygulaDil();
             pnlDilSecenekleri.Visible = false;
         }
     }
