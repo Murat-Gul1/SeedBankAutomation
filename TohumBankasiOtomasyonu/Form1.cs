@@ -91,5 +91,80 @@ namespace TohumBankasiOtomasyonu
             // Save all changes to the settings file.
             Properties.Settings.Default.Save();
         }
+
+        private void btnDil_Click(object sender, EventArgs e)
+        {
+            // 1. Paneli, butonun tam altına ve sağına hizalı şekilde taşıyalım.
+            //    Butonun form üzerindeki ekran koordinatlarını al.
+            // 1. Move the panel aligned directly below and to the right of the button.  
+            //    Get the button's screen coordinates on the form.
+
+            Point btnKonum = btnDil.PointToScreen(Point.Empty);
+            //    Formun ekran koordinatlarını al.
+            //    Get the form's screen coordinates.
+
+            Point formKonum = this.PointToScreen(Point.Empty);
+
+            //    Panelin 'x' pozisyonu: (Butonun x'i - Formun x'i) + Butonun genişliği - Panelin genişliği
+            //    Bu hesap, panelin sağ kenarını butonun sağ kenarına hizalar.
+            //    Panel's 'x' position: (Button's x - Form's x) + Button's width - Panel's width  
+            //    This calculation aligns the panel's right edge with the button's right edge.
+
+            int x = (btnKonum.X - formKonum.X) + btnDil.Width - pnlDilSecenekleri.Width;
+
+            //    Panelin 'y' pozisyonu: (Butonun y'si - Formun y'si) + Butonun yüksekliği
+            //    Bu hesap, paneli butonun tam altına yerleştirir.
+            //    Panel's 'y' position: (Button's y - Form's y) + Button's height  
+            //    This calculation places the panel directly below the button.
+
+            int y = (btnKonum.Y - formKonum.Y) + btnDil.Height;
+
+            pnlDilSecenekleri.Location = new Point(x, y);
+
+            // 2. Panelin görünürlüğünü tersine çevir (Açıksa kapat, kapalıysa aç).
+            // 2. Toggle the panel's visibility (Close if open, open if closed).
+
+            pnlDilSecenekleri.Visible = !pnlDilSecenekleri.Visible;
+
+            // 3. Paneli açtıysak, en üste getirelim ve odaklanalım.
+            // 3. If we opened the panel, bring it to the front and focus on it.
+
+            if (pnlDilSecenekleri.Visible)
+            {
+                pnlDilSecenekleri.BringToFront(); // Diğer kontrollerin üstünde dursun(Let it stay above the other controls.)
+                pnlDilSecenekleri.Focus();
+            }
+        }
+
+        private void Form1_Click(object sender, EventArgs e)
+        {
+            // Formun boş bir yerine tıklanırsa paneli gizle
+            // Hide the panel when an empty area of the form is clicked.
+
+            pnlDilSecenekleri.Visible = false;
+        }
+
+        private void pnlToolbar_Click(object sender, EventArgs e)
+        {
+            // Üst menü paneline tıklanırsa da paneli gizle
+            // Also hide the panel when the top menu panel is clicked.
+
+            pnlDilSecenekleri.Visible = false;
+        }
+
+        private void pnlDilSecenekleri_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTurkce_Click(object sender, EventArgs e)
+        {
+            pnlDilSecenekleri.Visible = false;
+        }
+
+        private void btnIngilizce_Click(object sender, EventArgs e)
+        {
+            pnlDilSecenekleri.Visible = false;
+        }
     }
 }
