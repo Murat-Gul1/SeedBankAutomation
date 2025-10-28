@@ -75,6 +75,10 @@ namespace TohumBankasiOtomasyonu
 
             this.Text = Resources.Form1_Title;
 
+            //Giriş butonunun açıklamasını (ToolTip) ayarla
+            // Set the description (ToolTip) of the login button.
+            btnGiris.ToolTip = Resources.btnGiris_ToolTip;
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

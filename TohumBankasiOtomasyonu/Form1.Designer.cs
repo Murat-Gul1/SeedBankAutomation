@@ -33,6 +33,7 @@
             pnlDilSecenekleri = new DevExpress.XtraEditors.PanelControl();
             btnIngilizce = new DevExpress.XtraEditors.SimpleButton();
             btnTurkce = new DevExpress.XtraEditors.SimpleButton();
+            btnGiris = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)pnlToolbar).BeginInit();
             pnlToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pnlDilSecenekleri).BeginInit();
@@ -41,6 +42,7 @@
             // 
             // pnlToolbar
             // 
+            pnlToolbar.Controls.Add(btnGiris);
             pnlToolbar.Controls.Add(btnDil);
             pnlToolbar.Dock = System.Windows.Forms.DockStyle.Top;
             pnlToolbar.Location = new System.Drawing.Point(0, 0);
@@ -94,6 +96,18 @@
             btnTurkce.Text = "Türkçe";
             btnTurkce.Click += btnTurkce_Click;
             // 
+            // btnGiris
+            // 
+            btnGiris.Dock = System.Windows.Forms.DockStyle.Left;
+            btnGiris.ImageOptions.Image = Properties.Resources.useraccount;
+            btnGiris.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            btnGiris.Location = new System.Drawing.Point(2, 2);
+            btnGiris.LookAndFeel.UseDefaultLookAndFeel = false;
+            btnGiris.Name = "btnGiris";
+            btnGiris.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            btnGiris.Size = new System.Drawing.Size(61, 52);
+            btnGiris.TabIndex = 1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,5 +134,6 @@
         private DevExpress.XtraEditors.PanelControl pnlDilSecenekleri;
         private DevExpress.XtraEditors.SimpleButton btnIngilizce;
         private DevExpress.XtraEditors.SimpleButton btnTurkce;
+        private DevExpress.XtraEditors.SimpleButton btnGiris;
     }
 }

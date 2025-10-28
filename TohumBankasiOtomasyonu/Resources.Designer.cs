@@ -61,6 +61,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kullanıcı Girişi.
+        /// </summary>
+        internal static string btnGiris_ToolTip {
+            get {
+                return ResourceManager.GetString("btnGiris_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tohum Bankası Otomasyonu.
         /// </summary>
         internal static string Form1_Title {
