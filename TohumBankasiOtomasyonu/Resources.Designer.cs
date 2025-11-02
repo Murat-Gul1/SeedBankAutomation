@@ -70,6 +70,24 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Admin Paneli.
+        /// </summary>
+        internal static string btnAdminPaneli_ToolTip {
+            get {
+                return ResourceManager.GetString("btnAdminPaneli_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Güvenli Çıkış.
+        /// </summary>
+        internal static string btnCikisYap_ToolTip {
+            get {
+                return ResourceManager.GetString("btnCikisYap_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kullanıcı Girişi.
         /// </summary>
         internal static string btnGiris_ToolTip {
@@ -84,6 +102,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string btnGirisYap_Text {
             get {
                 return ResourceManager.GetString("btnGirisYap_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilgileri Güncelle.
+        /// </summary>
+        internal static string btnHesapGuncelle {
+            get {
+                return ResourceManager.GetString("btnHesapGuncelle", resourceCulture);
             }
         }
         
@@ -115,11 +142,47 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kullanıcı Ayarları.
+        /// </summary>
+        internal static string btnKullaniciAyarlari_ToolTip {
+            get {
+                return ResourceManager.GetString("btnKullaniciAyarlari_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Temizle.
         /// </summary>
         internal static string btnTemizle_Text {
             get {
                 return ResourceManager.GetString("btnTemizle_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to İptal.
+        /// </summary>
+        internal static string ButonIptal {
+            get {
+                return ResourceManager.GetString("ButonIptal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sil.
+        /// </summary>
+        internal static string ButonSil {
+            get {
+                return ResourceManager.GetString("ButonSil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Başarıyla çıkış yaptınız..
+        /// </summary>
+        internal static string CikisBasariliMesaj {
+            get {
+                return ResourceManager.GetString("CikisBasariliMesaj", resourceCulture);
             }
         }
         
@@ -142,6 +205,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hesap Ayarları.
+        /// </summary>
+        internal static string FormHesapAyarlari_Title {
+            get {
+                return ResourceManager.GetString("FormHesapAyarlari_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kullanıcı Kaydı.
         /// </summary>
         internal static string FormKayitOl_Title {
@@ -160,11 +232,65 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kullanıcı adı ve şifre boş bırakılamaz..
+        /// </summary>
+        internal static string GirisAlanlarBosHata {
+            get {
+                return ResourceManager.GetString("GirisAlanlarBosHata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hoşgeldiniz, {0} {1}! ({2}).
+        /// </summary>
+        internal static string GirisBasariliMesaj {
+            get {
+                return ResourceManager.GetString("GirisBasariliMesaj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kullanıcı adı veya şifre hatalı..
+        /// </summary>
+        internal static string GirisHataliMesaj {
+            get {
+                return ResourceManager.GetString("GirisHataliMesaj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilgileriniz başarıyla güncellendi..
+        /// </summary>
+        internal static string GuncellemeBasarili {
+            get {
+                return ResourceManager.GetString("GuncellemeBasarili", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hata.
         /// </summary>
         internal static string HataBaslik {
             get {
                 return ResourceManager.GetString("HataBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hesabı Sil.
+        /// </summary>
+        internal static string HesapSilUyariBaslik {
+            get {
+                return ResourceManager.GetString("HesapSilUyariBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hesabınız kalıcı olarak ve geri döndürülemez şekilde silinecektir. Bu işlemi yapmak istediğinizden emin misiniz?.
+        /// </summary>
+        internal static string HesapSilUyariMesaj {
+            get {
+                return ResourceManager.GetString("HesapSilUyariMesaj", resourceCulture);
             }
         }
         
@@ -183,6 +309,69 @@ namespace TohumBankasiOtomasyonu {
         internal static string KullaniciAdiMevcutHata {
             get {
                 return ResourceManager.GetString("KullaniciAdiMevcutHata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ad:.
+        /// </summary>
+        internal static string labelHesapAd {
+            get {
+                return ResourceManager.GetString("labelHesapAd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-posta:.
+        /// </summary>
+        internal static string labelHesapEmail {
+            get {
+                return ResourceManager.GetString("labelHesapEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kullanıcı Adı:.
+        /// </summary>
+        internal static string labelHesapKullaniciAdi {
+            get {
+                return ResourceManager.GetString("labelHesapKullaniciAdi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mevcut Şifre: .
+        /// </summary>
+        internal static string labelHesapMevcutSifre {
+            get {
+                return ResourceManager.GetString("labelHesapMevcutSifre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soyad:.
+        /// </summary>
+        internal static string labelHesapSoyad {
+            get {
+                return ResourceManager.GetString("labelHesapSoyad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni Şifre:.
+        /// </summary>
+        internal static string labelHesapYeniSifre {
+            get {
+                return ResourceManager.GetString("labelHesapYeniSifre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni Şifre Tekrar:.
+        /// </summary>
+        internal static string labelHesapYeniSifreTekrar {
+            get {
+                return ResourceManager.GetString("labelHesapYeniSifreTekrar", resourceCulture);
             }
         }
         
@@ -259,11 +448,47 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hesabımı Kalıcı Olarak Kapat.
+        /// </summary>
+        internal static string linkHesapSil {
+            get {
+                return ResourceManager.GetString("linkHesapSil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Değişiklikleri kaydetmek için girdiğiniz mevcut şifre hatalı..
+        /// </summary>
+        internal static string MevcutSifreHatali {
+            get {
+                return ResourceManager.GetString("MevcutSifreHatali", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Girdiğiniz şifreler birbiriyle eşleşmiyor..
         /// </summary>
         internal static string SifreEslesmeHata {
             get {
                 return ResourceManager.GetString("SifreEslesmeHata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin.
+        /// </summary>
+        internal static string UserType_Admin {
+            get {
+                return ResourceManager.GetString("UserType_Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kullanıcı.
+        /// </summary>
+        internal static string UserType_Kullanici {
+            get {
+                return ResourceManager.GetString("UserType_Kullanici", resourceCulture);
             }
         }
         

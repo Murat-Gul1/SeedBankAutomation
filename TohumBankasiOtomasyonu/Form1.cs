@@ -1,18 +1,23 @@
-﻿using System;
+﻿using DevExpress.XtraEditors;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Threading;
-using System.Globalization;
-
+using System.Windows.Forms;
+using TohumBankasiOtomasyonu.Models;
+using TohumBankasiOtomasyonu.Properties;
 namespace TohumBankasiOtomasyonu
 {
     public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
+        // Giriş yapan kullanıcıyı formun her yerinden erişebilmek için burada tutacağız
+        // We'll store the logged-in user here to access them from anywhere in the form
+        private Kullanicilar aktifKullanici = null;
         public Form1()
         {
             InitializeComponent();
@@ -57,6 +62,9 @@ namespace TohumBankasiOtomasyonu
                 }
             }
             UygulaDil();
+            // Programın 'Çıkış Yapılmış' modda başladığından emin ol
+            // Ensure the program starts in the 'Logged Out' mode
+            GuncelleArayuz(null);
         }
 
         // Bu metot, formdaki tüm metinleri o an seçili olan dile göre
@@ -79,6 +87,11 @@ namespace TohumBankasiOtomasyonu
             // Set the description (ToolTip) of the login button.
             btnGiris.ToolTip = Resources.btnGiris_ToolTip;
 
+            // Admin paneli butonunun açıklamasını(ToolTip) ayarla
+            // Set the tooltip for the admin panel button
+            btnAdminPaneli.ToolTip = Resources.btnAdminPaneli_ToolTip;
+            btnKullaniciAyarlari.ToolTip = Resources.btnKullaniciAyarlari_ToolTip;
+            btnCikisYap.ToolTip = Resources.btnCikisYap_ToolTip;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -212,46 +225,149 @@ namespace TohumBankasiOtomasyonu
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
-
-            // Bu bayrak, kullanıcı giriş yapana veya 'X'e basıp vazgeçene kadar
-            // döngünün devam etmesini sağlar.
-
-            // This flag keeps the loop running
-            // until the user logs in or clicks 'X' to cancel
             bool girisIslemiTamamlandi = false;
 
             while (!girisIslemiTamamlandi)
             {
-                // 1. ADIM: GİRİŞ FORMUNU AÇ
-                // STEP 1: Open the login form
                 FormGiris frmGiris = new FormGiris();
                 frmGiris.ShowDialog();
 
-                // 2. ADIM: GİRİŞ FORMU KAPANDI. NEDEN KAPANDIĞINI KONTROL ET.
-                // STEP 2: THE LOGIN FORM HAS CLOSED. CHECK WHY IT CLOSED.
-
                 if (frmGiris.KayitOlmakIstiyor)
                 {
-
                     FormKayitOl frmKayit = new FormKayitOl();
-                    frmKayit.ShowDialog(this); 
-
-
-                    if (frmKayit.KayitBasarili)
+                    frmKayit.ShowDialog(this);
+                    if (frmKayit.KayitBasarili) { continue; } else { girisIslemiTamamlandi = true; }
+                }
+                // Kayıt olmak istemiyor, yani ya giriş yaptı ya da 'X'e bastı
+                // Doesn't want to register, meaning either logged in or clicked 'X'
+                else
+                {
+                    // Giriş başarılı mı diye kontrol et
+                    // Check if the login was successful
+                    if (frmGiris.GirisYapanKullanici != null)
                     {
-
-                        continue;
+                        // BAŞARILI GİRİŞ!
+                        // SUCCESSFUL LOGIN!
+                        // Kullanıcıyı Form1'e al
+                        // Transfer the user to Form1
+                        aktifKullanici = frmGiris.GirisYapanKullanici;
+                        girisIslemiTamamlandi = true;
                     }
                     else
                     {
+                        // BAŞARISIZ GİRİŞ veya X'e basıldı.
+                        // Kullanıcı işlemden vazgeçti. Döngüyü bitir.
+                        // FAILED LOGIN or 'X' was clicked.  
+                        // The user canceled the operation. End the loop.
                         girisIslemiTamamlandi = true;
                     }
                 }
+            }
+
+            if (aktifKullanici != null)
+            {
+                // --- 1. KULLANICI TİPİNİ SÖZLÜKTEN ÇEVİRME ---
+                // --- 1. TRANSLATING USER TYPE FROM DICTIONARY ---
+
+                string cevrilmisKullaniciTipi = "";
+                if (aktifKullanici.KullaniciTipi == "Admin")
+                {
+                    cevrilmisKullaniciTipi = Resources.UserType_Admin;
+                }
                 else
                 {
-                    girisIslemiTamamlandi = true;
+                    cevrilmisKullaniciTipi = Resources.UserType_Kullanici;
+                }
+                // --- BİTTİ ---
+                // --- DONE ---
+
+
+                // 2. Sözlükten o anki dile ait mesaj formatını çek
+                // 2. Retrieve the message format for the current language from the dictionary
+
+                string mesajFormati = Resources.GirisBasariliMesaj;
+
+                // 3. Joker karakterleri kullanıcının bilgileriyle ve çevrilmiş tiple doldur
+                // 3. Fill wildcard characters with user's information and translated type
+
+                string sonMesaj = string.Format(mesajFormati,
+                    aktifKullanici.Ad,
+                    aktifKullanici.Soyad,
+                    cevrilmisKullaniciTipi);
+
+
+                XtraMessageBox.Show(sonMesaj, Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Arayüzü güncelle
+                // Update the user interface
+                GuncelleArayuz(aktifKullanici);
+
+            }
+        }
+        private void GuncelleArayuz(Kullanicilar girisYapanKullanici)
+        {
+            if (girisYapanKullanici != null)
+            {
+                // --- GİRİŞ BAŞARILI DURUMU ---
+                // --- SUCCESSFUL LOGIN STATE ---
+                btnGiris.Visible = false;             // Giriş butonunu GİZLE (Hide the login button)
+                btnKullaniciAyarlari.Visible = true;  // Ayarlar butonunu GÖSTER(Show the settings button)
+                btnCikisYap.Visible = true;           // Çıkış butonunu GÖSTER(Show the logout button)
+
+                // Kullanıcı tipine göre Admin Panelini göster/gizle
+                // Show or hide the Admin Panel based on the user type
+                if (girisYapanKullanici.KullaniciTipi == "Admin")
+                {
+                    btnAdminPaneli.Visible = true;
+                }
+                else
+                {
+                    btnAdminPaneli.Visible = false;
                 }
             }
+            else
+            {
+                // --- ÇIKIŞ YAPILMIŞ VEYA BAŞLANGIÇ DURUMU ---
+                // --- LOGGED OUT OR INITIAL STATE ---
+                btnGiris.Visible = true;              // Giriş butonunu GÖSTER (Show the login button)
+                btnKullaniciAyarlari.Visible = false; // Ayarlar butonunu GİZLE(Hide the settings button)
+                btnCikisYap.Visible = false;          // Çıkış butonunu GİZLE(Hide the logout button)
+                btnAdminPaneli.Visible = false;       // Admin panelini GİZLE(Hide the admin panel)
+            }
+        }
+
+        private void btnCikisYap_Click(object sender, EventArgs e)
+        {
+            // 1. Kullanıcıya çıkış yaptığını bildir
+            // 1. Notify the user that they have logged out
+            XtraMessageBox.Show(Resources.CikisBasariliMesaj, Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // 2. Aktif kullanıcıyı 'null' olarak ayarla
+            // 2. Set the active user to 'null'
+            aktifKullanici = null;
+
+            // 3. Arayüzü 'çıkış yapılmış' (logged-out) duruma getir
+            // 3. Set the user interface to the 'logged-out' state
+            GuncelleArayuz(null);
+        }
+
+        private void btnKullaniciAyarlari_Click(object sender, EventArgs e)
+        {
+            // Giriş yapmış bir kullanıcı olduğundan emin ol
+            if (aktifKullanici == null)
+            {
+                // (Bu aslında 'GuncelleArayuz' mantığı yüzünden asla olmamalı,
+                // ama bir güvenlik kontrolü olarak iyidir)
+                XtraMessageBox.Show("Ayarları görmek için önce giriş yapmalısınız.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Formu, Adım 1'de yazdığımız YENİ oluşturucuyu (constructor) kullanarak
+            // ve 'aktifKullanici' bilgisini göndererek aç.
+            FormHesapAyarlari frmAyar = new FormHesapAyarlari(aktifKullanici);
+            frmAyar.ShowDialog();
+
+            // (Gelecekte, eğer kullanıcı bilgilerini güncellerse
+            // 'aktifKullanici' değişkenini de burada yenilememiz gerekebilir)
         }
     }
 }

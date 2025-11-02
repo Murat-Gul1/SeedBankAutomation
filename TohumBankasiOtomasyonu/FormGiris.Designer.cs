@@ -72,6 +72,7 @@
             btnGirisYap.Size = new System.Drawing.Size(99, 22);
             btnGirisYap.TabIndex = 3;
             btnGirisYap.Text = "simpleButton1";
+            btnGirisYap.Click += btnGirisYap_Click;
             // 
             // txtSifre
             // 

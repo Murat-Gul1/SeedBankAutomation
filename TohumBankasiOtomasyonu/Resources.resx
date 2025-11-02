@@ -120,11 +120,20 @@
   <data name="BasariBaslik" xml:space="preserve">
     <value>Başarılı</value>
   </data>
+  <data name="btnAdminPaneli_ToolTip" xml:space="preserve">
+    <value>Admin Paneli</value>
+  </data>
+  <data name="btnCikisYap_ToolTip" xml:space="preserve">
+    <value>Güvenli Çıkış</value>
+  </data>
   <data name="btnGirisYap_Text" xml:space="preserve">
     <value>Giriş Yap</value>
   </data>
   <data name="btnGiris_ToolTip" xml:space="preserve">
     <value>Kullanıcı Girişi</value>
+  </data>
+  <data name="btnHesapGuncelle" xml:space="preserve">
+    <value>Bilgileri Güncelle</value>
   </data>
   <data name="btnKaydol_Text" xml:space="preserve">
     <value>Kayıt Ol</value>
@@ -135,8 +144,20 @@
   <data name="btnKayitTemizle_Text" xml:space="preserve">
     <value>Temizle</value>
   </data>
+  <data name="btnKullaniciAyarlari_ToolTip" xml:space="preserve">
+    <value>Kullanıcı Ayarları</value>
+  </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Temizle</value>
+  </data>
+  <data name="ButonIptal" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="ButonSil" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="CikisBasariliMesaj" xml:space="preserve">
+    <value>Başarıyla çıkış yaptınız.</value>
   </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Tohum Bankası Otomasyonu</value>
@@ -144,20 +165,62 @@
   <data name="FormGiris_Title" xml:space="preserve">
     <value>Kullanıcı Girişi</value>
   </data>
+  <data name="FormHesapAyarlari_Title" xml:space="preserve">
+    <value>Hesap Ayarları</value>
+  </data>
   <data name="FormKayitOl_Title" xml:space="preserve">
     <value>Kullanıcı Kaydı</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>Kayıt sırasında beklenmedik bir hata oluştu:</value>
   </data>
+  <data name="GirisAlanlarBosHata" xml:space="preserve">
+    <value>Kullanıcı adı ve şifre boş bırakılamaz.</value>
+  </data>
+  <data name="GirisBasariliMesaj" xml:space="preserve">
+    <value>Hoşgeldiniz, {0} {1}! ({2})</value>
+  </data>
+  <data name="GirisHataliMesaj" xml:space="preserve">
+    <value>Kullanıcı adı veya şifre hatalı.</value>
+  </data>
+  <data name="GuncellemeBasarili" xml:space="preserve">
+    <value>Bilgileriniz başarıyla güncellendi.</value>
+  </data>
   <data name="HataBaslik" xml:space="preserve">
     <value>Hata</value>
+  </data>
+  <data name="HesapSilUyariBaslik" xml:space="preserve">
+    <value>Hesabı Sil</value>
+  </data>
+  <data name="HesapSilUyariMesaj" xml:space="preserve">
+    <value>Hesabınız kalıcı olarak ve geri döndürülemez şekilde silinecektir. Bu işlemi yapmak istediğinizden emin misiniz?</value>
   </data>
   <data name="KayitBasariliMesaj" xml:space="preserve">
     <value>Kaydınız başarıyla tamamlandı. Şimdi giriş yapabilirsiniz.</value>
   </data>
   <data name="KullaniciAdiMevcutHata" xml:space="preserve">
     <value>Bu kullanıcı adı zaten alınmış. Lütfen farklı bir kullanıcı adı deneyin.</value>
+  </data>
+  <data name="labelHesapAd" xml:space="preserve">
+    <value>Ad:</value>
+  </data>
+  <data name="labelHesapEmail" xml:space="preserve">
+    <value>E-posta:</value>
+  </data>
+  <data name="labelHesapKullaniciAdi" xml:space="preserve">
+    <value>Kullanıcı Adı:</value>
+  </data>
+  <data name="labelHesapMevcutSifre" xml:space="preserve">
+    <value>Mevcut Şifre: </value>
+  </data>
+  <data name="labelHesapSoyad" xml:space="preserve">
+    <value>Soyad:</value>
+  </data>
+  <data name="labelHesapYeniSifre" xml:space="preserve">
+    <value>Yeni Şifre:</value>
+  </data>
+  <data name="labelHesapYeniSifreTekrar" xml:space="preserve">
+    <value>Yeni Şifre Tekrar:</value>
   </data>
   <data name="labelKayitAd" xml:space="preserve">
     <value>Ad:*</value>
@@ -183,8 +246,20 @@
   <data name="labelSifre" xml:space="preserve">
     <value>Şifre:</value>
   </data>
+  <data name="linkHesapSil" xml:space="preserve">
+    <value>Hesabımı Kalıcı Olarak Kapat</value>
+  </data>
+  <data name="MevcutSifreHatali" xml:space="preserve">
+    <value>Değişiklikleri kaydetmek için girdiğiniz mevcut şifre hatalı.</value>
+  </data>
   <data name="SifreEslesmeHata" xml:space="preserve">
     <value>Girdiğiniz şifreler birbiriyle eşleşmiyor.</value>
+  </data>
+  <data name="UserType_Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="UserType_Kullanici" xml:space="preserve">
+    <value>Kullanıcı</value>
   </data>
   <data name="ZorunluAlanlarHata" xml:space="preserve">
     <value>Yıldızlı (*) alanların tamamı doldurulmalıdır.</value>

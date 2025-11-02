@@ -120,11 +120,20 @@
   <data name="BasariBaslik" xml:space="preserve">
     <value>Success</value>
   </data>
+  <data name="btnAdminPaneli_ToolTip" xml:space="preserve">
+    <value>Admin Panel</value>
+  </data>
+  <data name="btnCikisYap_ToolTip" xml:space="preserve">
+    <value>Secure Logout</value>
+  </data>
   <data name="btnGirisYap_Text" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="btnGiris_ToolTip" xml:space="preserve">
     <value>User Login</value>
+  </data>
+  <data name="btnHesapGuncelle" xml:space="preserve">
+    <value>Update Information</value>
   </data>
   <data name="btnKaydol_Text" xml:space="preserve">
     <value>Register</value>
@@ -135,8 +144,20 @@
   <data name="btnKayitTemizle_Text" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="btnKullaniciAyarlari_ToolTip" xml:space="preserve">
+    <value>User Settings</value>
+  </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Clear</value>
+  </data>
+  <data name="ButonIptal" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ButonSil" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="CikisBasariliMesaj" xml:space="preserve">
+    <value>You have been logged out successfully.</value>
   </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Seed Bank Automation</value>
@@ -144,20 +165,62 @@
   <data name="FormGiris_Title" xml:space="preserve">
     <value>User Login</value>
   </data>
+  <data name="FormHesapAyarlari_Title" xml:space="preserve">
+    <value>Account Settings</value>
+  </data>
   <data name="FormKayitOl_Title" xml:space="preserve">
     <value>User Registration</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>An unexpected error occurred during registration:</value>
   </data>
+  <data name="GirisAlanlarBosHata" xml:space="preserve">
+    <value>Username and password cannot be empty.</value>
+  </data>
+  <data name="GirisBasariliMesaj" xml:space="preserve">
+    <value>Welcome, {0} {1}! ({2})</value>
+  </data>
+  <data name="GirisHataliMesaj" xml:space="preserve">
+    <value>Incorrect username or password.</value>
+  </data>
+  <data name="GuncellemeBasarili" xml:space="preserve">
+    <value>Your information has been updated successfully.</value>
+  </data>
   <data name="HataBaslik" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="HesapSilUyariBaslik" xml:space="preserve">
+    <value>Delete Account</value>
+  </data>
+  <data name="HesapSilUyariMesaj" xml:space="preserve">
+    <value>Your account will be permanently and irreversibly deleted. Are you sure you want to perform this action?</value>
   </data>
   <data name="KayitBasariliMesaj" xml:space="preserve">
     <value>Your registration is complete. You can now log in.</value>
   </data>
   <data name="KullaniciAdiMevcutHata" xml:space="preserve">
     <value>This username is already taken. Please try a different username.</value>
+  </data>
+  <data name="labelHesapAd" xml:space="preserve">
+    <value>First Name:</value>
+  </data>
+  <data name="labelHesapEmail" xml:space="preserve">
+    <value>E-mail:</value>
+  </data>
+  <data name="labelHesapKullaniciAdi" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="labelHesapMevcutSifre" xml:space="preserve">
+    <value>Current Password: </value>
+  </data>
+  <data name="labelHesapSoyad" xml:space="preserve">
+    <value>Last Name:</value>
+  </data>
+  <data name="labelHesapYeniSifre" xml:space="preserve">
+    <value>New Password:</value>
+  </data>
+  <data name="labelHesapYeniSifreTekrar" xml:space="preserve">
+    <value>Confirm New Password:</value>
   </data>
   <data name="labelKayitAd" xml:space="preserve">
     <value>First Name:*</value>
@@ -183,8 +246,20 @@
   <data name="labelSifre" xml:space="preserve">
     <value>Password:</value>
   </data>
+  <data name="linkHesapSil" xml:space="preserve">
+    <value>Permanently Delete My Account</value>
+  </data>
+  <data name="MevcutSifreHatali" xml:space="preserve">
+    <value>The current password you entered to save changes is incorrect.</value>
+  </data>
   <data name="SifreEslesmeHata" xml:space="preserve">
     <value>The passwords you entered do not match.</value>
+  </data>
+  <data name="UserType_Admin" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="UserType_Kullanici" xml:space="preserve">
+    <value>User</value>
   </data>
   <data name="ZorunluAlanlarHata" xml:space="preserve">
     <value>All fields marked with * are required.</value>
