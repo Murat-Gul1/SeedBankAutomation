@@ -44,6 +44,7 @@
             txtYeniSifre = new DevExpress.XtraEditors.TextEdit();
             txtYeniSifreTekrar = new DevExpress.XtraEditors.TextEdit();
             txtMevcutSifre = new DevExpress.XtraEditors.TextEdit();
+            btnHesapTemizle = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)txtAd.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtSoyad.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtEmail.Properties).BeginInit();
@@ -137,6 +138,7 @@
             btnHesapGuncelle.Size = new System.Drawing.Size(102, 36);
             btnHesapGuncelle.TabIndex = 7;
             btnHesapGuncelle.Text = "simpleButton1";
+            btnHesapGuncelle.Click += btnHesapGuncelle_Click;
             // 
             // linkHesapSil
             // 
@@ -198,11 +200,21 @@
             txtMevcutSifre.Size = new System.Drawing.Size(139, 20);
             txtMevcutSifre.TabIndex = 15;
             // 
+            // btnHesapTemizle
+            // 
+            btnHesapTemizle.Location = new System.Drawing.Point(200, 337);
+            btnHesapTemizle.Name = "btnHesapTemizle";
+            btnHesapTemizle.Size = new System.Drawing.Size(102, 36);
+            btnHesapTemizle.TabIndex = 16;
+            btnHesapTemizle.Text = "simpleButton1";
+            btnHesapTemizle.Click += btnHesapTemizle_Click;
+            // 
             // FormHesapAyarlari
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(372, 471);
+            ClientSize = new System.Drawing.Size(358, 455);
+            Controls.Add(btnHesapTemizle);
             Controls.Add(txtMevcutSifre);
             Controls.Add(txtYeniSifreTekrar);
             Controls.Add(txtYeniSifre);
@@ -255,5 +267,6 @@
         private DevExpress.XtraEditors.TextEdit txtYeniSifre;
         private DevExpress.XtraEditors.TextEdit txtYeniSifreTekrar;
         private DevExpress.XtraEditors.TextEdit txtMevcutSifre;
+        private DevExpress.XtraEditors.SimpleButton btnHesapTemizle;
     }
 }

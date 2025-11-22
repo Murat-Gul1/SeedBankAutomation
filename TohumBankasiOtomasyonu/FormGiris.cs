@@ -109,8 +109,8 @@ namespace TohumBankasiOtomasyonu
                 // Alanların boş olup olmadığını kontrol et
                 if (string.IsNullOrEmpty(kullaniciAdi) || string.IsNullOrEmpty(sifre))
                 {
-                    // Sözlüğe "GirisAlanlarBosHata" eklemeyi unutmayın!
-                    XtraMessageBox.Show("Kullanıcı adı ve şifre boş bırakılamaz.", Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    
+                    XtraMessageBox.Show(Resources.GirisAlanlarBosHata, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -138,8 +138,7 @@ namespace TohumBankasiOtomasyonu
                     else
                     {
                         // --- BAŞARISIZ GİRİŞ ---
-                        // Sözlüğe "GirisHataliMesaj" eklemeyi unutmayın!
-                        XtraMessageBox.Show("Kullanıcı adı veya şifre hatalı.", Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Resources.GirisHataliMesaj, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         // Şifre kutusunu temizle ve odaklan
                         txtSifre.Text = "";
                         txtSifre.Focus();

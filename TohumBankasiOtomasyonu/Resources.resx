@@ -120,8 +120,23 @@
   <data name="BasariBaslik" xml:space="preserve">
     <value>Başarılı</value>
   </data>
+  <data name="btnAdminBitkiler_ToolTip" xml:space="preserve">
+    <value>Bitki Yönetimi</value>
+  </data>
+  <data name="btnAdminBlockchain_ToolTip" xml:space="preserve">
+    <value>Blokzincir Verileri</value>
+  </data>
+  <data name="btnAdminKullanicilar_ToolTip" xml:space="preserve">
+    <value>Kullanıcı Yönetimi</value>
+  </data>
   <data name="btnAdminPaneli_ToolTip" xml:space="preserve">
     <value>Admin Paneli</value>
+  </data>
+  <data name="btnAdminSatislar_ToolTip" xml:space="preserve">
+    <value>Satış Kayıtları</value>
+  </data>
+  <data name="btnBitkiKaydet" xml:space="preserve">
+    <value>Kaydet</value>
   </data>
   <data name="btnCikisYap_ToolTip" xml:space="preserve">
     <value>Güvenli Çıkış</value>
@@ -135,6 +150,9 @@
   <data name="btnHesapGuncelle" xml:space="preserve">
     <value>Bilgileri Güncelle</value>
   </data>
+  <data name="btnHesapTemizle_Text" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
   <data name="btnKaydol_Text" xml:space="preserve">
     <value>Kayıt Ol</value>
   </data>
@@ -146,6 +164,9 @@
   </data>
   <data name="btnKullaniciAyarlari_ToolTip" xml:space="preserve">
     <value>Kullanıcı Ayarları</value>
+  </data>
+  <data name="btnResimSec" xml:space="preserve">
+    <value>Resim Seç...</value>
   </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Temizle</value>
@@ -161,6 +182,15 @@
   </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Tohum Bankası Otomasyonu</value>
+  </data>
+  <data name="FormAdminPaneli_Title" xml:space="preserve">
+    <value>Yönetici Paneli</value>
+  </data>
+  <data name="FormBitkiIslemleri_Title_Duzenle" xml:space="preserve">
+    <value>Bitki Düzenle</value>
+  </data>
+  <data name="FormBitkiIslemleri_Title_Ekle" xml:space="preserve">
+    <value>Yeni Bitki Ekle</value>
   </data>
   <data name="FormGiris_Title" xml:space="preserve">
     <value>Kullanıcı Girişi</value>
@@ -246,6 +276,30 @@
   <data name="labelSifre" xml:space="preserve">
     <value>Şifre:</value>
   </data>
+  <data name="lblBitkiAciklama" xml:space="preserve">
+    <value>Açıklama:</value>
+  </data>
+  <data name="lblBitkiAdi" xml:space="preserve">
+    <value>Bitki Adı:</value>
+  </data>
+  <data name="lblBitkiBilimselAd" xml:space="preserve">
+    <value>Bilimsel Adı (Latince):</value>
+  </data>
+  <data name="lblBitkiFiyat" xml:space="preserve">
+    <value>Fiyat (₺):</value>
+  </data>
+  <data name="lblBitkiResim" xml:space="preserve">
+    <value>Bitki Görseli:</value>
+  </data>
+  <data name="lblBitkiSaklama" xml:space="preserve">
+    <value>Saklama Koşulları:</value>
+  </data>
+  <data name="lblBitkiStok" xml:space="preserve">
+    <value>Stok Adedi:</value>
+  </data>
+  <data name="lblBitkiYetistirme" xml:space="preserve">
+    <value>Yetiştirme Koşulları:</value>
+  </data>
   <data name="linkHesapSil" xml:space="preserve">
     <value>Hesabımı Kalıcı Olarak Kapat</value>
   </data>
@@ -254,6 +308,12 @@
   </data>
   <data name="SifreEslesmeHata" xml:space="preserve">
     <value>Girdiğiniz şifreler birbiriyle eşleşmiyor.</value>
+  </data>
+  <data name="tabBitkiEN" xml:space="preserve">
+    <value>İngilizce Bilgiler</value>
+  </data>
+  <data name="tabBitkiTR" xml:space="preserve">
+    <value>Türkçe Bilgiler</value>
   </data>
   <data name="UserType_Admin" xml:space="preserve">
     <value>Admin</value>

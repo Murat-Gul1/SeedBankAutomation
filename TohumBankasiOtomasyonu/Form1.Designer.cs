@@ -97,6 +97,7 @@
             btnAdminPaneli.Size = new System.Drawing.Size(75, 52);
             btnAdminPaneli.TabIndex = 2;
             btnAdminPaneli.Visible = false;
+            btnAdminPaneli.Click += btnAdminPaneli_Click;
             // 
             // btnGiris
             // 

@@ -352,22 +352,51 @@ namespace TohumBankasiOtomasyonu
 
         private void btnKullaniciAyarlari_Click(object sender, EventArgs e)
         {
-            // Giriş yapmış bir kullanıcı olduğundan emin ol
+            // 1. Aktif bir kullanıcı olup olmadığını kontrol et
             if (aktifKullanici == null)
             {
-                // (Bu aslında 'GuncelleArayuz' mantığı yüzünden asla olmamalı,
-                // ama bir güvenlik kontrolü olarak iyidir)
+                // (Bu normalde olmamalı, ama güvenlik kontrolü olarak kalsın)
+                // (Bu hata mesajını da sözlüğe ekleyebiliriz: 'HataGirisGerekli')
                 XtraMessageBox.Show("Ayarları görmek için önce giriş yapmalısınız.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Formu, Adım 1'de yazdığımız YENİ oluşturucuyu (constructor) kullanarak
-            // ve 'aktifKullanici' bilgisini göndererek aç.
+            // 2. Formu, 'aktifKullanici' bilgisini göndererek aç
             FormHesapAyarlari frmAyar = new FormHesapAyarlari(aktifKullanici);
+
+            // 3. ShowDialog(), o form kapatılana kadar bu metodu duraklatır
             frmAyar.ShowDialog();
 
-            // (Gelecekte, eğer kullanıcı bilgilerini güncellerse
-            // 'aktifKullanici' değişkenini de burada yenilememiz gerekebilir)
+            // 4. FormHesapAyarlari kapandı. Şimdi kod buradan devam eder.
+            //    Güncelleme başarılı oldu mu?
+            if (frmAyar.GuncellemeBasarili)
+            {
+                // Evet, kullanıcının Adı, Soyadı veya E-postası değişmiş olabilir.
+                // Form1'deki 'aktifKullanici' nesnemiz artık "bayat" (stale) veriye sahip.
+                // Veritabanından en güncel veriyi tekrar çekmeliyiz.
+                try
+                {
+                    using (var db = new TohumBankasiContext())
+                    {
+                        // Find() komutu, birincil anahtara (KullaniciID) göre veriyi çeker
+                        this.aktifKullanici = db.Kullanicilars.Find(this.aktifKullanici.KullaniciId);
+                    }
+
+                    // (Gelecekte buraya, 'Hoşgeldiniz, [Yeni Ad]' yazan bir label'ı
+                    // güncelleyen kodu da ekleyebiliriz.)
+                    // Örn: GuncelleArayuz(aktifKullanici); // Label'ı tazelemek için
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show("Kullanıcı bilgileri yenilenirken bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnAdminPaneli_Click(object sender, EventArgs e)
+        {
+            FormAdminPaneli frmAdmin = new FormAdminPaneli();
+            frmAdmin.ShowDialog();
         }
     }
 }
