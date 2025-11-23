@@ -124,7 +124,7 @@
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(955, 236, 650, 400);
             layoutControl1.Root = Root;
-            layoutControl1.Size = new System.Drawing.Size(1037, 518);
+            layoutControl1.Size = new System.Drawing.Size(1023, 502);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
@@ -133,7 +133,7 @@
             xtraTabControl1.Location = new System.Drawing.Point(12, 12);
             xtraTabControl1.Name = "xtraTabControl1";
             xtraTabControl1.SelectedTabPage = pageTR;
-            xtraTabControl1.Size = new System.Drawing.Size(502, 454);
+            xtraTabControl1.Size = new System.Drawing.Size(495, 438);
             xtraTabControl1.TabIndex = 0;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { pageTR, pageEN });
             // 
@@ -141,7 +141,7 @@
             // 
             pageTR.Controls.Add(layoutControl2);
             pageTR.Name = "pageTR";
-            pageTR.Size = new System.Drawing.Size(500, 427);
+            pageTR.Size = new System.Drawing.Size(493, 411);
             pageTR.Text = "Türkçe";
             // 
             // layoutControl2
@@ -155,7 +155,7 @@
             layoutControl2.Name = "layoutControl2";
             layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(820, 213, 650, 400);
             layoutControl2.Root = layoutControlGroup1;
-            layoutControl2.Size = new System.Drawing.Size(500, 427);
+            layoutControl2.Size = new System.Drawing.Size(493, 411);
             layoutControl2.TabIndex = 0;
             layoutControl2.Text = "layoutControl2";
             // 
@@ -163,7 +163,7 @@
             // 
             txtAdTR.Location = new System.Drawing.Point(85, 12);
             txtAdTR.Name = "txtAdTR";
-            txtAdTR.Size = new System.Drawing.Size(403, 20);
+            txtAdTR.Size = new System.Drawing.Size(396, 20);
             txtAdTR.StyleController = layoutControl2;
             txtAdTR.TabIndex = 4;
             // 
@@ -171,23 +171,23 @@
             // 
             memoAciklamaTR.Location = new System.Drawing.Point(85, 36);
             memoAciklamaTR.Name = "memoAciklamaTR";
-            memoAciklamaTR.Size = new System.Drawing.Size(403, 115);
+            memoAciklamaTR.Size = new System.Drawing.Size(396, 110);
             memoAciklamaTR.StyleController = layoutControl2;
             memoAciklamaTR.TabIndex = 5;
             // 
             // memoYetistirmeTR
             // 
-            memoYetistirmeTR.Location = new System.Drawing.Point(85, 155);
+            memoYetistirmeTR.Location = new System.Drawing.Point(85, 150);
             memoYetistirmeTR.Name = "memoYetistirmeTR";
-            memoYetistirmeTR.Size = new System.Drawing.Size(403, 119);
+            memoYetistirmeTR.Size = new System.Drawing.Size(396, 114);
             memoYetistirmeTR.StyleController = layoutControl2;
             memoYetistirmeTR.TabIndex = 6;
             // 
             // memoSaklamaTR
             // 
-            memoSaklamaTR.Location = new System.Drawing.Point(85, 278);
+            memoSaklamaTR.Location = new System.Drawing.Point(85, 268);
             memoSaklamaTR.Name = "memoSaklamaTR";
-            memoSaklamaTR.Size = new System.Drawing.Size(403, 137);
+            memoSaklamaTR.Size = new System.Drawing.Size(396, 131);
             memoSaklamaTR.StyleController = layoutControl2;
             memoSaklamaTR.TabIndex = 7;
             // 
@@ -197,7 +197,7 @@
             layoutControlGroup1.GroupBordersVisible = false;
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { lciAdTR, lciAciklamaTR, lciYetistirmeTR, lciSaklamaTR });
             layoutControlGroup1.Name = "Root";
-            layoutControlGroup1.Size = new System.Drawing.Size(500, 427);
+            layoutControlGroup1.Size = new System.Drawing.Size(493, 411);
             layoutControlGroup1.TextVisible = false;
             // 
             // lciAdTR
@@ -205,7 +205,7 @@
             lciAdTR.Control = txtAdTR;
             lciAdTR.Location = new System.Drawing.Point(0, 0);
             lciAdTR.Name = "lciAdTR";
-            lciAdTR.Size = new System.Drawing.Size(480, 24);
+            lciAdTR.Size = new System.Drawing.Size(473, 24);
             lciAdTR.TextSize = new System.Drawing.Size(69, 13);
             // 
             // lciAciklamaTR
@@ -213,30 +213,30 @@
             lciAciklamaTR.Control = memoAciklamaTR;
             lciAciklamaTR.Location = new System.Drawing.Point(0, 24);
             lciAciklamaTR.Name = "lciAciklamaTR";
-            lciAciklamaTR.Size = new System.Drawing.Size(480, 119);
+            lciAciklamaTR.Size = new System.Drawing.Size(473, 114);
             lciAciklamaTR.TextSize = new System.Drawing.Size(69, 13);
             // 
             // lciYetistirmeTR
             // 
             lciYetistirmeTR.Control = memoYetistirmeTR;
-            lciYetistirmeTR.Location = new System.Drawing.Point(0, 143);
+            lciYetistirmeTR.Location = new System.Drawing.Point(0, 138);
             lciYetistirmeTR.Name = "lciYetistirmeTR";
-            lciYetistirmeTR.Size = new System.Drawing.Size(480, 123);
+            lciYetistirmeTR.Size = new System.Drawing.Size(473, 118);
             lciYetistirmeTR.TextSize = new System.Drawing.Size(69, 13);
             // 
             // lciSaklamaTR
             // 
             lciSaklamaTR.Control = memoSaklamaTR;
-            lciSaklamaTR.Location = new System.Drawing.Point(0, 266);
+            lciSaklamaTR.Location = new System.Drawing.Point(0, 256);
             lciSaklamaTR.Name = "lciSaklamaTR";
-            lciSaklamaTR.Size = new System.Drawing.Size(480, 141);
+            lciSaklamaTR.Size = new System.Drawing.Size(473, 135);
             lciSaklamaTR.TextSize = new System.Drawing.Size(69, 13);
             // 
             // pageEN
             // 
             pageEN.Controls.Add(layoutControl3);
             pageEN.Name = "pageEN";
-            pageEN.Size = new System.Drawing.Size(500, 427);
+            pageEN.Size = new System.Drawing.Size(493, 411);
             pageEN.Text = "English";
             // 
             // layoutControl3
@@ -249,7 +249,7 @@
             layoutControl3.Location = new System.Drawing.Point(0, 0);
             layoutControl3.Name = "layoutControl3";
             layoutControl3.Root = layoutControlGroup2;
-            layoutControl3.Size = new System.Drawing.Size(500, 427);
+            layoutControl3.Size = new System.Drawing.Size(493, 411);
             layoutControl3.TabIndex = 0;
             layoutControl3.Text = "layoutControl3";
             // 
@@ -257,7 +257,7 @@
             // 
             txtAdEN.Location = new System.Drawing.Point(85, 12);
             txtAdEN.Name = "txtAdEN";
-            txtAdEN.Size = new System.Drawing.Size(403, 20);
+            txtAdEN.Size = new System.Drawing.Size(396, 20);
             txtAdEN.StyleController = layoutControl3;
             txtAdEN.TabIndex = 4;
             // 
@@ -265,23 +265,23 @@
             // 
             memoAciklamaEN.Location = new System.Drawing.Point(85, 36);
             memoAciklamaEN.Name = "memoAciklamaEN";
-            memoAciklamaEN.Size = new System.Drawing.Size(403, 115);
+            memoAciklamaEN.Size = new System.Drawing.Size(396, 110);
             memoAciklamaEN.StyleController = layoutControl3;
             memoAciklamaEN.TabIndex = 5;
             // 
             // memoYetistirmeEN
             // 
-            memoYetistirmeEN.Location = new System.Drawing.Point(85, 155);
+            memoYetistirmeEN.Location = new System.Drawing.Point(85, 150);
             memoYetistirmeEN.Name = "memoYetistirmeEN";
-            memoYetistirmeEN.Size = new System.Drawing.Size(403, 121);
+            memoYetistirmeEN.Size = new System.Drawing.Size(396, 115);
             memoYetistirmeEN.StyleController = layoutControl3;
             memoYetistirmeEN.TabIndex = 6;
             // 
             // memoSaklamaEN
             // 
-            memoSaklamaEN.Location = new System.Drawing.Point(85, 280);
+            memoSaklamaEN.Location = new System.Drawing.Point(85, 269);
             memoSaklamaEN.Name = "memoSaklamaEN";
-            memoSaklamaEN.Size = new System.Drawing.Size(403, 135);
+            memoSaklamaEN.Size = new System.Drawing.Size(396, 130);
             memoSaklamaEN.StyleController = layoutControl3;
             memoSaklamaEN.TabIndex = 7;
             // 
@@ -291,7 +291,7 @@
             layoutControlGroup2.GroupBordersVisible = false;
             layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { lciAdEN, lciAciklamaEN, lciYetistirmeEN, lciSaklamaEN });
             layoutControlGroup2.Name = "layoutControlGroup2";
-            layoutControlGroup2.Size = new System.Drawing.Size(500, 427);
+            layoutControlGroup2.Size = new System.Drawing.Size(493, 411);
             layoutControlGroup2.TextVisible = false;
             // 
             // lciAdEN
@@ -299,7 +299,7 @@
             lciAdEN.Control = txtAdEN;
             lciAdEN.Location = new System.Drawing.Point(0, 0);
             lciAdEN.Name = "lciAdEN";
-            lciAdEN.Size = new System.Drawing.Size(480, 24);
+            lciAdEN.Size = new System.Drawing.Size(473, 24);
             lciAdEN.TextSize = new System.Drawing.Size(69, 13);
             // 
             // lciAciklamaEN
@@ -307,71 +307,72 @@
             lciAciklamaEN.Control = memoAciklamaEN;
             lciAciklamaEN.Location = new System.Drawing.Point(0, 24);
             lciAciklamaEN.Name = "lciAciklamaEN";
-            lciAciklamaEN.Size = new System.Drawing.Size(480, 119);
+            lciAciklamaEN.Size = new System.Drawing.Size(473, 114);
             lciAciklamaEN.TextSize = new System.Drawing.Size(69, 13);
             // 
             // lciYetistirmeEN
             // 
             lciYetistirmeEN.Control = memoYetistirmeEN;
-            lciYetistirmeEN.Location = new System.Drawing.Point(0, 143);
+            lciYetistirmeEN.Location = new System.Drawing.Point(0, 138);
             lciYetistirmeEN.Name = "lciYetistirmeEN";
-            lciYetistirmeEN.Size = new System.Drawing.Size(480, 125);
+            lciYetistirmeEN.Size = new System.Drawing.Size(473, 119);
             lciYetistirmeEN.TextSize = new System.Drawing.Size(69, 13);
             // 
             // lciSaklamaEN
             // 
             lciSaklamaEN.Control = memoSaklamaEN;
-            lciSaklamaEN.Location = new System.Drawing.Point(0, 268);
+            lciSaklamaEN.Location = new System.Drawing.Point(0, 257);
             lciSaklamaEN.Name = "lciSaklamaEN";
-            lciSaklamaEN.Size = new System.Drawing.Size(480, 139);
+            lciSaklamaEN.Size = new System.Drawing.Size(473, 134);
             lciSaklamaEN.TextSize = new System.Drawing.Size(69, 13);
             // 
             // btnResimSec
             // 
             btnResimSec.ImageOptions.Image = Properties.Resources.image;
             btnResimSec.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            btnResimSec.Location = new System.Drawing.Point(518, 470);
+            btnResimSec.Location = new System.Drawing.Point(511, 454);
             btnResimSec.Name = "btnResimSec";
             btnResimSec.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            btnResimSec.Size = new System.Drawing.Size(274, 36);
+            btnResimSec.Size = new System.Drawing.Size(270, 36);
             btnResimSec.StyleController = layoutControl1;
             btnResimSec.TabIndex = 5;
+            btnResimSec.Click += btnResimSec_Click;
             // 
             // picBitkiResmi
             // 
-            picBitkiResmi.Location = new System.Drawing.Point(615, 84);
+            picBitkiResmi.Location = new System.Drawing.Point(608, 84);
             picBitkiResmi.Name = "picBitkiResmi";
             picBitkiResmi.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             picBitkiResmi.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
-            picBitkiResmi.Size = new System.Drawing.Size(410, 382);
+            picBitkiResmi.Size = new System.Drawing.Size(403, 366);
             picBitkiResmi.StyleController = layoutControl1;
             picBitkiResmi.TabIndex = 7;
             // 
             // numStok
             // 
             numStok.EditValue = new decimal(new int[] { 0, 0, 0, 0 });
-            numStok.Location = new System.Drawing.Point(615, 60);
+            numStok.Location = new System.Drawing.Point(608, 60);
             numStok.Name = "numStok";
             numStok.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            numStok.Size = new System.Drawing.Size(410, 20);
+            numStok.Size = new System.Drawing.Size(403, 20);
             numStok.StyleController = layoutControl1;
             numStok.TabIndex = 4;
             // 
             // numFiyat
             // 
             numFiyat.EditValue = new decimal(new int[] { 0, 0, 0, 0 });
-            numFiyat.Location = new System.Drawing.Point(615, 36);
+            numFiyat.Location = new System.Drawing.Point(608, 36);
             numFiyat.Name = "numFiyat";
             numFiyat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            numFiyat.Size = new System.Drawing.Size(410, 20);
+            numFiyat.Size = new System.Drawing.Size(403, 20);
             numFiyat.StyleController = layoutControl1;
             numFiyat.TabIndex = 3;
             // 
             // txtBilimselAd
             // 
-            txtBilimselAd.Location = new System.Drawing.Point(615, 12);
+            txtBilimselAd.Location = new System.Drawing.Point(608, 12);
             txtBilimselAd.Name = "txtBilimselAd";
-            txtBilimselAd.Size = new System.Drawing.Size(410, 20);
+            txtBilimselAd.Size = new System.Drawing.Size(403, 20);
             txtBilimselAd.StyleController = layoutControl1;
             txtBilimselAd.TabIndex = 2;
             // 
@@ -379,12 +380,13 @@
             // 
             btnKaydet.ImageOptions.Image = Properties.Resources.save;
             btnKaydet.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            btnKaydet.Location = new System.Drawing.Point(12, 470);
+            btnKaydet.Location = new System.Drawing.Point(12, 454);
             btnKaydet.Name = "btnKaydet";
             btnKaydet.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            btnKaydet.Size = new System.Drawing.Size(502, 36);
+            btnKaydet.Size = new System.Drawing.Size(495, 36);
             btnKaydet.StyleController = layoutControl1;
             btnKaydet.TabIndex = 8;
+            btnKaydet.Click += btnKaydet_Click;
             // 
             // Root
             // 
@@ -392,55 +394,55 @@
             Root.GroupBordersVisible = false;
             Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, emptySpaceItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem5, layoutControlItem6, layoutControlItem16 });
             Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(1037, 518);
+            Root.Size = new System.Drawing.Size(1023, 502);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             layoutControlItem1.Control = txtBilimselAd;
-            layoutControlItem1.Location = new System.Drawing.Point(506, 0);
+            layoutControlItem1.Location = new System.Drawing.Point(499, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(511, 24);
+            layoutControlItem1.Size = new System.Drawing.Size(504, 24);
             layoutControlItem1.TextSize = new System.Drawing.Size(93, 13);
             // 
             // emptySpaceItem1
             // 
             emptySpaceItem1.AllowHotTrack = false;
-            emptySpaceItem1.Location = new System.Drawing.Point(784, 458);
+            emptySpaceItem1.Location = new System.Drawing.Point(773, 442);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(233, 40);
+            emptySpaceItem1.Size = new System.Drawing.Size(230, 40);
             emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = numFiyat;
-            layoutControlItem2.Location = new System.Drawing.Point(506, 24);
+            layoutControlItem2.Location = new System.Drawing.Point(499, 24);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(511, 24);
+            layoutControlItem2.Size = new System.Drawing.Size(504, 24);
             layoutControlItem2.TextSize = new System.Drawing.Size(93, 13);
             // 
             // layoutControlItem3
             // 
             layoutControlItem3.Control = numStok;
-            layoutControlItem3.Location = new System.Drawing.Point(506, 48);
+            layoutControlItem3.Location = new System.Drawing.Point(499, 48);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(511, 24);
+            layoutControlItem3.Size = new System.Drawing.Size(504, 24);
             layoutControlItem3.TextSize = new System.Drawing.Size(93, 13);
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = picBitkiResmi;
-            layoutControlItem4.Location = new System.Drawing.Point(506, 72);
+            layoutControlItem4.Location = new System.Drawing.Point(499, 72);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(511, 386);
+            layoutControlItem4.Size = new System.Drawing.Size(504, 370);
             layoutControlItem4.TextSize = new System.Drawing.Size(93, 13);
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = btnResimSec;
-            layoutControlItem5.Location = new System.Drawing.Point(506, 458);
+            layoutControlItem5.Location = new System.Drawing.Point(499, 442);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(278, 40);
+            layoutControlItem5.Size = new System.Drawing.Size(274, 40);
             layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             layoutControlItem5.TextVisible = false;
             // 
@@ -449,16 +451,16 @@
             layoutControlItem6.Control = xtraTabControl1;
             layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(506, 458);
+            layoutControlItem6.Size = new System.Drawing.Size(499, 442);
             layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             layoutControlItem6.TextVisible = false;
             // 
             // layoutControlItem16
             // 
             layoutControlItem16.Control = btnKaydet;
-            layoutControlItem16.Location = new System.Drawing.Point(0, 458);
+            layoutControlItem16.Location = new System.Drawing.Point(0, 442);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(506, 40);
+            layoutControlItem16.Size = new System.Drawing.Size(499, 40);
             layoutControlItem16.TextSize = new System.Drawing.Size(0, 0);
             layoutControlItem16.TextVisible = false;
             // 
@@ -466,7 +468,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1037, 518);
+            ClientSize = new System.Drawing.Size(1023, 502);
             Controls.Add(layoutControl1);
             Name = "FormBitkiIslemleri";
             Text = "FormBitkiIslemleri";

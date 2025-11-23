@@ -70,6 +70,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bitki başarıyla kaydedildi..
+        /// </summary>
+        internal static string BitkiKayitBasarili {
+            get {
+                return ResourceManager.GetString("BitkiKayitBasarili", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitki Yönetimi.
         /// </summary>
         internal static string btnAdminBitkiler_ToolTip {
@@ -367,6 +376,42 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lütfen bitkinin Bilimsel Adını giriniz..
+        /// </summary>
+        internal static string HataBilimselAd {
+            get {
+                return ResourceManager.GetString("HataBilimselAd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lütfen Türkçe bitki adını giriniz..
+        /// </summary>
+        internal static string HataBitkiAdi {
+            get {
+                return ResourceManager.GetString("HataBitkiAdi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitki fiyatı 0&apos;dan büyük olmalıdır..
+        /// </summary>
+        internal static string HataBitkiFiyat {
+            get {
+                return ResourceManager.GetString("HataBitkiFiyat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lütfen bir bitki görseli seçiniz..
+        /// </summary>
+        internal static string HataBitkiResim {
+            get {
+                return ResourceManager.GetString("HataBitkiResim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hesabı Sil.
         /// </summary>
         internal static string HesapSilUyariBaslik {
@@ -624,6 +669,33 @@ namespace TohumBankasiOtomasyonu {
         internal static string MevcutSifreHatali {
             get {
                 return ResourceManager.GetString("MevcutSifreHatali", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resim Dosyaları|*.jpg;*.jpeg;*.png;*.bmp;*.gif.
+        /// </summary>
+        internal static string ResimSecDialogFilter {
+            get {
+                return ResourceManager.GetString("ResimSecDialogFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitki Görseli Seç.
+        /// </summary>
+        internal static string ResimSecDialogTitle {
+            get {
+                return ResourceManager.GetString("ResimSecDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resim yüklenirken bir hata oluştu:.
+        /// </summary>
+        internal static string ResimYuklemeHata {
+            get {
+                return ResourceManager.GetString("ResimYuklemeHata", resourceCulture);
             }
         }
         

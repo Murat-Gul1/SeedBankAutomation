@@ -50,6 +50,7 @@
             panelControl1.Name = "panelControl1";
             panelControl1.Size = new System.Drawing.Size(533, 60);
             panelControl1.TabIndex = 0;
+            panelControl1.Paint += panelControl1_Paint;
             // 
             // btnBitkiSil
             // 
@@ -97,6 +98,7 @@
             gridBitkiler.Size = new System.Drawing.Size(533, 366);
             gridBitkiler.TabIndex = 1;
             gridBitkiler.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            gridBitkiler.Click += gridBitkiler_Click;
             // 
             // gridView1
             // 
@@ -111,6 +113,7 @@
             Controls.Add(panelControl1);
             Name = "UcBitkiYonetimi";
             Size = new System.Drawing.Size(533, 426);
+            Load += UcBitkiYonetimi_Load;
             ((System.ComponentModel.ISupportInitialize)panelControl1).EndInit();
             panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridBitkiler).EndInit();

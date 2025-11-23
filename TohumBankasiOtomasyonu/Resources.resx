@@ -120,6 +120,9 @@
   <data name="BasariBaslik" xml:space="preserve">
     <value>Başarılı</value>
   </data>
+  <data name="BitkiKayitBasarili" xml:space="preserve">
+    <value>Bitki başarıyla kaydedildi.</value>
+  </data>
   <data name="btnAdminBitkiler_ToolTip" xml:space="preserve">
     <value>Bitki Yönetimi</value>
   </data>
@@ -219,6 +222,18 @@
   <data name="HataBaslik" xml:space="preserve">
     <value>Hata</value>
   </data>
+  <data name="HataBilimselAd" xml:space="preserve">
+    <value>Lütfen bitkinin Bilimsel Adını giriniz.</value>
+  </data>
+  <data name="HataBitkiAdi" xml:space="preserve">
+    <value>Lütfen Türkçe bitki adını giriniz.</value>
+  </data>
+  <data name="HataBitkiFiyat" xml:space="preserve">
+    <value>Bitki fiyatı 0'dan büyük olmalıdır.</value>
+  </data>
+  <data name="HataBitkiResim" xml:space="preserve">
+    <value>Lütfen bir bitki görseli seçiniz.</value>
+  </data>
   <data name="HesapSilUyariBaslik" xml:space="preserve">
     <value>Hesabı Sil</value>
   </data>
@@ -305,6 +320,15 @@
   </data>
   <data name="MevcutSifreHatali" xml:space="preserve">
     <value>Değişiklikleri kaydetmek için girdiğiniz mevcut şifre hatalı.</value>
+  </data>
+  <data name="ResimSecDialogFilter" xml:space="preserve">
+    <value>Resim Dosyaları|*.jpg;*.jpeg;*.png;*.bmp;*.gif</value>
+  </data>
+  <data name="ResimSecDialogTitle" xml:space="preserve">
+    <value>Bitki Görseli Seç</value>
+  </data>
+  <data name="ResimYuklemeHata" xml:space="preserve">
+    <value>Resim yüklenirken bir hata oluştu:</value>
   </data>
   <data name="SifreEslesmeHata" xml:space="preserve">
     <value>Girdiğiniz şifreler birbiriyle eşleşmiyor.</value>

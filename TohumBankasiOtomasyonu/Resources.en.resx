@@ -120,6 +120,9 @@
   <data name="BasariBaslik" xml:space="preserve">
     <value>Success</value>
   </data>
+  <data name="BitkiKayitBasarili" xml:space="preserve">
+    <value>Plant saved successfully.</value>
+  </data>
   <data name="btnAdminBitkiler_ToolTip" xml:space="preserve">
     <value>Plant Management</value>
   </data>
@@ -219,6 +222,18 @@
   <data name="HataBaslik" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="HataBilimselAd" xml:space="preserve">
+    <value>Please enter the Scientific Name.</value>
+  </data>
+  <data name="HataBitkiAdi" xml:space="preserve">
+    <value>Please enter the Turkish plant name.</value>
+  </data>
+  <data name="HataBitkiFiyat" xml:space="preserve">
+    <value>Plant price must be greater than 0.</value>
+  </data>
+  <data name="HataBitkiResim" xml:space="preserve">
+    <value>Please select a plant image.</value>
+  </data>
   <data name="HesapSilUyariBaslik" xml:space="preserve">
     <value>Delete Account</value>
   </data>
@@ -305,6 +320,15 @@
   </data>
   <data name="MevcutSifreHatali" xml:space="preserve">
     <value>The current password you entered to save changes is incorrect.</value>
+  </data>
+  <data name="ResimSecDialogFilter" xml:space="preserve">
+    <value>Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif</value>
+  </data>
+  <data name="ResimSecDialogTitle" xml:space="preserve">
+    <value>Select Plant Image</value>
+  </data>
+  <data name="ResimYuklemeHata" xml:space="preserve">
+    <value>An error occurred while loading the image:</value>
   </data>
   <data name="SifreEslesmeHata" xml:space="preserve">
     <value>The passwords you entered do not match.</value>
