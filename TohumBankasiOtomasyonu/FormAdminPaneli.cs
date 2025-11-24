@@ -50,5 +50,11 @@ namespace TohumBankasiOtomasyonu
             // NavigationFrame'e "pageBitkiler" sayfasını göstermesini söyle
             navFrameAdmin.SelectedPage = pageBitkiler;
         }
+
+        private void btnAdminKullanicilar_Click(object sender, EventArgs e)
+        {
+            // Kullanıcılar sayfasını göster
+            navFrameAdmin.SelectedPage = pageKullanicilar;
+        }
     }
 }

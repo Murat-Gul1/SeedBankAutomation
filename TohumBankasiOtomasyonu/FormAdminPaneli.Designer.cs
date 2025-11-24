@@ -36,12 +36,14 @@
             navFrameAdmin = new DevExpress.XtraBars.Navigation.NavigationFrame();
             pageBitkiler = new DevExpress.XtraBars.Navigation.NavigationPage();
             ucBitkiYonetimi1 = new UcBitkiYonetimi();
-            navigationPage2 = new DevExpress.XtraBars.Navigation.NavigationPage();
+            pageKullanicilar = new DevExpress.XtraBars.Navigation.NavigationPage();
+            ucKullaniciYonetimi1 = new UcKullaniciYonetimi();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
             panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)navFrameAdmin).BeginInit();
             navFrameAdmin.SuspendLayout();
             pageBitkiler.SuspendLayout();
+            pageKullanicilar.SuspendLayout();
             SuspendLayout();
             // 
             // panelControl1
@@ -91,6 +93,7 @@
             btnAdminKullanicilar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
             btnAdminKullanicilar.Size = new System.Drawing.Size(82, 56);
             btnAdminKullanicilar.TabIndex = 1;
+            btnAdminKullanicilar.Click += btnAdminKullanicilar_Click;
             // 
             // btnAdminBitkiler
             // 
@@ -108,11 +111,11 @@
             // navFrameAdmin
             // 
             navFrameAdmin.Controls.Add(pageBitkiler);
-            navFrameAdmin.Controls.Add(navigationPage2);
+            navFrameAdmin.Controls.Add(pageKullanicilar);
             navFrameAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
             navFrameAdmin.Location = new System.Drawing.Point(86, 0);
             navFrameAdmin.Name = "navFrameAdmin";
-            navFrameAdmin.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { pageBitkiler, navigationPage2 });
+            navFrameAdmin.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { pageBitkiler, pageKullanicilar });
             navFrameAdmin.SelectedPage = pageBitkiler;
             navFrameAdmin.Size = new System.Drawing.Size(1051, 532);
             navFrameAdmin.TabIndex = 1;
@@ -133,11 +136,20 @@
             ucBitkiYonetimi1.Size = new System.Drawing.Size(1051, 532);
             ucBitkiYonetimi1.TabIndex = 0;
             // 
-            // navigationPage2
+            // pageKullanicilar
             // 
-            navigationPage2.Caption = "navigationPage2";
-            navigationPage2.Name = "navigationPage2";
-            navigationPage2.Size = new System.Drawing.Size(1051, 532);
+            pageKullanicilar.Caption = "navigationPage2";
+            pageKullanicilar.Controls.Add(ucKullaniciYonetimi1);
+            pageKullanicilar.Name = "pageKullanicilar";
+            pageKullanicilar.Size = new System.Drawing.Size(1051, 532);
+            // 
+            // ucKullaniciYonetimi1
+            // 
+            ucKullaniciYonetimi1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucKullaniciYonetimi1.Location = new System.Drawing.Point(0, 0);
+            ucKullaniciYonetimi1.Name = "ucKullaniciYonetimi1";
+            ucKullaniciYonetimi1.Size = new System.Drawing.Size(1051, 532);
+            ucKullaniciYonetimi1.TabIndex = 0;
             // 
             // FormAdminPaneli
             // 
@@ -156,6 +168,7 @@
             ((System.ComponentModel.ISupportInitialize)navFrameAdmin).EndInit();
             navFrameAdmin.ResumeLayout(false);
             pageBitkiler.ResumeLayout(false);
+            pageKullanicilar.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -168,7 +181,8 @@
         private DevExpress.XtraEditors.SimpleButton btnAdminBlockchain;
         private DevExpress.XtraBars.Navigation.NavigationFrame navFrameAdmin;
         private DevExpress.XtraBars.Navigation.NavigationPage pageBitkiler;
-        private DevExpress.XtraBars.Navigation.NavigationPage navigationPage2;
+        private DevExpress.XtraBars.Navigation.NavigationPage pageKullanicilar;
         private UcBitkiYonetimi ucBitkiYonetimi1;
+        private UcKullaniciYonetimi ucKullaniciYonetimi1;
     }
 }

@@ -177,6 +177,9 @@
   <data name="btnKullaniciAyarlari_ToolTip" xml:space="preserve">
     <value>User Settings</value>
   </data>
+  <data name="btnKullaniciGuncelle" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="btnResimSec" xml:space="preserve">
     <value>Select Image...</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="FormKayitOl_Title" xml:space="preserve">
     <value>User Registration</value>
+  </data>
+  <data name="FormKullaniciDuzenle_Title" xml:space="preserve">
+    <value>Edit User</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>An unexpected error occurred during registration:</value>
@@ -257,6 +263,15 @@
   </data>
   <data name="KullaniciAdiMevcutHata" xml:space="preserve">
     <value>This username is already taken. Please try a different username.</value>
+  </data>
+  <data name="KullaniciSilBasarili" xml:space="preserve">
+    <value>User deleted successfully.</value>
+  </data>
+  <data name="KullaniciSilOnayBaslik" xml:space="preserve">
+    <value>Delete User Confirmation</value>
+  </data>
+  <data name="KullaniciSilOnayMesaj" xml:space="preserve">
+    <value>Are you sure you want to permanently delete the selected user?</value>
   </data>
   <data name="labelHesapAd" xml:space="preserve">
     <value>First Name:</value>
@@ -327,6 +342,9 @@
   <data name="lblBitkiYetistirme" xml:space="preserve">
     <value>Growing Conditions:</value>
   </data>
+  <data name="lblKullaniciTipi" xml:space="preserve">
+    <value>Role / Permission:</value>
+  </data>
   <data name="linkHesapSil" xml:space="preserve">
     <value>Permanently Delete My Account</value>
   </data>
@@ -341,6 +359,12 @@
   </data>
   <data name="ResimYuklemeHata" xml:space="preserve">
     <value>An error occurred while loading the image:</value>
+  </data>
+  <data name="Role_Admin" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="Role_Kullanici" xml:space="preserve">
+    <value>Standard User</value>
   </data>
   <data name="SifreEslesmeHata" xml:space="preserve">
     <value>The passwords you entered do not match.</value>

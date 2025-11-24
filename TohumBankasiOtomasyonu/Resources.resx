@@ -177,6 +177,9 @@
   <data name="btnKullaniciAyarlari_ToolTip" xml:space="preserve">
     <value>Kullanıcı Ayarları</value>
   </data>
+  <data name="btnKullaniciGuncelle" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
   <data name="btnResimSec" xml:space="preserve">
     <value>Resim Seç...</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="FormKayitOl_Title" xml:space="preserve">
     <value>Kullanıcı Kaydı</value>
+  </data>
+  <data name="FormKullaniciDuzenle_Title" xml:space="preserve">
+    <value>Kullanıcı Düzenle</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>Kayıt sırasında beklenmedik bir hata oluştu:</value>
@@ -257,6 +263,15 @@
   </data>
   <data name="KullaniciAdiMevcutHata" xml:space="preserve">
     <value>Bu kullanıcı adı zaten alınmış. Lütfen farklı bir kullanıcı adı deneyin.</value>
+  </data>
+  <data name="KullaniciSilBasarili" xml:space="preserve">
+    <value>Kullanıcı başarıyla silindi.</value>
+  </data>
+  <data name="KullaniciSilOnayBaslik" xml:space="preserve">
+    <value>Kullanıcı Silme Onayı</value>
+  </data>
+  <data name="KullaniciSilOnayMesaj" xml:space="preserve">
+    <value>Seçili kullanıcıyı kalıcı olarak silmek istediğinize emin misiniz?</value>
   </data>
   <data name="labelHesapAd" xml:space="preserve">
     <value>Ad:</value>
@@ -327,6 +342,9 @@
   <data name="lblBitkiYetistirme" xml:space="preserve">
     <value>Yetiştirme Koşulları:</value>
   </data>
+  <data name="lblKullaniciTipi" xml:space="preserve">
+    <value>Yetki / Rol:</value>
+  </data>
   <data name="linkHesapSil" xml:space="preserve">
     <value>Hesabımı Kalıcı Olarak Kapat</value>
   </data>
@@ -341,6 +359,12 @@
   </data>
   <data name="ResimYuklemeHata" xml:space="preserve">
     <value>Resim yüklenirken bir hata oluştu:</value>
+  </data>
+  <data name="Role_Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Role_Kullanici" xml:space="preserve">
+    <value>Kullanıcı</value>
   </data>
   <data name="SifreEslesmeHata" xml:space="preserve">
     <value>Girdiğiniz şifreler birbiriyle eşleşmiyor.</value>
