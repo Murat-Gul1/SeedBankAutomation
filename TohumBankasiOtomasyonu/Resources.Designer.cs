@@ -79,6 +79,33 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bitki başarıyla silindi..
+        /// </summary>
+        internal static string BitkiSilBasarili {
+            get {
+                return ResourceManager.GetString("BitkiSilBasarili", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silme Onayı.
+        /// </summary>
+        internal static string BitkiSilOnayBaslik {
+            get {
+                return ResourceManager.GetString("BitkiSilOnayBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seçili bitkiyi silmek istediğinize emin misiniz?.
+        /// </summary>
+        internal static string BitkiSilOnayMesaj {
+            get {
+                return ResourceManager.GetString("BitkiSilOnayMesaj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitki Yönetimi.
         /// </summary>
         internal static string btnAdminBitkiler_ToolTip {
@@ -408,6 +435,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string HataBitkiResim {
             get {
                 return ResourceManager.GetString("HataBitkiResim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lütfen silinecek bir satır seçiniz..
+        /// </summary>
+        internal static string HataSatirSecilmedi {
+            get {
+                return ResourceManager.GetString("HataSatirSecilmedi", resourceCulture);
             }
         }
         

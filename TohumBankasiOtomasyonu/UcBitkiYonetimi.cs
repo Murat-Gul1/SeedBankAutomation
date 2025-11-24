@@ -85,5 +85,78 @@ namespace TohumBankasiOtomasyonu
                 BitkileriListele();
             }
         }
+
+        private void btnBitkiSil_Click(object sender, EventArgs e)
+        {
+            // 1. Grid üzerinden seçili satırın "ID" değerini al
+            // (Not: GridView isminiz varsayılan olarak 'gridView1'dir. 
+            // Eğer değiştirdiyseniz kendi verdiğiniz ismi kullanın)
+
+            var seciliIdObj = gridView1.GetFocusedRowCellValue("ID");
+
+            // Eğer hiçbir satır seçilmemişse veya liste boşsa
+            if (seciliIdObj == null)
+            {
+                XtraMessageBox.Show(Resources.HataSatirSecilmedi, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int silinecekId = Convert.ToInt32(seciliIdObj);
+
+            // 2. Kullanıcıdan ONAY iste (Güvenlik için şart)
+            DialogResult onay = XtraMessageBox.Show(Resources.BitkiSilOnayMesaj, Resources.BitkiSilOnayBaslik, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (onay == DialogResult.Yes)
+            {
+                try
+                {
+                    using (var db = new TohumBankasiContext())
+                    {
+                        // 3. Veritabanında bu ID'ye sahip bitkiyi bul
+                        var silinecekBitki = db.Bitkilers.Find(silinecekId);
+
+                        if (silinecekBitki != null)
+                        {
+                            // 4. Sil ve Kaydet
+                            // (EF Core, ilişkili tabloları -Çeviriler ve Görseller- otomatik silebilir, 
+                            // eğer silmezse veritabanı ayarlarından Cascade Delete açılmalıdır)
+                            db.Bitkilers.Remove(silinecekBitki);
+                            db.SaveChanges();
+
+                            // 5. Başarı mesajı ver
+                            XtraMessageBox.Show(Resources.BitkiSilBasarili, Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // 6. LİSTEYİ YENİLE (Çok Önemli: Silinen satırın ekrandan gitmesi için)
+                            BitkileriListele();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(Resources.GenelHata + " " + ex.Message, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnBitkiDuzenle_Click(object sender, EventArgs e)
+        {
+            // 1. Seçili ID'yi al (Silme işlemindeki gibi)
+            var seciliIdObj = gridView1.GetFocusedRowCellValue("ID");
+            if (seciliIdObj == null)
+            {
+                XtraMessageBox.Show(Resources.HataSatirSecilmedi, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            int id = Convert.ToInt32(seciliIdObj);
+
+            // 2. Formu bu ID ile oluştur (Düzenleme Modu)
+            FormBitkiIslemleri frmIslem = new FormBitkiIslemleri(id);
+
+            // 3. Aç
+            frmIslem.ShowDialog();
+
+            // 4. Kapanınca listeyi yenile
+            BitkileriListele();
+        }
     }
 }

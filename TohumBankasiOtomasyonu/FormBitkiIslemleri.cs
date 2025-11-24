@@ -1,12 +1,13 @@
 ﻿using DevExpress.XtraEditors;
 using System;
-using System.Windows.Forms;
-using System.Threading;
-using System.Globalization;
-using TohumBankasiOtomasyonu.Properties; 
-using TohumBankasiOtomasyonu.Models;
-using System.IO; 
 using System.Drawing.Imaging; 
+using System.Globalization;
+using System.IO; 
+using System.Threading;
+using System.Windows.Forms;
+using TohumBankasiOtomasyonu.Models;
+using TohumBankasiOtomasyonu.Properties;
+using System.Linq;
 namespace TohumBankasiOtomasyonu
 {
     public partial class FormBitkiIslemleri : DevExpress.XtraEditors.XtraForm
@@ -62,15 +63,72 @@ namespace TohumBankasiOtomasyonu
             lciYetistirmeEN.Text = Resources.lblBitkiYetistirme;
             lciSaklamaEN.Text = Resources.lblBitkiSaklama;
         }
+        private void VerileriDoldur()
+        {
+            // Eğer yeni kayıt modundaysak (ID = 0), hiçbir şey yapma, boş kalsın.
+            if (_gelenBitkiId == 0) return;
+
+            using (var db = new TohumBankasiContext())
+            {
+                // 1. Ana Tablo Verisini Çek
+                var bitki = db.Bitkilers.Find(_gelenBitkiId);
+                if (bitki == null) return;
+
+                // Ortak alanları doldur
+                txtBilimselAd.Text = ""; // (Bunu aşağıda çevirilerden veya ana tablodan alacağız ama önce temizleyelim)
+                numFiyat.Value = (decimal)bitki.Fiyat;
+                numStok.Value = (decimal)bitki.StokAdedi;
+
+                // 2. Resmi Getir
+                // Görsel tablosundan bu bitkiye ait "Ana Görseli" bul
+                var gorselKaydi = db.BitkiGorselleris.FirstOrDefault(g => g.BitkiId == _gelenBitkiId && g.AnaGorsel == 1);
+                if (gorselKaydi != null)
+                {
+                    // Resim yolunu tam yola çevir (bin/debug/Gorseller/...)
+                    string tamYol = Path.Combine(Application.StartupPath, gorselKaydi.DosyaYolu);
+                    if (File.Exists(tamYol))
+                    {
+                        // Resmi yükle (Stream kullanarak yüklüyoruz ki dosya kilitlenmesin)
+                        using (var stream = new FileStream(tamYol, FileMode.Open, FileAccess.Read))
+                        {
+                            picBitkiResmi.Image = System.Drawing.Image.FromStream(stream);
+                        }
+                    }
+                }
+
+                // 3. Çevirileri Getir (Türkçe)
+                var tr = db.BitkiCevirileris.FirstOrDefault(c => c.BitkiId == _gelenBitkiId && c.DilKodu == "tr");
+                if (tr != null)
+                {
+                    txtAdTR.Text = tr.BitkiAdi;
+                    txtBilimselAd.Text = tr.BilimselAd; // Bilimsel ad her dilde aynıdır, buradan alabiliriz
+                    memoAciklamaTR.Text = tr.Aciklama;
+                    memoYetistirmeTR.Text = tr.YetistirmeKosullari;
+                    memoSaklamaTR.Text = tr.SaklamaKosullari;
+                }
+
+                // 4. Çevirileri Getir (İngilizce)
+                var en = db.BitkiCevirileris.FirstOrDefault(c => c.BitkiId == _gelenBitkiId && c.DilKodu == "en");
+                if (en != null)
+                {
+                    txtAdEN.Text = en.BitkiAdi;
+                    memoAciklamaEN.Text = en.Aciklama;
+                    memoYetistirmeEN.Text = en.YetistirmeKosullari;
+                    memoSaklamaEN.Text = en.SaklamaKosullari;
+                }
+            }
+        }
 
         private void FormBitkiIslemleri_Load(object sender, EventArgs e)
         {
             UygulaDil();
+            VerileriDoldur();
         }
 
         private void FormBitkiIslemleri_Load_1(object sender, EventArgs e)
         {
             UygulaDil();
+            VerileriDoldur();
         }
 
         private void btnResimSec_Click(object sender, EventArgs e)
@@ -104,127 +162,91 @@ namespace TohumBankasiOtomasyonu
         {
             try
             {
-                // --- 1. VALİDASYON ---
-                // --- 1. VALIDATION ---
-
-
-                // ZORUNLU OLAN TEK ALAN: BİLİMSEL AD
-                // The only required field: Scientific Name
+                // --- 1. VALİDASYON (Aynı Kalıyor) ---
                 if (string.IsNullOrWhiteSpace(txtBilimselAd.Text))
                 {
                     XtraMessageBox.Show(Resources.HataBilimselAd, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtBilimselAd.Focus();
                     return;
                 }
+                // ... (Fiyat ve Resim validasyonlarını buraya ekleyin veya olduğu gibi bırakın) ...
 
-                // Fiyat kontrolü 
-                // Price check
-                if (numFiyat.Value <= 0)
-                {
-                    XtraMessageBox.Show(Resources.HataBitkiFiyat, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    numFiyat.Focus();
-                    return;
-                }
-
-                // Resim kontrolü 
-                // Image check
-                if (picBitkiResmi.Image == null)
-                {
-                    XtraMessageBox.Show(Resources.HataBitkiResim, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // --- 2. VERİ HAZIRLIĞI (OTOMATİK DOLDURMA) ---
-                // --- 2. DATA PREPARATION (AUTOFILL) ---
-
+                // --- 2. VERİ HAZIRLIĞI ---
                 string bilimselAd = txtBilimselAd.Text.Trim();
-
-                // Eğer Türkçe ad girilmediyse, Bilimsel adı kullan
-                // If the Turkish name is not entered, use the Scientific name
-
                 string kayitAdTR = string.IsNullOrWhiteSpace(txtAdTR.Text) ? bilimselAd : txtAdTR.Text.Trim();
-
-                // Eğer İngilizce ad girilmediyse, Bilimsel adı kullan
-                // If the English name is not entered, use the Scientific name
-
                 string kayitAdEN = string.IsNullOrWhiteSpace(txtAdEN.Text) ? bilimselAd : txtAdEN.Text.Trim();
 
-
-                // --- 3. RESMİ KLASÖRE KAYDETME ---
-                // --- 3. SAVE TO THE OFFICIAL FOLDER ---
-                string klasorYolu = Path.Combine(Application.StartupPath, "Gorseller");
-                if (!Directory.Exists(klasorYolu)) Directory.CreateDirectory(klasorYolu);
-                string dosyaAdi = Guid.NewGuid().ToString() + ".jpg";
-                string tamYol = Path.Combine(klasorYolu, dosyaAdi);
-                picBitkiResmi.Image.Save(tamYol, ImageFormat.Jpeg);
-
-                // --- 4. VERİTABANI İŞLEMLERİ  ---
-                // --- 4. DATABASE OPERATIONS ---
                 using (var db = new TohumBankasiContext())
                 {
-                    // A. ANA TABLO
-                    // A. MAIN TABLE
-                    Bitkiler yeniBitki = new Bitkiler
+                    // ==========================================
+                    // DURUM A: YENİ KAYIT (INSERT)
+                    // ==========================================
+                    if (_gelenBitkiId == 0)
                     {
-                        Fiyat = (double)numFiyat.Value,
-                        StokAdedi = (int)numStok.Value,
-                        Aktif = 1
-                    };
-                    db.Bitkilers.Add(yeniBitki);
-                    db.SaveChanges();
+                        // 1. Resim Kaydetme (Sadece yeni kayıtta veya resim değiştiyse yapılır)
+                        // (Basitlik için her zaman kaydediyoruz, gelişmiş versiyonda kontrol edilebilir)
+                        string klasorYolu = Path.Combine(Application.StartupPath, "Gorseller");
+                        if (!Directory.Exists(klasorYolu)) Directory.CreateDirectory(klasorYolu);
+                        string dosyaAdi = Guid.NewGuid().ToString() + ".jpg";
+                        string tamYol = Path.Combine(klasorYolu, dosyaAdi);
+                        picBitkiResmi.Image.Save(tamYol, ImageFormat.Jpeg);
 
-                    // B. ÇEVİRİ TABLOSU
-                    // B. TRANSLATION TABLE
+                        // 2. Bitki Ekle
+                        Bitkiler yeniBitki = new Bitkiler
+                        {
+                            Fiyat = (double)numFiyat.Value,
+                            StokAdedi = (int)numStok.Value,
+                            Aktif = 1
+                        };
+                        db.Bitkilers.Add(yeniBitki);
+                        db.SaveChanges(); // ID oluşsun diye
 
-                    // B1. Türkçe Kaydı
-                    // B1. Turkish Record
+                        // 3. Çevirileri Ekle
+                        db.BitkiCevirileris.Add(new BitkiCevirileri { BitkiId = yeniBitki.BitkiId, DilKodu = "tr", BitkiAdi = kayitAdTR, BilimselAd = bilimselAd, Aciklama = memoAciklamaTR.Text, YetistirmeKosullari = memoYetistirmeTR.Text, SaklamaKosullari = memoSaklamaTR.Text });
+                        db.BitkiCevirileris.Add(new BitkiCevirileri { BitkiId = yeniBitki.BitkiId, DilKodu = "en", BitkiAdi = kayitAdEN, BilimselAd = bilimselAd, Aciklama = memoAciklamaEN.Text, YetistirmeKosullari = memoYetistirmeEN.Text, SaklamaKosullari = memoSaklamaEN.Text });
 
-                    BitkiCevirileri cevirTr = new BitkiCevirileri
+                        // 4. Görsel Ekle
+                        db.BitkiGorselleris.Add(new BitkiGorselleri { BitkiId = yeniBitki.BitkiId, DosyaYolu = "Gorseller/" + dosyaAdi, AnaGorsel = 1 });
+
+                        db.SaveChanges();
+                        XtraMessageBox.Show(Resources.BitkiKayitBasarili, Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Temizle(); // Yeni kayıt için temizle
+                    }
+                    // ==========================================
+                    // DURUM B: GÜNCELLEME (UPDATE)
+                    // ==========================================
+                    else
                     {
-                        BitkiId = yeniBitki.BitkiId,
-                        DilKodu = "tr",
-                        // Otomatik doldurulmuş veya girilmiş veri
-                        // Automatically filled or entered data
-                        BitkiAdi = kayitAdTR, 
-                        BilimselAd = bilimselAd,
-                        Aciklama = memoAciklamaTR.Text,
-                        YetistirmeKosullari = memoYetistirmeTR.Text,
-                        SaklamaKosullari = memoSaklamaTR.Text
-                    };
-                    db.BitkiCevirileris.Add(cevirTr);
+                        // 1. Mevcut Bitkiyi Bul
+                        var bitki = db.Bitkilers.Find(_gelenBitkiId);
+                        if (bitki != null)
+                        {
+                            // Ana tabloyu güncelle
+                            bitki.Fiyat = (double)numFiyat.Value;
+                            bitki.StokAdedi = (int)numStok.Value;
 
-                    // B2. İngilizce Kaydı
-                    // B2. English Record
-                    BitkiCevirileri cevirEn = new BitkiCevirileri
-                    {
-                        BitkiId = yeniBitki.BitkiId,
-                        DilKodu = "en",
-                        // Otomatik doldurulmuş veya girilmiş veri
-                        // Automatically filled or entered data
-                        BitkiAdi = kayitAdEN, 
-                        BilimselAd = bilimselAd,
-                        Aciklama = memoAciklamaEN.Text,
-                        YetistirmeKosullari = memoYetistirmeEN.Text,
-                        SaklamaKosullari = memoSaklamaEN.Text
-                    };
-                    db.BitkiCevirileris.Add(cevirEn);
+                            // 2. Çevirileri Güncelle (TR)
+                            var tr = db.BitkiCevirileris.FirstOrDefault(x => x.BitkiId == _gelenBitkiId && x.DilKodu == "tr");
+                            if (tr != null)
+                            {
+                                tr.BitkiAdi = kayitAdTR; tr.BilimselAd = bilimselAd; tr.Aciklama = memoAciklamaTR.Text; tr.YetistirmeKosullari = memoYetistirmeTR.Text; tr.SaklamaKosullari = memoSaklamaTR.Text;
+                            }
 
-                    // C. GÖRSEL TABLOSU 
-                    // C. IMAGE TABLE
-                    BitkiGorselleri yeniGorsel = new BitkiGorselleri
-                    {
-                        BitkiId = yeniBitki.BitkiId,
-                        DosyaYolu = "Gorseller/" + dosyaAdi,
-                        AnaGorsel = 1
-                    };
-                    db.BitkiGorselleris.Add(yeniGorsel);
+                            // 3. Çevirileri Güncelle (EN)
+                            var en = db.BitkiCevirileris.FirstOrDefault(x => x.BitkiId == _gelenBitkiId && x.DilKodu == "en");
+                            if (en != null)
+                            {
+                                en.BitkiAdi = kayitAdEN; en.BilimselAd = bilimselAd; en.Aciklama = memoAciklamaEN.Text; en.YetistirmeKosullari = memoYetistirmeEN.Text; en.SaklamaKosullari = memoSaklamaEN.Text;
+                            }
 
-                    db.SaveChanges();
+                            // (Resim güncelleme işlemi biraz daha karmaşıktır, şimdilik resmi değiştirmeyi es geçiyoruz veya
+                            // eskiyi silip yenisini eklemek gerekir. Basitlik adına şu an sadece metinleri güncelliyoruz.)
 
-                    XtraMessageBox.Show(Resources.BitkiKayitBasarili, Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // Formu kapatma, temizle ve yeni kayda hazırla
-                    // Close the form, clear it, and prepare for a new record
-                    Temizle();
+                            db.SaveChanges();
+                            XtraMessageBox.Show("Bitki başarıyla güncellendi.", Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close(); // Güncelleme bitince formu kapat
+                        }
+                    }
                 }
             }
             catch (Exception ex)

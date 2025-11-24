@@ -123,6 +123,15 @@
   <data name="BitkiKayitBasarili" xml:space="preserve">
     <value>Bitki başarıyla kaydedildi.</value>
   </data>
+  <data name="BitkiSilBasarili" xml:space="preserve">
+    <value>Bitki başarıyla silindi.</value>
+  </data>
+  <data name="BitkiSilOnayBaslik" xml:space="preserve">
+    <value>Silme Onayı</value>
+  </data>
+  <data name="BitkiSilOnayMesaj" xml:space="preserve">
+    <value>Seçili bitkiyi silmek istediğinize emin misiniz?</value>
+  </data>
   <data name="btnAdminBitkiler_ToolTip" xml:space="preserve">
     <value>Bitki Yönetimi</value>
   </data>
@@ -233,6 +242,9 @@
   </data>
   <data name="HataBitkiResim" xml:space="preserve">
     <value>Lütfen bir bitki görseli seçiniz.</value>
+  </data>
+  <data name="HataSatirSecilmedi" xml:space="preserve">
+    <value>Lütfen silinecek bir satır seçiniz.</value>
   </data>
   <data name="HesapSilUyariBaslik" xml:space="preserve">
     <value>Hesabı Sil</value>

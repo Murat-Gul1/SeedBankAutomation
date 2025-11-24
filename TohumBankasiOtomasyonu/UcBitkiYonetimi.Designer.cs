@@ -63,6 +63,7 @@
             btnBitkiSil.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
             btnBitkiSil.Size = new System.Drawing.Size(75, 56);
             btnBitkiSil.TabIndex = 2;
+            btnBitkiSil.Click += btnBitkiSil_Click;
             // 
             // btnBitkiDuzenle
             // 
@@ -75,6 +76,7 @@
             btnBitkiDuzenle.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
             btnBitkiDuzenle.Size = new System.Drawing.Size(75, 56);
             btnBitkiDuzenle.TabIndex = 1;
+            btnBitkiDuzenle.Click += btnBitkiDuzenle_Click;
             // 
             // btnBitkiEkle
             // 

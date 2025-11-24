@@ -123,6 +123,15 @@
   <data name="BitkiKayitBasarili" xml:space="preserve">
     <value>Plant saved successfully.</value>
   </data>
+  <data name="BitkiSilBasarili" xml:space="preserve">
+    <value>The plant was successfully deleted.</value>
+  </data>
+  <data name="BitkiSilOnayBaslik" xml:space="preserve">
+    <value>Deletion Confirmation</value>
+  </data>
+  <data name="BitkiSilOnayMesaj" xml:space="preserve">
+    <value>Are you sure you want to delete the selected plant?</value>
+  </data>
   <data name="btnAdminBitkiler_ToolTip" xml:space="preserve">
     <value>Plant Management</value>
   </data>
@@ -233,6 +242,9 @@
   </data>
   <data name="HataBitkiResim" xml:space="preserve">
     <value>Please select a plant image.</value>
+  </data>
+  <data name="HataSatirSecilmedi" xml:space="preserve">
+    <value>Please select a row to delete.</value>
   </data>
   <data name="HesapSilUyariBaslik" xml:space="preserve">
     <value>Delete Account</value>
