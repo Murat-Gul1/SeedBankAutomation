@@ -56,5 +56,10 @@ namespace TohumBankasiOtomasyonu
             // Kullanıcılar sayfasını göster
             navFrameAdmin.SelectedPage = pageKullanicilar;
         }
+
+        private void btnAdminSatislar_Click(object sender, EventArgs e)
+        {
+            navFrameAdmin.SelectedPage = pageSatislar;
+        }
     }
 }

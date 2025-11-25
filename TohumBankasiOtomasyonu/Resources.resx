@@ -165,6 +165,9 @@
   <data name="btnHesapTemizle_Text" xml:space="preserve">
     <value>Temizle</value>
   </data>
+  <data name="btnKapat" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
   <data name="btnKaydol_Text" xml:space="preserve">
     <value>Kayıt Ol</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="btnResimSec" xml:space="preserve">
     <value>Resim Seç...</value>
   </data>
+  <data name="btnSatisDetay_Text" xml:space="preserve">
+    <value>Detayları Gör</value>
+  </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Temizle</value>
   </data>
@@ -194,6 +200,75 @@
   </data>
   <data name="CikisBasariliMesaj" xml:space="preserve">
     <value>Başarıyla çıkış yaptınız.</value>
+  </data>
+  <data name="colBirimFiyat" xml:space="preserve">
+    <value>Birim Fiyat</value>
+  </data>
+  <data name="colBitkiAdi" xml:space="preserve">
+    <value>Bitki Adı</value>
+  </data>
+  <data name="colBitkiBilimsel" xml:space="preserve">
+    <value>Bilimsel Ad</value>
+  </data>
+  <data name="colBitkiDurum" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="colBitkiFiyat" xml:space="preserve">
+    <value>Fiyat</value>
+  </data>
+  <data name="colBitkiID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="colBitkiStok" xml:space="preserve">
+    <value>Stok</value>
+  </data>
+  <data name="colKullaniciAd" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="colKullaniciAdi" xml:space="preserve">
+    <value>Kullanıcı Adı</value>
+  </data>
+  <data name="colKullaniciEmail" xml:space="preserve">
+    <value>E-posta</value>
+  </data>
+  <data name="colKullaniciID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="colKullaniciSoyad" xml:space="preserve">
+    <value>Soyad</value>
+  </data>
+  <data name="colKullaniciYetki" xml:space="preserve">
+    <value>Yetki</value>
+  </data>
+  <data name="colMiktar" xml:space="preserve">
+    <value>Miktar</value>
+  </data>
+  <data name="colMusteriAdSoyad" xml:space="preserve">
+    <value>Müşteri</value>
+  </data>
+  <data name="colSatirToplam" xml:space="preserve">
+    <value>Ara Toplam</value>
+  </data>
+  <data name="colSatisId" xml:space="preserve">
+    <value>Makbuz No</value>
+  </data>
+  <data name="colSatisMakbuz" xml:space="preserve">
+    <value>Makbuz No</value>
+  </data>
+  <data name="colSatisMusteri" xml:space="preserve">
+    <value>Müşteri</value>
+  </data>
+  <data name="colSatisTarih" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="colSatisTutar" xml:space="preserve">
+    <value>Tutar</value>
+  </data>
+  <data name="colToplamTutar" xml:space="preserve">
+    <value>Toplam Tutar</value>
+  </data>
+  <data name="colUrunAdi" xml:space="preserve">
+    <value>Ürün Adı</value>
   </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Tohum Bankası Otomasyonu</value>
@@ -218,6 +293,9 @@
   </data>
   <data name="FormKullaniciDuzenle_Title" xml:space="preserve">
     <value>Kullanıcı Düzenle</value>
+  </data>
+  <data name="FormSatisDetay_Title" xml:space="preserve">
+    <value>Satış Detayları</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>Kayıt sırasında beklenmedik bir hata oluştu:</value>
@@ -341,6 +419,15 @@
   </data>
   <data name="lblBitkiYetistirme" xml:space="preserve">
     <value>Yetiştirme Koşulları:</value>
+  </data>
+  <data name="lblDetayMakbuzNo" xml:space="preserve">
+    <value>Makbuz No:</value>
+  </data>
+  <data name="lblDetayTarih" xml:space="preserve">
+    <value>Tarih:</value>
+  </data>
+  <data name="lblDetayToplam" xml:space="preserve">
+    <value>Genel Toplam:</value>
   </data>
   <data name="lblKullaniciTipi" xml:space="preserve">
     <value>Yetki / Rol:</value>

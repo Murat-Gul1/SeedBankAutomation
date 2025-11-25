@@ -24,27 +24,61 @@ namespace TohumBankasiOtomasyonu
         {
             using (var db = new TohumBankasiContext())
             {
-                // 1. Şu anki program dili ne? ("tr" veya "en")
-                // (Veritabanında 'tr' ve 'en' olarak tuttuğumuz için ilk iki harfi alıyoruz)
                 string aktifDil = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
-                // 2. LINQ Sorgusu: İki tabloyu birleştir
-                var bitkiListesi = from b in db.Bitkilers
-                                   join c in db.BitkiCevirileris on b.BitkiId equals c.BitkiId
-                                   where c.DilKodu == aktifDil // Sadece aktif dildeki çeviriyi getir
-                                   select new
-                                   {
-                                       ID = b.BitkiId,
-                                       BitkiAdi = c.BitkiAdi, // Çeviri tablosundan
-                                       BilimselAd = c.BilimselAd, // Çeviri tablosundan
-                                       Fiyat = b.Fiyat,       // Ana tablodan
-                                       Stok = b.StokAdedi,    // Ana tablodan
-                                       Durum = b.Aktif == 1 ? "Satışta" : "Pasif" // 1/0 yerine yazı gösterelim
-                                   };
+                // 1. Önce tüm bitkileri (Ana Tabloyu) çek
+                var tumBitkiler = db.Bitkilers.ToList();
 
-                // 3. Sonucu GridControl'e bağla
-                // (gridBitkiler, tasarımda GridControl'e verdiğimiz isim olmalı)
-                gridBitkiler.DataSource = bitkiListesi.ToList();
+                // 2. Tüm çevirileri de çek (Bellekte eşleştirmek daha kolaydır)
+                var tumCeviriler = db.BitkiCevirileris.ToList();
+
+                // 3. Bellekte (Memory) birleştirme ve dil seçimi yap
+                var bitkiListesi = tumBitkiler.Select(b => {
+                    // Bu bitkinin aktif dildeki çevirisini bul
+                    var ceviri = tumCeviriler.FirstOrDefault(c => c.BitkiId == b.BitkiId && c.DilKodu == aktifDil);
+
+                    // Eğer yoksa, Türkçe çevirisini bul (Fallback)
+                    if (ceviri == null)
+                    {
+                        ceviri = tumCeviriler.FirstOrDefault(c => c.BitkiId == b.BitkiId && c.DilKodu == "tr");
+                    }
+
+                    // Hala yoksa (ki olmamalı), boş bir nesne oluştur
+                    if (ceviri == null) ceviri = new BitkiCevirileri { BitkiAdi = "İsimsiz", BilimselAd = "Bilinmiyor" };
+
+                    return new
+                    {
+                        ID = b.BitkiId,
+                        BitkiAdi = ceviri.BitkiAdi,
+                        BilimselAd = ceviri.BilimselAd,
+                        Fiyat = b.Fiyat,
+                        Stok = b.StokAdedi,
+                        Durum = b.Aktif == 1 ? "Satışta" : "Pasif"
+                    };
+                }).ToList();
+
+                gridBitkiler.DataSource = bitkiListesi;
+
+                // --- ÇÖZÜM 2: SÜTUN BAŞLIKLARINI DÜZELTME ---
+                SutunBasliklariniAyarla();
+            }
+        }
+        private void SutunBasliklariniAyarla()
+        {
+            // GridView'e erişim (Varsayılan adı gridView1'dir)
+            var view = gridBitkiler.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
+
+            if (view != null)
+            {
+                // Sütunlar veritabanından gelen isimlerle oluşur (ID, BitkiAdi, Fiyat...)
+                // Biz bunların görünen başlıklarını (Caption) değiştiriyoruz.
+
+                if (view.Columns["ID"] != null) view.Columns["ID"].Caption = Resources.colBitkiID;
+                if (view.Columns["BitkiAdi"] != null) view.Columns["BitkiAdi"].Caption = Resources.colBitkiAdi;
+                if (view.Columns["BilimselAd"] != null) view.Columns["BilimselAd"].Caption = Resources.colBitkiBilimsel;
+                if (view.Columns["Fiyat"] != null) view.Columns["Fiyat"].Caption = Resources.colBitkiFiyat;
+                if (view.Columns["Stok"] != null) view.Columns["Stok"].Caption = Resources.colBitkiStok;
+                if (view.Columns["Durum"] != null) view.Columns["Durum"].Caption = Resources.colBitkiDurum;
             }
         }
 

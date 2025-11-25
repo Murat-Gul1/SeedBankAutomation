@@ -17,6 +17,20 @@ namespace TohumBankasiOtomasyonu
         {
             InitializeComponent();
         }
+        private void SutunBasliklariniAyarla()
+        {
+            var view = gridKullanicilar.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (view != null)
+            {
+                // Anonim tipte verdiğimiz isimler: ID, KullaniciAdi, Ad, Soyad, Email, Yetki
+                if (view.Columns["ID"] != null) view.Columns["ID"].Caption = Resources.colKullaniciID;
+                if (view.Columns["KullaniciAdi"] != null) view.Columns["KullaniciAdi"].Caption = Resources.colKullaniciAdi;
+                if (view.Columns["Ad"] != null) view.Columns["Ad"].Caption = Resources.colKullaniciAd;
+                if (view.Columns["Soyad"] != null) view.Columns["Soyad"].Caption = Resources.colKullaniciSoyad;
+                if (view.Columns["Email"] != null) view.Columns["Email"].Caption = Resources.colKullaniciEmail;
+                if (view.Columns["Yetki"] != null) view.Columns["Yetki"].Caption = Resources.colKullaniciYetki;
+            }
+        }
         public void KullanicilariListele()
         {
             using (var db = new TohumBankasiContext())
@@ -36,6 +50,7 @@ namespace TohumBankasiOtomasyonu
                               .ToList();
 
                 gridKullanicilar.DataSource = liste;
+                SutunBasliklariniAyarla();
             }
         }
 

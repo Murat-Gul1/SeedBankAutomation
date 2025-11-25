@@ -38,12 +38,15 @@
             ucBitkiYonetimi1 = new UcBitkiYonetimi();
             pageKullanicilar = new DevExpress.XtraBars.Navigation.NavigationPage();
             ucKullaniciYonetimi1 = new UcKullaniciYonetimi();
+            pageSatislar = new DevExpress.XtraBars.Navigation.NavigationPage();
+            ucSatisYonetimi1 = new UcSatisYonetimi();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
             panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)navFrameAdmin).BeginInit();
             navFrameAdmin.SuspendLayout();
             pageBitkiler.SuspendLayout();
             pageKullanicilar.SuspendLayout();
+            pageSatislar.SuspendLayout();
             SuspendLayout();
             // 
             // panelControl1
@@ -55,7 +58,7 @@
             panelControl1.Dock = System.Windows.Forms.DockStyle.Left;
             panelControl1.Location = new System.Drawing.Point(0, 0);
             panelControl1.Name = "panelControl1";
-            panelControl1.Size = new System.Drawing.Size(86, 532);
+            panelControl1.Size = new System.Drawing.Size(86, 516);
             panelControl1.TabIndex = 0;
             // 
             // btnAdminBlockchain
@@ -81,6 +84,7 @@
             btnAdminSatislar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
             btnAdminSatislar.Size = new System.Drawing.Size(82, 56);
             btnAdminSatislar.TabIndex = 2;
+            btnAdminSatislar.Click += btnAdminSatislar_Click;
             // 
             // btnAdminKullanicilar
             // 
@@ -112,12 +116,13 @@
             // 
             navFrameAdmin.Controls.Add(pageBitkiler);
             navFrameAdmin.Controls.Add(pageKullanicilar);
+            navFrameAdmin.Controls.Add(pageSatislar);
             navFrameAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
             navFrameAdmin.Location = new System.Drawing.Point(86, 0);
             navFrameAdmin.Name = "navFrameAdmin";
-            navFrameAdmin.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { pageBitkiler, pageKullanicilar });
+            navFrameAdmin.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { pageBitkiler, pageKullanicilar, pageSatislar });
             navFrameAdmin.SelectedPage = pageBitkiler;
-            navFrameAdmin.Size = new System.Drawing.Size(1051, 532);
+            navFrameAdmin.Size = new System.Drawing.Size(1037, 516);
             navFrameAdmin.TabIndex = 1;
             navFrameAdmin.Text = "navigationFrame1";
             // 
@@ -126,14 +131,14 @@
             pageBitkiler.Caption = "pageBitkiler";
             pageBitkiler.Controls.Add(ucBitkiYonetimi1);
             pageBitkiler.Name = "pageBitkiler";
-            pageBitkiler.Size = new System.Drawing.Size(1051, 532);
+            pageBitkiler.Size = new System.Drawing.Size(1037, 516);
             // 
             // ucBitkiYonetimi1
             // 
             ucBitkiYonetimi1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucBitkiYonetimi1.Location = new System.Drawing.Point(0, 0);
             ucBitkiYonetimi1.Name = "ucBitkiYonetimi1";
-            ucBitkiYonetimi1.Size = new System.Drawing.Size(1051, 532);
+            ucBitkiYonetimi1.Size = new System.Drawing.Size(1037, 516);
             ucBitkiYonetimi1.TabIndex = 0;
             // 
             // pageKullanicilar
@@ -141,21 +146,36 @@
             pageKullanicilar.Caption = "navigationPage2";
             pageKullanicilar.Controls.Add(ucKullaniciYonetimi1);
             pageKullanicilar.Name = "pageKullanicilar";
-            pageKullanicilar.Size = new System.Drawing.Size(1051, 532);
+            pageKullanicilar.Size = new System.Drawing.Size(1037, 516);
             // 
             // ucKullaniciYonetimi1
             // 
             ucKullaniciYonetimi1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucKullaniciYonetimi1.Location = new System.Drawing.Point(0, 0);
             ucKullaniciYonetimi1.Name = "ucKullaniciYonetimi1";
-            ucKullaniciYonetimi1.Size = new System.Drawing.Size(1051, 532);
+            ucKullaniciYonetimi1.Size = new System.Drawing.Size(1037, 516);
             ucKullaniciYonetimi1.TabIndex = 0;
+            // 
+            // pageSatislar
+            // 
+            pageSatislar.Caption = "pageSatislar";
+            pageSatislar.Controls.Add(ucSatisYonetimi1);
+            pageSatislar.Name = "pageSatislar";
+            pageSatislar.Size = new System.Drawing.Size(1037, 516);
+            // 
+            // ucSatisYonetimi1
+            // 
+            ucSatisYonetimi1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucSatisYonetimi1.Location = new System.Drawing.Point(0, 0);
+            ucSatisYonetimi1.Name = "ucSatisYonetimi1";
+            ucSatisYonetimi1.Size = new System.Drawing.Size(1037, 516);
+            ucSatisYonetimi1.TabIndex = 0;
             // 
             // FormAdminPaneli
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1137, 532);
+            ClientSize = new System.Drawing.Size(1123, 516);
             Controls.Add(navFrameAdmin);
             Controls.Add(panelControl1);
             Name = "FormAdminPaneli";
@@ -169,6 +189,7 @@
             navFrameAdmin.ResumeLayout(false);
             pageBitkiler.ResumeLayout(false);
             pageKullanicilar.ResumeLayout(false);
+            pageSatislar.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -184,5 +205,7 @@
         private DevExpress.XtraBars.Navigation.NavigationPage pageKullanicilar;
         private UcBitkiYonetimi ucBitkiYonetimi1;
         private UcKullaniciYonetimi ucKullaniciYonetimi1;
+        private DevExpress.XtraBars.Navigation.NavigationPage pageSatislar;
+        private UcSatisYonetimi ucSatisYonetimi1;
     }
 }

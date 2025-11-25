@@ -165,6 +165,9 @@
   <data name="btnHesapTemizle_Text" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="btnKapat" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="btnKaydol_Text" xml:space="preserve">
     <value>Register</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="btnResimSec" xml:space="preserve">
     <value>Select Image...</value>
   </data>
+  <data name="btnSatisDetay_Text" xml:space="preserve">
+    <value>View Details</value>
+  </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Clear</value>
   </data>
@@ -194,6 +200,75 @@
   </data>
   <data name="CikisBasariliMesaj" xml:space="preserve">
     <value>You have been logged out successfully.</value>
+  </data>
+  <data name="colBirimFiyat" xml:space="preserve">
+    <value>Unit Price</value>
+  </data>
+  <data name="colBitkiAdi" xml:space="preserve">
+    <value>Plant Name</value>
+  </data>
+  <data name="colBitkiBilimsel" xml:space="preserve">
+    <value>Scientific Name</value>
+  </data>
+  <data name="colBitkiDurum" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="colBitkiFiyat" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="colBitkiID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="colBitkiStok" xml:space="preserve">
+    <value>Stock</value>
+  </data>
+  <data name="colKullaniciAd" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="colKullaniciAdi" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="colKullaniciEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="colKullaniciID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="colKullaniciSoyad" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="colKullaniciYetki" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="colMiktar" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="colMusteriAdSoyad" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="colSatirToplam" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="colSatisId" xml:space="preserve">
+    <value>Receipt No</value>
+  </data>
+  <data name="colSatisMakbuz" xml:space="preserve">
+    <value>Receipt No</value>
+  </data>
+  <data name="colSatisMusteri" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="colSatisTarih" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="colSatisTutar" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="colToplamTutar" xml:space="preserve">
+    <value>Total Amount</value>
+  </data>
+  <data name="colUrunAdi" xml:space="preserve">
+    <value>Product Name</value>
   </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Seed Bank Automation</value>
@@ -218,6 +293,9 @@
   </data>
   <data name="FormKullaniciDuzenle_Title" xml:space="preserve">
     <value>Edit User</value>
+  </data>
+  <data name="FormSatisDetay_Title" xml:space="preserve">
+    <value>Sales Details</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>An unexpected error occurred during registration:</value>
@@ -341,6 +419,15 @@
   </data>
   <data name="lblBitkiYetistirme" xml:space="preserve">
     <value>Growing Conditions:</value>
+  </data>
+  <data name="lblDetayMakbuzNo" xml:space="preserve">
+    <value>Receipt No:</value>
+  </data>
+  <data name="lblDetayTarih" xml:space="preserve">
+    <value>Date:</value>
+  </data>
+  <data name="lblDetayToplam" xml:space="preserve">
+    <value>Grand Total:</value>
   </data>
   <data name="lblKullaniciTipi" xml:space="preserve">
     <value>Role / Permission:</value>
