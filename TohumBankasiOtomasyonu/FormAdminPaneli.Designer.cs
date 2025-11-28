@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            btnAdminStok = new DevExpress.XtraEditors.SimpleButton();
             btnAdminBlockchain = new DevExpress.XtraEditors.SimpleButton();
             btnAdminSatislar = new DevExpress.XtraEditors.SimpleButton();
             btnAdminKullanicilar = new DevExpress.XtraEditors.SimpleButton();
@@ -40,6 +41,10 @@
             ucKullaniciYonetimi1 = new UcKullaniciYonetimi();
             pageSatislar = new DevExpress.XtraBars.Navigation.NavigationPage();
             ucSatisYonetimi1 = new UcSatisYonetimi();
+            pageBlockchain = new DevExpress.XtraBars.Navigation.NavigationPage();
+            ucBlockchainYonetimi1 = new UcBlockchainYonetimi();
+            pageStok = new DevExpress.XtraBars.Navigation.NavigationPage();
+            ucStokYonetimi1 = new UcStokYonetimi();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
             panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)navFrameAdmin).BeginInit();
@@ -47,11 +52,14 @@
             pageBitkiler.SuspendLayout();
             pageKullanicilar.SuspendLayout();
             pageSatislar.SuspendLayout();
+            pageBlockchain.SuspendLayout();
+            pageStok.SuspendLayout();
             SuspendLayout();
             // 
             // panelControl1
             // 
             panelControl1.Controls.Add(btnAdminBlockchain);
+            panelControl1.Controls.Add(btnAdminStok);
             panelControl1.Controls.Add(btnAdminSatislar);
             panelControl1.Controls.Add(btnAdminKullanicilar);
             panelControl1.Controls.Add(btnAdminBitkiler);
@@ -61,17 +69,31 @@
             panelControl1.Size = new System.Drawing.Size(86, 516);
             panelControl1.TabIndex = 0;
             // 
+            // btnAdminStok
+            // 
+            btnAdminStok.Dock = System.Windows.Forms.DockStyle.Top;
+            btnAdminStok.ImageOptions.Image = Properties.Resources.inventory;
+            btnAdminStok.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            btnAdminStok.Location = new System.Drawing.Point(2, 170);
+            btnAdminStok.LookAndFeel.UseDefaultLookAndFeel = false;
+            btnAdminStok.Name = "btnAdminStok";
+            btnAdminStok.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            btnAdminStok.Size = new System.Drawing.Size(82, 56);
+            btnAdminStok.TabIndex = 4;
+            btnAdminStok.Click += btnAdminStok_Click;
+            // 
             // btnAdminBlockchain
             // 
             btnAdminBlockchain.Dock = System.Windows.Forms.DockStyle.Top;
             btnAdminBlockchain.ImageOptions.Image = Properties.Resources.blockchain;
             btnAdminBlockchain.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            btnAdminBlockchain.Location = new System.Drawing.Point(2, 170);
+            btnAdminBlockchain.Location = new System.Drawing.Point(2, 226);
             btnAdminBlockchain.LookAndFeel.UseDefaultLookAndFeel = false;
             btnAdminBlockchain.Name = "btnAdminBlockchain";
             btnAdminBlockchain.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
             btnAdminBlockchain.Size = new System.Drawing.Size(82, 56);
             btnAdminBlockchain.TabIndex = 3;
+            btnAdminBlockchain.Click += btnAdminBlockchain_Click;
             // 
             // btnAdminSatislar
             // 
@@ -117,10 +139,12 @@
             navFrameAdmin.Controls.Add(pageBitkiler);
             navFrameAdmin.Controls.Add(pageKullanicilar);
             navFrameAdmin.Controls.Add(pageSatislar);
+            navFrameAdmin.Controls.Add(pageBlockchain);
+            navFrameAdmin.Controls.Add(pageStok);
             navFrameAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
             navFrameAdmin.Location = new System.Drawing.Point(86, 0);
             navFrameAdmin.Name = "navFrameAdmin";
-            navFrameAdmin.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { pageBitkiler, pageKullanicilar, pageSatislar });
+            navFrameAdmin.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { pageBitkiler, pageKullanicilar, pageSatislar, pageBlockchain, pageStok });
             navFrameAdmin.SelectedPage = pageBitkiler;
             navFrameAdmin.Size = new System.Drawing.Size(1037, 516);
             navFrameAdmin.TabIndex = 1;
@@ -171,6 +195,36 @@
             ucSatisYonetimi1.Size = new System.Drawing.Size(1037, 516);
             ucSatisYonetimi1.TabIndex = 0;
             // 
+            // pageBlockchain
+            // 
+            pageBlockchain.Caption = "pageBlockchain";
+            pageBlockchain.Controls.Add(ucBlockchainYonetimi1);
+            pageBlockchain.Name = "pageBlockchain";
+            pageBlockchain.Size = new System.Drawing.Size(1037, 516);
+            // 
+            // ucBlockchainYonetimi1
+            // 
+            ucBlockchainYonetimi1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucBlockchainYonetimi1.Location = new System.Drawing.Point(0, 0);
+            ucBlockchainYonetimi1.Name = "ucBlockchainYonetimi1";
+            ucBlockchainYonetimi1.Size = new System.Drawing.Size(1037, 516);
+            ucBlockchainYonetimi1.TabIndex = 0;
+            // 
+            // pageStok
+            // 
+            pageStok.Caption = "pageStok";
+            pageStok.Controls.Add(ucStokYonetimi1);
+            pageStok.Name = "pageStok";
+            pageStok.Size = new System.Drawing.Size(1037, 516);
+            // 
+            // ucStokYonetimi1
+            // 
+            ucStokYonetimi1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucStokYonetimi1.Location = new System.Drawing.Point(0, 0);
+            ucStokYonetimi1.Name = "ucStokYonetimi1";
+            ucStokYonetimi1.Size = new System.Drawing.Size(1037, 516);
+            ucStokYonetimi1.TabIndex = 0;
+            // 
             // FormAdminPaneli
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,6 +244,8 @@
             pageBitkiler.ResumeLayout(false);
             pageKullanicilar.ResumeLayout(false);
             pageSatislar.ResumeLayout(false);
+            pageBlockchain.ResumeLayout(false);
+            pageStok.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -207,5 +263,10 @@
         private UcKullaniciYonetimi ucKullaniciYonetimi1;
         private DevExpress.XtraBars.Navigation.NavigationPage pageSatislar;
         private UcSatisYonetimi ucSatisYonetimi1;
+        private DevExpress.XtraBars.Navigation.NavigationPage pageBlockchain;
+        private UcBlockchainYonetimi ucBlockchainYonetimi1;
+        private DevExpress.XtraEditors.SimpleButton btnAdminStok;
+        private DevExpress.XtraBars.Navigation.NavigationPage pageStok;
+        private UcStokYonetimi ucStokYonetimi1;
     }
 }

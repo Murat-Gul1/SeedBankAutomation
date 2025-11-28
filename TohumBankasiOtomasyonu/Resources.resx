@@ -132,6 +132,9 @@
   <data name="BitkiSilOnayMesaj" xml:space="preserve">
     <value>Seçili bitkiyi silmek istediğinize emin misiniz?</value>
   </data>
+  <data name="BlokzincirVerisi" xml:space="preserve">
+    <value>Satış ID: {0}, Tutar: {1}, Tarih: {2}</value>
+  </data>
   <data name="btnAdminBitkiler_ToolTip" xml:space="preserve">
     <value>Bitki Yönetimi</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="btnAdminSatislar_ToolTip" xml:space="preserve">
     <value>Satış Kayıtları</value>
+  </data>
+  <data name="btnAdminStok_ToolTip" xml:space="preserve">
+    <value>Stok Yönetimi</value>
   </data>
   <data name="btnBitkiKaydet" xml:space="preserve">
     <value>Kaydet</value>
@@ -189,6 +195,18 @@
   <data name="btnSatisDetay_Text" xml:space="preserve">
     <value>Detayları Gör</value>
   </data>
+  <data name="btnSepetSatinAl" xml:space="preserve">
+    <value>Satın Almayı Tamamla</value>
+  </data>
+  <data name="btnSepetTemizle" xml:space="preserve">
+    <value>Sepeti Boşalt</value>
+  </data>
+  <data name="btnSepetUrunSil" xml:space="preserve">
+    <value>Seçili Ürünü Çıkar</value>
+  </data>
+  <data name="btnSepet_ToolTip" xml:space="preserve">
+    <value>Sepetim</value>
+  </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Temizle</value>
   </data>
@@ -222,6 +240,9 @@
   <data name="colBitkiStok" xml:space="preserve">
     <value>Stok</value>
   </data>
+  <data name="colBlokID" xml:space="preserve">
+    <value>Blok No</value>
+  </data>
   <data name="colKullaniciAd" xml:space="preserve">
     <value>Ad</value>
   </data>
@@ -240,11 +261,17 @@
   <data name="colKullaniciYetki" xml:space="preserve">
     <value>Yetki</value>
   </data>
+  <data name="colMevcutHash" xml:space="preserve">
+    <value>Blok Hash'i</value>
+  </data>
   <data name="colMiktar" xml:space="preserve">
     <value>Miktar</value>
   </data>
   <data name="colMusteriAdSoyad" xml:space="preserve">
     <value>Müşteri</value>
+  </data>
+  <data name="colOncekiHash" xml:space="preserve">
+    <value>Önceki Hash</value>
   </data>
   <data name="colSatirToplam" xml:space="preserve">
     <value>Ara Toplam</value>
@@ -264,11 +291,32 @@
   <data name="colSatisTutar" xml:space="preserve">
     <value>Tutar</value>
   </data>
+  <data name="colSepetAdet" xml:space="preserve">
+    <value>Adet</value>
+  </data>
+  <data name="colSepetFiyat" xml:space="preserve">
+    <value>Birim Fiyat</value>
+  </data>
+  <data name="colSepetResim" xml:space="preserve">
+    <value>Ürün Görseli</value>
+  </data>
+  <data name="colSepetToplam" xml:space="preserve">
+    <value>Toplam</value>
+  </data>
+  <data name="colSepetUrunAdi" xml:space="preserve">
+    <value>Ürün Adı</value>
+  </data>
   <data name="colToplamTutar" xml:space="preserve">
     <value>Toplam Tutar</value>
   </data>
   <data name="colUrunAdi" xml:space="preserve">
     <value>Ürün Adı</value>
+  </data>
+  <data name="colVeri" xml:space="preserve">
+    <value>Veri / İşlem</value>
+  </data>
+  <data name="colZamanDamgasi" xml:space="preserve">
+    <value>Zaman Damgası</value>
   </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Tohum Bankası Otomasyonu</value>
@@ -296,6 +344,9 @@
   </data>
   <data name="FormSatisDetay_Title" xml:space="preserve">
     <value>Satış Detayları</value>
+  </data>
+  <data name="FormSepet_Title" xml:space="preserve">
+    <value>Alışveriş Sepeti</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>Kayıt sırasında beklenmedik bir hata oluştu:</value>
@@ -327,8 +378,14 @@
   <data name="HataBitkiResim" xml:space="preserve">
     <value>Lütfen bir bitki görseli seçiniz.</value>
   </data>
+  <data name="HataGirisGerekli" xml:space="preserve">
+    <value>Sepete ürün eklemek için lütfen giriş yapınız.</value>
+  </data>
   <data name="HataSatirSecilmedi" xml:space="preserve">
     <value>Lütfen silinecek bir satır seçiniz.</value>
+  </data>
+  <data name="HataYetersizStok" xml:space="preserve">
+    <value>Yetersiz stok! Şu ürün tükenmiş:</value>
   </data>
   <data name="HesapSilUyariBaslik" xml:space="preserve">
     <value>Hesabı Sil</value>
@@ -432,11 +489,26 @@
   <data name="lblKullaniciTipi" xml:space="preserve">
     <value>Yetki / Rol:</value>
   </data>
+  <data name="lblSepetGenelToplam" xml:space="preserve">
+    <value>Genel Toplam:</value>
+  </data>
   <data name="linkHesapSil" xml:space="preserve">
     <value>Hesabımı Kalıcı Olarak Kapat</value>
   </data>
   <data name="MevcutSifreHatali" xml:space="preserve">
     <value>Değişiklikleri kaydetmek için girdiğiniz mevcut şifre hatalı.</value>
+  </data>
+  <data name="MsgSepetBos" xml:space="preserve">
+    <value>Sepetiniz şu an boş.</value>
+  </data>
+  <data name="MsgSepeteEklandi" xml:space="preserve">
+    <value>Ürün sepete eklendi!</value>
+  </data>
+  <data name="OnayBaslik" xml:space="preserve">
+    <value>Onay</value>
+  </data>
+  <data name="OnaySepetBosalt" xml:space="preserve">
+    <value>Sepeti tamamen boşaltmak istediğinize emin misiniz?</value>
   </data>
   <data name="ResimSecDialogFilter" xml:space="preserve">
     <value>Resim Dosyaları|*.jpg;*.jpeg;*.png;*.bmp;*.gif</value>
@@ -452,6 +524,9 @@
   </data>
   <data name="Role_Kullanici" xml:space="preserve">
     <value>Kullanıcı</value>
+  </data>
+  <data name="SatinAlmaBasarili" xml:space="preserve">
+    <value>Satın alma işlemi başarıyla tamamlandı ve Blokzincire işlendi!</value>
   </data>
   <data name="SifreEslesmeHata" xml:space="preserve">
     <value>Girdiğiniz şifreler birbiriyle eşleşmiyor.</value>

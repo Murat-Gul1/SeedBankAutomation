@@ -61,5 +61,15 @@ namespace TohumBankasiOtomasyonu
         {
             navFrameAdmin.SelectedPage = pageSatislar;
         }
+
+        private void btnAdminBlockchain_Click(object sender, EventArgs e)
+        {
+            navFrameAdmin.SelectedPage = pageBlockchain;
+        }
+
+        private void btnAdminStok_Click(object sender, EventArgs e)
+        {
+            navFrameAdmin.SelectedPage = pageStok;
+        }
     }
 }

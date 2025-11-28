@@ -15,12 +15,31 @@ namespace TohumBankasiOtomasyonu
 {
     public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
+        private UcAnaSayfa _anaSayfaControl;
         // Giriş yapan kullanıcıyı formun her yerinden erişebilmek için burada tutacağız
         // We'll store the logged-in user here to access them from anywhere in the form
         private Kullanicilar aktifKullanici = null;
         public Form1()
         {
             InitializeComponent();
+        }
+        private void AnaSayfayiYukle()
+        {
+            // Eğer zaten yüklüyse tekrar yükleme
+            if (_anaSayfaControl == null)
+            {
+                _anaSayfaControl = new UcAnaSayfa();
+                _anaSayfaControl.Dock = DockStyle.Fill;
+                pnlAnaIcerik.Controls.Add(_anaSayfaControl);
+            }
+
+            // Paneli temizle ve ana sayfayı göster
+            pnlAnaIcerik.Controls.Clear();
+            pnlAnaIcerik.Controls.Add(_anaSayfaControl);
+            _anaSayfaControl.BringToFront();
+
+            // Verileri yükle/yenile
+            _anaSayfaControl.DiliYenile();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -65,6 +84,7 @@ namespace TohumBankasiOtomasyonu
             // Programın 'Çıkış Yapılmış' modda başladığından emin ol
             // Ensure the program starts in the 'Logged Out' mode
             GuncelleArayuz(null);
+            AnaSayfayiYukle();
         }
 
         // Bu metot, formdaki tüm metinleri o an seçili olan dile göre
@@ -172,6 +192,10 @@ namespace TohumBankasiOtomasyonu
                 pnlDilSecenekleri.BringToFront(); // Diğer kontrollerin üstünde dursun(Let it stay above the other controls.)
                 pnlDilSecenekleri.Focus();
             }
+            if (_anaSayfaControl != null)
+            {
+                _anaSayfaControl.DiliYenile();
+            }
         }
 
         private void Form1_Click(object sender, EventArgs e)
@@ -197,34 +221,45 @@ namespace TohumBankasiOtomasyonu
 
         private void btnTurkce_Click(object sender, EventArgs e)
         {
-            // 1. Programın aktif dilini "Türkçe" (tr-TR) olarak ayarla
-            // 1. Set the program's active language to "Turkish" (tr-TR)
-
+            // 1. Dili Türkçe yap
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("tr-TR");
 
-            // 2. Formdaki tüm metinleri sözlükten yeniden yükle
-            // 2. Reload all texts on the form from the dictionary.
-
+            // 2. Form1 üzerindeki sabit yazıları (butonlar vb.) güncelle
             UygulaDil();
+
+            // 3. KRİTİK ADIM: Ana Sayfa (Galeri) açıksa, onu da anında yenile
+            if (_anaSayfaControl != null)
+            {
+                _anaSayfaControl.DiliYenile();
+            }
+
+            // 4. Dil panelini kapat
             pnlDilSecenekleri.Visible = false;
         }
 
         private void btnIngilizce_Click(object sender, EventArgs e)
         {
-            // 1. Programın aktif dilini "İngilizce" (en-US) olarak ayarla
-            // 1. Set the program's active language to "English" (en-US)
-
+            // 1. Dili İngilizce yap
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
-            // 2. Formdaki tüm metinleri sözlükten yeniden yükle
-            // 2. Reload all texts on the form from the dictionary.
-
+            // 2. Form1 üzerindeki sabit yazıları güncelle
             UygulaDil();
+
+            // 3. KRİTİK ADIM: Ana Sayfa (Galeri) açıksa, onu da anında yenile
+            if (_anaSayfaControl != null)
+            {
+                _anaSayfaControl.DiliYenile();
+            }
+
+            // 4. Dil panelini kapat
             pnlDilSecenekleri.Visible = false;
         }
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
+            aktifKullanici = null; // Mevcut yerel değişkeni de sıfırla
+            GuncelleArayuz(null);
+            Session.AktifKullanici = null;
             bool girisIslemiTamamlandi = false;
 
             while (!girisIslemiTamamlandi)
@@ -268,7 +303,7 @@ namespace TohumBankasiOtomasyonu
             {
                 // --- 1. KULLANICI TİPİNİ SÖZLÜKTEN ÇEVİRME ---
                 // --- 1. TRANSLATING USER TYPE FROM DICTIONARY ---
-
+                Session.AktifKullanici = aktifKullanici;
                 string cevrilmisKullaniciTipi = "";
                 if (aktifKullanici.KullaniciTipi == "Admin")
                 {
@@ -302,6 +337,7 @@ namespace TohumBankasiOtomasyonu
                 GuncelleArayuz(aktifKullanici);
 
             }
+
         }
         private void GuncelleArayuz(Kullanicilar girisYapanKullanici)
         {
@@ -397,6 +433,39 @@ namespace TohumBankasiOtomasyonu
         {
             FormAdminPaneli frmAdmin = new FormAdminPaneli();
             frmAdmin.ShowDialog();
+            // Admin paneli kapandıktan sonra burası çalışır.
+            // Ana Sayfa açıksa, oradaki vitrini (stokları, fiyatları) yenile.
+            if (_anaSayfaControl != null)
+            {
+                _anaSayfaControl.VitriniDoldur();
+            }
+        }
+
+        private void btnSepet_Click(object sender, EventArgs e)
+        {
+            if (aktifKullanici == null)
+            {
+                XtraMessageBox.Show("Sepeti görüntülemek için giriş yapmalısınız.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Sepet formunu oluştur
+            FormSepet frm = new FormSepet(aktifKullanici);
+
+            // --- YENİ KISIM: OLAYI BAĞLA ---
+            // FormSepet'teki "SatisYapildi" sinyaline abone oluyoruz.
+            // Bu sinyal gelince "Sepet_SatisYapildi" metodu çalışacak.
+            frm.SatisYapildi += Sepet_SatisYapildi;
+
+            frm.ShowDialog();
+        }
+        private void Sepet_SatisYapildi(object sender, EventArgs e)
+        {
+            // Ana Sayfa açıksa, vitrini (stokları) yenile
+            if (_anaSayfaControl != null)
+            {
+                _anaSayfaControl.VitriniDoldur();
+            }
         }
     }
 }

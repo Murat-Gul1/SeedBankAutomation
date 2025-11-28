@@ -29,47 +29,37 @@
         private void InitializeComponent()
         {
             pnlToolbar = new DevExpress.XtraEditors.PanelControl();
-            btnCikisYap = new DevExpress.XtraEditors.SimpleButton();
             btnKullaniciAyarlari = new DevExpress.XtraEditors.SimpleButton();
             btnAdminPaneli = new DevExpress.XtraEditors.SimpleButton();
             btnGiris = new DevExpress.XtraEditors.SimpleButton();
             btnDil = new DevExpress.XtraEditors.SimpleButton();
+            btnSepet = new DevExpress.XtraEditors.SimpleButton();
+            btnCikisYap = new DevExpress.XtraEditors.SimpleButton();
             pnlDilSecenekleri = new DevExpress.XtraEditors.PanelControl();
             btnIngilizce = new DevExpress.XtraEditors.SimpleButton();
             btnTurkce = new DevExpress.XtraEditors.SimpleButton();
+            pnlAnaIcerik = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)pnlToolbar).BeginInit();
             pnlToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pnlDilSecenekleri).BeginInit();
             pnlDilSecenekleri.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pnlAnaIcerik).BeginInit();
             SuspendLayout();
             // 
             // pnlToolbar
             // 
-            pnlToolbar.Controls.Add(btnCikisYap);
             pnlToolbar.Controls.Add(btnKullaniciAyarlari);
             pnlToolbar.Controls.Add(btnAdminPaneli);
             pnlToolbar.Controls.Add(btnGiris);
             pnlToolbar.Controls.Add(btnDil);
+            pnlToolbar.Controls.Add(btnSepet);
+            pnlToolbar.Controls.Add(btnCikisYap);
             pnlToolbar.Dock = System.Windows.Forms.DockStyle.Top;
             pnlToolbar.Location = new System.Drawing.Point(0, 0);
             pnlToolbar.Name = "pnlToolbar";
-            pnlToolbar.Size = new System.Drawing.Size(913, 56);
+            pnlToolbar.Size = new System.Drawing.Size(885, 56);
             pnlToolbar.TabIndex = 0;
             pnlToolbar.Click += pnlToolbar_Click;
-            // 
-            // btnCikisYap
-            // 
-            btnCikisYap.Dock = System.Windows.Forms.DockStyle.Right;
-            btnCikisYap.ImageOptions.Image = Properties.Resources.close;
-            btnCikisYap.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            btnCikisYap.Location = new System.Drawing.Point(706, 2);
-            btnCikisYap.LookAndFeel.UseDefaultLookAndFeel = false;
-            btnCikisYap.Name = "btnCikisYap";
-            btnCikisYap.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            btnCikisYap.Size = new System.Drawing.Size(75, 52);
-            btnCikisYap.TabIndex = 4;
-            btnCikisYap.Visible = false;
-            btnCikisYap.Click += btnCikisYap_Click;
             // 
             // btnKullaniciAyarlari
             // 
@@ -90,7 +80,7 @@
             btnAdminPaneli.Dock = System.Windows.Forms.DockStyle.Right;
             btnAdminPaneli.ImageOptions.Image = Properties.Resources.administrator;
             btnAdminPaneli.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            btnAdminPaneli.Location = new System.Drawing.Point(781, 2);
+            btnAdminPaneli.Location = new System.Drawing.Point(603, 2);
             btnAdminPaneli.LookAndFeel.UseDefaultLookAndFeel = false;
             btnAdminPaneli.Name = "btnAdminPaneli";
             btnAdminPaneli.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
@@ -117,13 +107,40 @@
             btnDil.Dock = System.Windows.Forms.DockStyle.Right;
             btnDil.ImageOptions.Image = Properties.Resources.language;
             btnDil.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            btnDil.Location = new System.Drawing.Point(856, 2);
+            btnDil.Location = new System.Drawing.Point(678, 2);
             btnDil.LookAndFeel.UseDefaultLookAndFeel = false;
             btnDil.Name = "btnDil";
             btnDil.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
             btnDil.Size = new System.Drawing.Size(55, 52);
-            btnDil.TabIndex = 0;
+            btnDil.TabIndex = 5;
             btnDil.Click += btnDil_Click;
+            // 
+            // btnSepet
+            // 
+            btnSepet.Dock = System.Windows.Forms.DockStyle.Right;
+            btnSepet.ImageOptions.Image = Properties.Resources.Basket;
+            btnSepet.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            btnSepet.Location = new System.Drawing.Point(733, 2);
+            btnSepet.LookAndFeel.UseDefaultLookAndFeel = false;
+            btnSepet.Name = "btnSepet";
+            btnSepet.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            btnSepet.Size = new System.Drawing.Size(75, 52);
+            btnSepet.TabIndex = 6;
+            btnSepet.Click += btnSepet_Click;
+            // 
+            // btnCikisYap
+            // 
+            btnCikisYap.Dock = System.Windows.Forms.DockStyle.Right;
+            btnCikisYap.ImageOptions.Image = Properties.Resources.close;
+            btnCikisYap.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            btnCikisYap.Location = new System.Drawing.Point(808, 2);
+            btnCikisYap.LookAndFeel.UseDefaultLookAndFeel = false;
+            btnCikisYap.Name = "btnCikisYap";
+            btnCikisYap.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            btnCikisYap.Size = new System.Drawing.Size(75, 52);
+            btnCikisYap.TabIndex = 0;
+            btnCikisYap.Visible = false;
+            btnCikisYap.Click += btnCikisYap_Click;
             // 
             // pnlDilSecenekleri
             // 
@@ -157,11 +174,21 @@
             btnTurkce.Text = "Türkçe";
             btnTurkce.Click += btnTurkce_Click;
             // 
+            // pnlAnaIcerik
+            // 
+            pnlAnaIcerik.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            pnlAnaIcerik.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlAnaIcerik.Location = new System.Drawing.Point(0, 56);
+            pnlAnaIcerik.Name = "pnlAnaIcerik";
+            pnlAnaIcerik.Size = new System.Drawing.Size(885, 210);
+            pnlAnaIcerik.TabIndex = 2;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(913, 298);
+            ClientSize = new System.Drawing.Size(885, 266);
+            Controls.Add(pnlAnaIcerik);
             Controls.Add(pnlDilSecenekleri);
             Controls.Add(pnlToolbar);
             Name = "Form1";
@@ -172,6 +199,7 @@
             pnlToolbar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pnlDilSecenekleri).EndInit();
             pnlDilSecenekleri.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pnlAnaIcerik).EndInit();
             ResumeLayout(false);
 
         }
@@ -186,5 +214,7 @@
         private DevExpress.XtraEditors.SimpleButton btnAdminPaneli;
         private DevExpress.XtraEditors.SimpleButton btnKullaniciAyarlari;
         private DevExpress.XtraEditors.SimpleButton btnCikisYap;
+        private DevExpress.XtraEditors.PanelControl pnlAnaIcerik;
+        private DevExpress.XtraEditors.SimpleButton btnSepet;
     }
 }

@@ -132,6 +132,9 @@
   <data name="BitkiSilOnayMesaj" xml:space="preserve">
     <value>Are you sure you want to delete the selected plant?</value>
   </data>
+  <data name="BlokzincirVerisi" xml:space="preserve">
+    <value>Sale ID: {0}, Amount: {1}, Date: {2}</value>
+  </data>
   <data name="btnAdminBitkiler_ToolTip" xml:space="preserve">
     <value>Plant Management</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="btnAdminSatislar_ToolTip" xml:space="preserve">
     <value>Sales Records</value>
+  </data>
+  <data name="btnAdminStok_ToolTip" xml:space="preserve">
+    <value>Inventory Management</value>
   </data>
   <data name="btnBitkiKaydet" xml:space="preserve">
     <value>Save</value>
@@ -189,6 +195,18 @@
   <data name="btnSatisDetay_Text" xml:space="preserve">
     <value>View Details</value>
   </data>
+  <data name="btnSepetSatinAl" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="btnSepetTemizle" xml:space="preserve">
+    <value>Empty Cart</value>
+  </data>
+  <data name="btnSepetUrunSil" xml:space="preserve">
+    <value>Remove Selected</value>
+  </data>
+  <data name="btnSepet_ToolTip" xml:space="preserve">
+    <value>My Cart</value>
+  </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Clear</value>
   </data>
@@ -222,6 +240,9 @@
   <data name="colBitkiStok" xml:space="preserve">
     <value>Stock</value>
   </data>
+  <data name="colBlokID" xml:space="preserve">
+    <value>Block ID</value>
+  </data>
   <data name="colKullaniciAd" xml:space="preserve">
     <value>Username</value>
   </data>
@@ -240,11 +261,17 @@
   <data name="colKullaniciYetki" xml:space="preserve">
     <value>Role</value>
   </data>
+  <data name="colMevcutHash" xml:space="preserve">
+    <value>Current Hash</value>
+  </data>
   <data name="colMiktar" xml:space="preserve">
     <value>Quantity</value>
   </data>
   <data name="colMusteriAdSoyad" xml:space="preserve">
     <value>Customer</value>
+  </data>
+  <data name="colOncekiHash" xml:space="preserve">
+    <value>Previous Hash</value>
   </data>
   <data name="colSatirToplam" xml:space="preserve">
     <value>Subtotal</value>
@@ -264,11 +291,32 @@
   <data name="colSatisTutar" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="colSepetAdet" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="colSepetFiyat" xml:space="preserve">
+    <value>Unit Price</value>
+  </data>
+  <data name="colSepetResim" xml:space="preserve">
+    <value>Product Image</value>
+  </data>
+  <data name="colSepetToplam" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="colSepetUrunAdi" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
   <data name="colToplamTutar" xml:space="preserve">
     <value>Total Amount</value>
   </data>
   <data name="colUrunAdi" xml:space="preserve">
     <value>Product Name</value>
+  </data>
+  <data name="colVeri" xml:space="preserve">
+    <value>Data / Transaction</value>
+  </data>
+  <data name="colZamanDamgasi" xml:space="preserve">
+    <value>Timestamp</value>
   </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Seed Bank Automation</value>
@@ -296,6 +344,9 @@
   </data>
   <data name="FormSatisDetay_Title" xml:space="preserve">
     <value>Sales Details</value>
+  </data>
+  <data name="FormSepet_Title" xml:space="preserve">
+    <value>Shopping Cart</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>An unexpected error occurred during registration:</value>
@@ -327,8 +378,14 @@
   <data name="HataBitkiResim" xml:space="preserve">
     <value>Please select a plant image.</value>
   </data>
+  <data name="HataGirisGerekli" xml:space="preserve">
+    <value>Please log in to add items to the cart.</value>
+  </data>
   <data name="HataSatirSecilmedi" xml:space="preserve">
     <value>Please select a row to delete.</value>
+  </data>
+  <data name="HataYetersizStok" xml:space="preserve">
+    <value>Insufficient stock for product:</value>
   </data>
   <data name="HesapSilUyariBaslik" xml:space="preserve">
     <value>Delete Account</value>
@@ -432,11 +489,26 @@
   <data name="lblKullaniciTipi" xml:space="preserve">
     <value>Role / Permission:</value>
   </data>
+  <data name="lblSepetGenelToplam" xml:space="preserve">
+    <value>Grand Total:</value>
+  </data>
   <data name="linkHesapSil" xml:space="preserve">
     <value>Permanently Delete My Account</value>
   </data>
   <data name="MevcutSifreHatali" xml:space="preserve">
     <value>The current password you entered to save changes is incorrect.</value>
+  </data>
+  <data name="MsgSepetBos" xml:space="preserve">
+    <value>Your cart is currently empty.</value>
+  </data>
+  <data name="MsgSepeteEklandi" xml:space="preserve">
+    <value>Product added to cart!</value>
+  </data>
+  <data name="OnayBaslik" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="OnaySepetBosalt" xml:space="preserve">
+    <value>Are you sure you want to empty the cart?</value>
   </data>
   <data name="ResimSecDialogFilter" xml:space="preserve">
     <value>Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif</value>
@@ -452,6 +524,9 @@
   </data>
   <data name="Role_Kullanici" xml:space="preserve">
     <value>Standard User</value>
+  </data>
+  <data name="SatinAlmaBasarili" xml:space="preserve">
+    <value>Purchase completed successfully and recorded to Blockchain!</value>
   </data>
   <data name="SifreEslesmeHata" xml:space="preserve">
     <value>The passwords you entered do not match.</value>
