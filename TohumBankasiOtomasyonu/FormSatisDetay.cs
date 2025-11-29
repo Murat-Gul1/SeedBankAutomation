@@ -1,9 +1,11 @@
 ﻿using DevExpress.XtraEditors;
 using System;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Globalization;
+using System.Windows.Forms;
 using TohumBankasiOtomasyonu.Models;
 using TohumBankasiOtomasyonu.Properties;
 
@@ -13,48 +15,34 @@ namespace TohumBankasiOtomasyonu
     {
         private int _gelenSatisId = 0;
 
-        // Parametresiz oluşturucu (Hata vermemesi için)
-        public FormSatisDetay()
-        {
-            InitializeComponent();
-        }
-        private void SutunBasliklariniAyarla()
-        {
-            var view = gridDetaylar.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (view != null)
-            {
-                // Anonim tipte verdiğimiz isimler: UrunAdi, BirimFiyat, Miktar, AraToplam
-
-                if (view.Columns["UrunAdi"] != null)
-                    view.Columns["UrunAdi"].Caption = Resources.colUrunAdi;
-
-                if (view.Columns["BirimFiyat"] != null)
-                    view.Columns["BirimFiyat"].Caption = Resources.colBirimFiyat;
-
-                if (view.Columns["Miktar"] != null)
-                    view.Columns["Miktar"].Caption = Resources.colMiktar;
-
-                if (view.Columns["AraToplam"] != null)
-                    view.Columns["AraToplam"].Caption = Resources.colSatirToplam;
-            }
-        }
-
-        // ASIL KULLANACAĞIMIZ OLUŞTURUCU
         public FormSatisDetay(int satisId) : this()
         {
             _gelenSatisId = satisId;
         }
 
-        private void UygulaDil()
+        public FormSatisDetay() { InitializeComponent(); }
+
+        // --- RESİM YÜKLEME YARDIMCISI ---
+        private Image ResmiYukle(string yol)
         {
-            this.Text = Resources.FormSatisDetay_Title;
+            try
+            {
+                if (string.IsNullOrEmpty(yol)) return null;
 
-            // LayoutControl içindeki etiketler
-            layoutControl1.GetItemByControl(txtMakbuzNo).Text = Resources.lblDetayMakbuzNo;
-            layoutControl1.GetItemByControl(txtTarih).Text = Resources.lblDetayTarih;
-            layoutControl1.GetItemByControl(txtToplamTutar).Text = Resources.lblDetayToplam;
-
-            btnKapat.Text = Resources.btnKapat;
+                string tamYol = Path.Combine(Application.StartupPath, yol);
+                if (File.Exists(tamYol))
+                {
+                    using (var stream = new FileStream(tamYol, FileMode.Open, FileAccess.Read))
+                    {
+                        // Resmi yükle ve küçük bir kopyasını (Thumbnail) döndür
+                        // (Performans için resmi küçültmek iyidir)
+                        Image img = Image.FromStream(stream);
+                        return new Bitmap(img, new Size(50, 50));
+                    }
+                }
+            }
+            catch { }
+            return null;
         }
 
         private void VerileriYukle()
@@ -69,52 +57,97 @@ namespace TohumBankasiOtomasyonu
                 {
                     txtMakbuzNo.Text = satis.MakbuzNo;
                     txtTarih.Text = satis.SatisTarihi;
-                    txtToplamTutar.Text = satis.ToplamTutar.ToString() + " ₺";
+                    txtToplamTutar.Text = satis.ToplamTutar.ToString("C2"); // Para formatı
                 }
 
                 // 2. Detayları Çek (GÜNCELLENMİŞ KISIM)
                 string aktifDil = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
-                // Tüm detayları ve ilişkili tüm çevirileri çek (Bellekte işlemek için)
+                // a. Önce ham veriyi çek (Resim yolu dahil)
                 var hamListe = (from d in db.SatisDetaylaris
                                 where d.SatisId == _gelenSatisId
                                 select new
                                 {
-                                    Detay = d,
-                                    // Bu ürünün tüm çevirilerini getir
-                                    Ceviriler = db.BitkiCevirileris.Where(c => c.BitkiId == d.BitkiId).ToList()
+                                    d.BitkiId,
+                                    d.Miktar,
+                                    d.SatisAnindakiFiyat,
+                                    // Çevirileri ve Resimleri al
+                                    Ceviriler = db.BitkiCevirileris.Where(c => c.BitkiId == d.BitkiId).ToList(),
+                                    Gorsel = db.BitkiGorselleris.FirstOrDefault(g => g.BitkiId == d.BitkiId && g.AnaGorsel == 1)
                                 }).ToList();
 
-                // Bellekte dil seçimi yap
+                // b. Bellekte işle (Dil seçimi ve Resim Yükleme)
                 var sonucListesi = hamListe.Select(item => {
-                    // Aktif dildeki ismi bul
-                    var uygunCeviri = item.Ceviriler.FirstOrDefault(c => c.DilKodu == aktifDil);
+                    var uygunCeviri = item.Ceviriler.FirstOrDefault(c => c.DilKodu == aktifDil) ??
+                                      item.Ceviriler.FirstOrDefault(c => c.DilKodu == "tr");
 
-                    // Yoksa Türkçe ismi bul (Fallback)
-                    if (uygunCeviri == null)
-                        uygunCeviri = item.Ceviriler.FirstOrDefault(c => c.DilKodu == "tr");
-
-                    // Hiçbiri yoksa (olmamalı ama güvenlik için)
-                    string urunAdi = (uygunCeviri != null) ? uygunCeviri.BitkiAdi : "Unknown Plant";
+                    string urunAdi = (uygunCeviri != null) ? uygunCeviri.BitkiAdi : "Unknown";
+                    string bilimselAd = (uygunCeviri != null) ? uygunCeviri.BilimselAd : "";
+                    string resimYolu = (item.Gorsel != null) ? item.Gorsel.DosyaYolu : "";
 
                     return new
                     {
+                        Resim = ResmiYukle(resimYolu), // Resmi Image objesi olarak döndür
                         UrunAdi = urunAdi,
-                        BirimFiyat = item.Detay.SatisAnindakiFiyat,
-                        Miktar = item.Detay.Miktar,
-                        AraToplam = item.Detay.Miktar * item.Detay.SatisAnindakiFiyat
+                        BilimselAd = bilimselAd, // Yeni Sütun
+                        BirimFiyat = item.SatisAnindakiFiyat,
+                        Miktar = item.Miktar,
+                        AraToplam = item.Miktar * item.SatisAnindakiFiyat
                     };
                 }).ToList();
 
                 gridDetaylar.DataSource = sonucListesi;
 
-                // 3. Sütun başlıklarını güncelle
-                SutunBasliklariniAyarla();
+                // 3. Ayarları Yap (Başlıklar ve Resim Sütunu)
+                GridAyarlariniYap();
             }
         }
+
+        private void GridAyarlariniYap()
+        {
+            var view = gridDetaylar.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (view != null)
+            {
+                // Başlıkları Ayarla (Sözlükten)
+                if (view.Columns["Resim"] != null) view.Columns["Resim"].Caption = Resources.colDetayResim;
+                if (view.Columns["UrunAdi"] != null) view.Columns["UrunAdi"].Caption = Resources.colUrunAdi;
+                if (view.Columns["BilimselAd"] != null) view.Columns["BilimselAd"].Caption = Resources.colDetayBilimselAd;
+                if (view.Columns["BirimFiyat"] != null) view.Columns["BirimFiyat"].Caption = Resources.colBirimFiyat;
+                if (view.Columns["Miktar"] != null) view.Columns["Miktar"].Caption = Resources.colMiktar;
+                if (view.Columns["AraToplam"] != null) view.Columns["AraToplam"].Caption = Resources.colSatirToplam;
+
+                // Resim Sütunu Ayarı (Görünmesi için önemli)
+                if (view.Columns["Resim"] != null)
+                {
+                    view.Columns["Resim"].Width = 60; // Biraz genişlik ver
+                }
+                view.RowHeight = 60; // Satır yüksekliğini artır ki resim sığsın
+
+                // Para Formatı
+                if (view.Columns["BirimFiyat"] != null)
+                {
+                    view.Columns["BirimFiyat"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                    view.Columns["BirimFiyat"].DisplayFormat.FormatString = "c2";
+                }
+                if (view.Columns["AraToplam"] != null)
+                {
+                    view.Columns["AraToplam"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                    view.Columns["AraToplam"].DisplayFormat.FormatString = "c2";
+                }
+
+                view.OptionsBehavior.Editable = false; // Düzenlenemesin
+            }
+        }
+
         private void FormSatisDetay_Load(object sender, EventArgs e)
         {
-            UygulaDil();
+            // UygulaDil(); // Başlıkları zaten GridAyarlariniYap içinde hallettik
+            this.Text = Resources.FormSatisDetay_Title;
+            layoutControl1.GetItemByControl(txtMakbuzNo).Text = Resources.lblDetayMakbuzNo;
+            layoutControl1.GetItemByControl(txtTarih).Text = Resources.lblDetayTarih;
+            layoutControl1.GetItemByControl(txtToplamTutar).Text = Resources.lblDetayToplam;
+            btnKapat.Text = Resources.btnKapat;
+
             VerileriYukle();
         }
 

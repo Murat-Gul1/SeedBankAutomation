@@ -26,7 +26,7 @@ namespace TohumBankasiOtomasyonu
             sliderBitkiler.CurrentImageIndexChanged += SliderBitkiler_CurrentImageIndexChanged;
         }
 
-       
+
         // Ana Metot: Verileri Çek ve Yükle
         public void GaleriYukle()
         {
@@ -138,6 +138,7 @@ namespace TohumBankasiOtomasyonu
 
         private void UcAnaSayfa_Load(object sender, EventArgs e)
         {
+            IcerigiOrtala();
             if (!this.DesignMode)
             {
                 GaleriYukle();
@@ -204,7 +205,57 @@ namespace TohumBankasiOtomasyonu
             {
                 XtraMessageBox.Show("Vitrin yüklenirken hata: " + ex.Message);
             }
+            KartlariOrtala();
         }
+        private void KartlariOrtala()
+        {
+            // Eğer vitrinde hiç kart yoksa işlem yapma
+            if (flowPanelUrunler.Controls.Count == 0) return;
+
+            // 1. Kartın Genişliğini Hesapla
+            // Kart genişliği (200) + Margin (Sol 10 + Sağ 10 = 20) = 220
+            // (Eğer kart boyutunu değiştirdiyseniz burayı ona göre güncelleyin)
+            int kartTamGenisligi = 220;
+
+            // 2. Panelin Genişliği
+            int panelGenisligi = flowPanelUrunler.ClientSize.Width;
+
+            // 3. Bir satıra en fazla kaç kart sığar?
+            int satirdakiKartSayisi = Math.Max(1, panelGenisligi / kartTamGenisligi);
+
+            // 4. Bu kartlar toplam ne kadar yer kaplıyor?
+            int doluAlan = satirdakiKartSayisi * kartTamGenisligi;
+
+            // 5. Kalan boşluğu bul ve ikiye böl (Sol boşluk = Sağ boşluk)
+            int solBosluk = (panelGenisligi - doluAlan) / 2;
+
+            // 6. Panelin sol dolgusunu (Padding) ayarla
+            // (Sol boşluk kadar it, üstten 10px boşluk bırak)
+            flowPanelUrunler.Padding = new Padding(solBosluk, 10, 0, 0);
+        }
+
+        private void UcAnaSayfa_Resize(object sender, EventArgs e)
+        {
+            IcerigiOrtala();
+        }
+        private void IcerigiOrtala()
+        {
+            if (pnlMerkezKutu == null) return;
+
+            // 1. Yatay Ortalama (X)
+            // Zemin genişliğinden kutu genişliğini çıkarıp ikiye bölüyoruz.
+            int x = (this.ClientSize.Width - pnlMerkezKutu.Width) / 2;
+
+            // Sol kenara yapışmaması için güvenlik (Mobil gibi dar ekranlar için)
+            if (x < 10) x = 10;
+
+            // 2. Dikey Konum (Y)
+            // Hep en üstten başlasın (Kaydırma çubuğu (Scrollbar) işi halledecek)
+            int y = 10;
+
+            pnlMerkezKutu.Location = new Point(x, y);
+        }
+
 
     }
 

@@ -112,6 +112,9 @@ namespace TohumBankasiOtomasyonu
             btnAdminPaneli.ToolTip = Resources.btnAdminPaneli_ToolTip;
             btnKullaniciAyarlari.ToolTip = Resources.btnKullaniciAyarlari_ToolTip;
             btnCikisYap.ToolTip = Resources.btnCikisYap_ToolTip;
+            btnAnaSayfa.ToolTip = Resources.btnAnaSayfa_ToolTip;
+            btnSiparisGecmisi.ToolTip = Resources.btnSiparisGecmisi_ToolTip;
+            btnHakkinda.ToolTip = Resources.btnHakkinda_ToolTip;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -221,37 +224,29 @@ namespace TohumBankasiOtomasyonu
 
         private void btnTurkce_Click(object sender, EventArgs e)
         {
-            // 1. Dili Türkçe yap
+            // 1. Dili değiştir
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("tr-TR");
 
-            // 2. Form1 üzerindeki sabit yazıları (butonlar vb.) güncelle
+            // 2. Form1'i güncelle
             UygulaDil();
 
-            // 3. KRİTİK ADIM: Ana Sayfa (Galeri) açıksa, onu da anında yenile
-            if (_anaSayfaControl != null)
-            {
-                _anaSayfaControl.DiliYenile();
-            }
+            // 3. Aktif sayfayı (Ana Sayfa veya Arama Sayfası) güncelle
+            AktifSayfayiYenile(); // <-- YENİ METOT
 
-            // 4. Dil panelini kapat
             pnlDilSecenekleri.Visible = false;
         }
 
         private void btnIngilizce_Click(object sender, EventArgs e)
         {
-            // 1. Dili İngilizce yap
+            // 1. Dili değiştir
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
-            // 2. Form1 üzerindeki sabit yazıları güncelle
+            // 2. Form1'i güncelle
             UygulaDil();
 
-            // 3. KRİTİK ADIM: Ana Sayfa (Galeri) açıksa, onu da anında yenile
-            if (_anaSayfaControl != null)
-            {
-                _anaSayfaControl.DiliYenile();
-            }
+            // 3. Aktif sayfayı güncelle
+            AktifSayfayiYenile(); // <-- YENİ METOT
 
-            // 4. Dil panelini kapat
             pnlDilSecenekleri.Visible = false;
         }
 
@@ -348,6 +343,7 @@ namespace TohumBankasiOtomasyonu
                 btnGiris.Visible = false;             // Giriş butonunu GİZLE (Hide the login button)
                 btnKullaniciAyarlari.Visible = true;  // Ayarlar butonunu GÖSTER(Show the settings button)
                 btnCikisYap.Visible = true;           // Çıkış butonunu GÖSTER(Show the logout button)
+                btnSiparisGecmisi.Visible = true;
 
                 // Kullanıcı tipine göre Admin Panelini göster/gizle
                 // Show or hide the Admin Panel based on the user type
@@ -358,6 +354,7 @@ namespace TohumBankasiOtomasyonu
                 else
                 {
                     btnAdminPaneli.Visible = false;
+
                 }
             }
             else
@@ -368,6 +365,7 @@ namespace TohumBankasiOtomasyonu
                 btnKullaniciAyarlari.Visible = false; // Ayarlar butonunu GİZLE(Hide the settings button)
                 btnCikisYap.Visible = false;          // Çıkış butonunu GİZLE(Hide the logout button)
                 btnAdminPaneli.Visible = false;       // Admin panelini GİZLE(Hide the admin panel)
+                btnSiparisGecmisi.Visible = false;
             }
         }
 
@@ -445,7 +443,7 @@ namespace TohumBankasiOtomasyonu
         {
             if (aktifKullanici == null)
             {
-                XtraMessageBox.Show("Sepeti görüntülemek için giriş yapmalısınız.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show(Resources.HataSepetGoruntuleme, Resources.UyariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -466,6 +464,60 @@ namespace TohumBankasiOtomasyonu
             {
                 _anaSayfaControl.VitriniDoldur();
             }
+        }
+
+        private void btnBitkiBilgi_Click(object sender, EventArgs e)
+        {
+            // 1. Eğer zaten açıksa tekrar yükleme
+            // (Bu kontrolü yapmak için _aktifModul gibi bir değişken tutabiliriz ama
+            // şimdilik basitçe paneli temizleyip ekleyelim)
+
+            pnlAnaIcerik.Controls.Clear();
+            UcBitkiBilgi ucBilgi = new UcBitkiBilgi();
+            ucBilgi.Dock = DockStyle.Fill;
+            pnlAnaIcerik.Controls.Add(ucBilgi);
+        }
+        // O an açık olan sayfayı bulup dilini yenileyen metot
+        private void AktifSayfayiYenile()
+        {
+            // Panelde hiç kontrol yoksa çık
+            if (pnlAnaIcerik.Controls.Count == 0) return;
+
+            // Panelin içindeki ilk kontrolü al (Genelde tek bir UserControl olur)
+            Control aktifKontrol = pnlAnaIcerik.Controls[0];
+
+            // 1. Eğer aktif sayfa 'UcAnaSayfa' ise
+            if (aktifKontrol is UcAnaSayfa)
+            {
+                ((UcAnaSayfa)aktifKontrol).DiliYenile();
+            }
+            // 2. Eğer aktif sayfa 'UcBitkiBilgi' ise (YENİ EKLENEN)
+            else if (aktifKontrol is UcBitkiBilgi)
+            {
+                ((UcBitkiBilgi)aktifKontrol).DiliYenile();
+            }
+        }
+
+        private void btnAnaSayfa_Click(object sender, EventArgs e)
+        {
+            // Ana sayfa modülünü yükle
+            AnaSayfayiYukle();
+        }
+
+        private void btnSiparisGecmisi_Click(object sender, EventArgs e)
+        {
+            // Güvenlik kontrolü
+            if (aktifKullanici == null) return;
+
+            // Formu kullanıcı ile birlikte aç
+            FormSiparisGecmisi frm = new FormSiparisGecmisi(aktifKullanici);
+            frm.ShowDialog();
+        }
+
+        private void btnHakkinda_Click(object sender, EventArgs e)
+        {
+            FormHakkinda frm = new FormHakkinda();
+            frm.ShowDialog();
         }
     }
 }

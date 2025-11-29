@@ -70,6 +70,24 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SAKLAMA:.
+        /// </summary>
+        internal static string BaslikSaklama {
+            get {
+                return ResourceManager.GetString("BaslikSaklama", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YETİŞTİRME:.
+        /// </summary>
+        internal static string BaslikYetistirme {
+            get {
+                return ResourceManager.GetString("BaslikYetistirme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitki başarıyla kaydedildi..
         /// </summary>
         internal static string BitkiKayitBasarili {
@@ -169,6 +187,24 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ana Sayfa.
+        /// </summary>
+        internal static string btnAnaSayfa_ToolTip {
+            get {
+                return ResourceManager.GetString("btnAnaSayfa_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitki Ara / Bilgi Bankası.
+        /// </summary>
+        internal static string btnBitkiBilgi_ToolTip {
+            get {
+                return ResourceManager.GetString("btnBitkiBilgi_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kaydet.
         /// </summary>
         internal static string btnBitkiKaydet {
@@ -201,6 +237,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string btnGirisYap_Text {
             get {
                 return ResourceManager.GetString("btnGirisYap_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hakkında.
+        /// </summary>
+        internal static string btnHakkinda_ToolTip {
+            get {
+                return ResourceManager.GetString("btnHakkinda_ToolTip", resourceCulture);
             }
         }
         
@@ -331,6 +376,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Geçmiş Siparişlerim.
+        /// </summary>
+        internal static string btnSiparisGecmisi_ToolTip {
+            get {
+                return ResourceManager.GetString("btnSiparisGecmisi_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Temizle.
         /// </summary>
         internal static string btnTemizle_Text {
@@ -435,6 +489,60 @@ namespace TohumBankasiOtomasyonu {
         internal static string colBlokID {
             get {
                 return ResourceManager.GetString("colBlokID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilimsel Ad.
+        /// </summary>
+        internal static string colDetayBilimselAd {
+            get {
+                return ResourceManager.GetString("colDetayBilimselAd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Görsel.
+        /// </summary>
+        internal static string colDetayResim {
+            get {
+                return ResourceManager.GetString("colDetayResim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Durum.
+        /// </summary>
+        internal static string colGecmisDurum {
+            get {
+                return ResourceManager.GetString("colGecmisDurum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Makbuz No.
+        /// </summary>
+        internal static string colGecmisMakbuz {
+            get {
+                return ResourceManager.GetString("colGecmisMakbuz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tarih.
+        /// </summary>
+        internal static string colGecmisTarih {
+            get {
+                return ResourceManager.GetString("colGecmisTarih", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toplam Tutar.
+        /// </summary>
+        internal static string colGecmisTutar {
+            get {
+                return ResourceManager.GetString("colGecmisTutar", resourceCulture);
             }
         }
         
@@ -709,6 +817,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Program Hakkında.
+        /// </summary>
+        internal static string FormHakkinda_Title {
+            get {
+                return ResourceManager.GetString("FormHakkinda_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hesap Ayarları.
         /// </summary>
         internal static string FormHesapAyarlari_Title {
@@ -736,6 +853,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ürün Görseli.
+        /// </summary>
+        internal static string FormResimGoruntule_Title {
+            get {
+                return ResourceManager.GetString("FormResimGoruntule_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Satış Detayları.
         /// </summary>
         internal static string FormSatisDetay_Title {
@@ -750,6 +876,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string FormSepet_Title {
             get {
                 return ResourceManager.GetString("FormSepet_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sipariş Geçmişi.
+        /// </summary>
+        internal static string FormSiparisGecmisi_Title {
+            get {
+                return ResourceManager.GetString("FormSiparisGecmisi_Title", resourceCulture);
             }
         }
         
@@ -858,6 +993,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string HataSatirSecilmedi {
             get {
                 return ResourceManager.GetString("HataSatirSecilmedi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sepeti görüntülemek için giriş yapmalısınız..
+        /// </summary>
+        internal static string HataSepetGoruntuleme {
+            get {
+                return ResourceManager.GetString("HataSepetGoruntuleme", resourceCulture);
             }
         }
         
@@ -1069,6 +1213,33 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bu program, bitki tohumlarının takibi, satışı ve blokzincir tabanlı güvenli kaydı için geliştirilmiştir..
+        /// </summary>
+        internal static string lblAciklama {
+            get {
+                return ResourceManager.GetString("lblAciklama", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tohum Bankasında Ara....
+        /// </summary>
+        internal static string lblAramaBaslik {
+            get {
+                return ResourceManager.GetString("lblAramaBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aradığınız kriterlere uygun bitki bulunamadı..
+        /// </summary>
+        internal static string lblBilgiBulunamadi {
+            get {
+                return ResourceManager.GetString("lblBilgiBulunamadi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Açıklama:.
         /// </summary>
         internal static string lblBitkiAciklama {
@@ -1168,6 +1339,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Geliştirici: [Murat Gül].
+        /// </summary>
+        internal static string lblGelistirici {
+            get {
+                return ResourceManager.GetString("lblGelistirici", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yetki / Rol:.
         /// </summary>
         internal static string lblKullaniciTipi {
@@ -1177,11 +1357,38 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tohum Bankası Otomasyonu.
+        /// </summary>
+        internal static string lblProjeAdi {
+            get {
+                return ResourceManager.GetString("lblProjeAdi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Genel Toplam:.
         /// </summary>
         internal static string lblSepetGenelToplam {
             get {
                 return ResourceManager.GetString("lblSepetGenelToplam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to © 2025 Tüm Hakları Saklıdır..
+        /// </summary>
+        internal static string lblTelif {
+            get {
+                return ResourceManager.GetString("lblTelif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sürüm: 1.0.0.
+        /// </summary>
+        internal static string lblVersiyon {
+            get {
+                return ResourceManager.GetString("lblVersiyon", resourceCulture);
             }
         }
         
@@ -1321,6 +1528,24 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Genel Bilgiler.
+        /// </summary>
+        internal static string tabGenelBilgi {
+            get {
+                return ResourceManager.GetString("tabGenelBilgi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yetiştirme ve Saklama.
+        /// </summary>
+        internal static string tabTeknikBilgi {
+            get {
+                return ResourceManager.GetString("tabTeknikBilgi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin.
         /// </summary>
         internal static string UserType_Admin {
@@ -1335,6 +1560,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string UserType_Kullanici {
             get {
                 return ResourceManager.GetString("UserType_Kullanici", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uyarı.
+        /// </summary>
+        internal static string UyariBaslik {
+            get {
+                return ResourceManager.GetString("UyariBaslik", resourceCulture);
             }
         }
         

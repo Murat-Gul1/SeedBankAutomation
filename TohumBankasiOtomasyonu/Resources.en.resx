@@ -120,6 +120,12 @@
   <data name="BasariBaslik" xml:space="preserve">
     <value>Success</value>
   </data>
+  <data name="BaslikSaklama" xml:space="preserve">
+    <value>STORAGE:</value>
+  </data>
+  <data name="BaslikYetistirme" xml:space="preserve">
+    <value>CULTIVATION:</value>
+  </data>
   <data name="BitkiKayitBasarili" xml:space="preserve">
     <value>Plant saved successfully.</value>
   </data>
@@ -153,6 +159,12 @@
   <data name="btnAdminStok_ToolTip" xml:space="preserve">
     <value>Inventory Management</value>
   </data>
+  <data name="btnAnaSayfa_ToolTip" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="btnBitkiBilgi_ToolTip" xml:space="preserve">
+    <value>Search Plants / Knowledge Base</value>
+  </data>
   <data name="btnBitkiKaydet" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -164,6 +176,9 @@
   </data>
   <data name="btnGiris_ToolTip" xml:space="preserve">
     <value>User Login</value>
+  </data>
+  <data name="btnHakkinda_ToolTip" xml:space="preserve">
+    <value>About</value>
   </data>
   <data name="btnHesapGuncelle" xml:space="preserve">
     <value>Update Information</value>
@@ -207,6 +222,9 @@
   <data name="btnSepet_ToolTip" xml:space="preserve">
     <value>My Cart</value>
   </data>
+  <data name="btnSiparisGecmisi_ToolTip" xml:space="preserve">
+    <value>My Order History</value>
+  </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Clear</value>
   </data>
@@ -242,6 +260,24 @@
   </data>
   <data name="colBlokID" xml:space="preserve">
     <value>Block ID</value>
+  </data>
+  <data name="colDetayBilimselAd" xml:space="preserve">
+    <value>Scientific Name</value>
+  </data>
+  <data name="colDetayResim" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="colGecmisDurum" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="colGecmisMakbuz" xml:space="preserve">
+    <value>Receipt No</value>
+  </data>
+  <data name="colGecmisTarih" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="colGecmisTutar" xml:space="preserve">
+    <value>Total Amount</value>
   </data>
   <data name="colKullaniciAd" xml:space="preserve">
     <value>Username</value>
@@ -333,6 +369,9 @@
   <data name="FormGiris_Title" xml:space="preserve">
     <value>User Login</value>
   </data>
+  <data name="FormHakkinda_Title" xml:space="preserve">
+    <value>About Application</value>
+  </data>
   <data name="FormHesapAyarlari_Title" xml:space="preserve">
     <value>Account Settings</value>
   </data>
@@ -342,11 +381,17 @@
   <data name="FormKullaniciDuzenle_Title" xml:space="preserve">
     <value>Edit User</value>
   </data>
+  <data name="FormResimGoruntule_Title" xml:space="preserve">
+    <value>Product Image</value>
+  </data>
   <data name="FormSatisDetay_Title" xml:space="preserve">
     <value>Sales Details</value>
   </data>
   <data name="FormSepet_Title" xml:space="preserve">
     <value>Shopping Cart</value>
+  </data>
+  <data name="FormSiparisGecmisi_Title" xml:space="preserve">
+    <value>Order History</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>An unexpected error occurred during registration:</value>
@@ -383,6 +428,9 @@
   </data>
   <data name="HataSatirSecilmedi" xml:space="preserve">
     <value>Please select a row to delete.</value>
+  </data>
+  <data name="HataSepetGoruntuleme" xml:space="preserve">
+    <value>You must log in to view your cart.</value>
   </data>
   <data name="HataYetersizStok" xml:space="preserve">
     <value>Insufficient stock for product:</value>
@@ -453,6 +501,15 @@
   <data name="labelSifre" xml:space="preserve">
     <value>Password:</value>
   </data>
+  <data name="lblAciklama" xml:space="preserve">
+    <value>This application is developed for tracking, selling, and blockchain-based secure recording of plant seeds.</value>
+  </data>
+  <data name="lblAramaBaslik" xml:space="preserve">
+    <value>Search the Seed Bank...</value>
+  </data>
+  <data name="lblBilgiBulunamadi" xml:space="preserve">
+    <value>No plants found matching your criteria.</value>
+  </data>
   <data name="lblBitkiAciklama" xml:space="preserve">
     <value>Description:</value>
   </data>
@@ -486,11 +543,23 @@
   <data name="lblDetayToplam" xml:space="preserve">
     <value>Grand Total:</value>
   </data>
+  <data name="lblGelistirici" xml:space="preserve">
+    <value>Developer: [Murat Gül]</value>
+  </data>
   <data name="lblKullaniciTipi" xml:space="preserve">
     <value>Role / Permission:</value>
   </data>
+  <data name="lblProjeAdi" xml:space="preserve">
+    <value>Seed Bank Automation</value>
+  </data>
   <data name="lblSepetGenelToplam" xml:space="preserve">
     <value>Grand Total:</value>
+  </data>
+  <data name="lblTelif" xml:space="preserve">
+    <value>© 2025 All Rights Reserved.</value>
+  </data>
+  <data name="lblVersiyon" xml:space="preserve">
+    <value>Version: 1.0.0</value>
   </data>
   <data name="linkHesapSil" xml:space="preserve">
     <value>Permanently Delete My Account</value>
@@ -537,11 +606,20 @@
   <data name="tabBitkiTR" xml:space="preserve">
     <value>Turkish Info</value>
   </data>
+  <data name="tabGenelBilgi" xml:space="preserve">
+    <value>General Info</value>
+  </data>
+  <data name="tabTeknikBilgi" xml:space="preserve">
+    <value>Cultivation &amp; Storage</value>
+  </data>
   <data name="UserType_Admin" xml:space="preserve">
     <value>Administrator</value>
   </data>
   <data name="UserType_Kullanici" xml:space="preserve">
     <value>User</value>
+  </data>
+  <data name="UyariBaslik" xml:space="preserve">
+    <value>Warning</value>
   </data>
   <data name="ZorunluAlanlarHata" xml:space="preserve">
     <value>All fields marked with * are required.</value>

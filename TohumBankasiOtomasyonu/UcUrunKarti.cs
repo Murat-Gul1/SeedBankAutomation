@@ -88,5 +88,17 @@ namespace TohumBankasiOtomasyonu
             }
 
         }
+
+        private void picUrunResmi_Click(object sender, EventArgs e)
+        {
+            // Eğer resim yoksa açma
+            if (picUrunResmi.Image == null) return;
+
+            // Büyük resim formunu oluştur ve resmi gönder
+            FormResimGoruntule frm = new FormResimGoruntule(picUrunResmi.Image);
+
+            // Formu aç
+            frm.ShowDialog();
+        }
     }
 }

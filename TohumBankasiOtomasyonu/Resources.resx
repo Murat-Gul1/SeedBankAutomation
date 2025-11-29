@@ -120,6 +120,12 @@
   <data name="BasariBaslik" xml:space="preserve">
     <value>Başarılı</value>
   </data>
+  <data name="BaslikSaklama" xml:space="preserve">
+    <value>SAKLAMA:</value>
+  </data>
+  <data name="BaslikYetistirme" xml:space="preserve">
+    <value>YETİŞTİRME:</value>
+  </data>
   <data name="BitkiKayitBasarili" xml:space="preserve">
     <value>Bitki başarıyla kaydedildi.</value>
   </data>
@@ -153,6 +159,12 @@
   <data name="btnAdminStok_ToolTip" xml:space="preserve">
     <value>Stok Yönetimi</value>
   </data>
+  <data name="btnAnaSayfa_ToolTip" xml:space="preserve">
+    <value>Ana Sayfa</value>
+  </data>
+  <data name="btnBitkiBilgi_ToolTip" xml:space="preserve">
+    <value>Bitki Ara / Bilgi Bankası</value>
+  </data>
   <data name="btnBitkiKaydet" xml:space="preserve">
     <value>Kaydet</value>
   </data>
@@ -164,6 +176,9 @@
   </data>
   <data name="btnGiris_ToolTip" xml:space="preserve">
     <value>Kullanıcı Girişi</value>
+  </data>
+  <data name="btnHakkinda_ToolTip" xml:space="preserve">
+    <value>Hakkında</value>
   </data>
   <data name="btnHesapGuncelle" xml:space="preserve">
     <value>Bilgileri Güncelle</value>
@@ -207,6 +222,9 @@
   <data name="btnSepet_ToolTip" xml:space="preserve">
     <value>Sepetim</value>
   </data>
+  <data name="btnSiparisGecmisi_ToolTip" xml:space="preserve">
+    <value>Geçmiş Siparişlerim</value>
+  </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Temizle</value>
   </data>
@@ -242,6 +260,24 @@
   </data>
   <data name="colBlokID" xml:space="preserve">
     <value>Blok No</value>
+  </data>
+  <data name="colDetayBilimselAd" xml:space="preserve">
+    <value>Bilimsel Ad</value>
+  </data>
+  <data name="colDetayResim" xml:space="preserve">
+    <value>Görsel</value>
+  </data>
+  <data name="colGecmisDurum" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="colGecmisMakbuz" xml:space="preserve">
+    <value>Makbuz No</value>
+  </data>
+  <data name="colGecmisTarih" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="colGecmisTutar" xml:space="preserve">
+    <value>Toplam Tutar</value>
   </data>
   <data name="colKullaniciAd" xml:space="preserve">
     <value>Ad</value>
@@ -333,6 +369,9 @@
   <data name="FormGiris_Title" xml:space="preserve">
     <value>Kullanıcı Girişi</value>
   </data>
+  <data name="FormHakkinda_Title" xml:space="preserve">
+    <value>Program Hakkında</value>
+  </data>
   <data name="FormHesapAyarlari_Title" xml:space="preserve">
     <value>Hesap Ayarları</value>
   </data>
@@ -342,11 +381,17 @@
   <data name="FormKullaniciDuzenle_Title" xml:space="preserve">
     <value>Kullanıcı Düzenle</value>
   </data>
+  <data name="FormResimGoruntule_Title" xml:space="preserve">
+    <value>Ürün Görseli</value>
+  </data>
   <data name="FormSatisDetay_Title" xml:space="preserve">
     <value>Satış Detayları</value>
   </data>
   <data name="FormSepet_Title" xml:space="preserve">
     <value>Alışveriş Sepeti</value>
+  </data>
+  <data name="FormSiparisGecmisi_Title" xml:space="preserve">
+    <value>Sipariş Geçmişi</value>
   </data>
   <data name="GenelHata" xml:space="preserve">
     <value>Kayıt sırasında beklenmedik bir hata oluştu:</value>
@@ -383,6 +428,9 @@
   </data>
   <data name="HataSatirSecilmedi" xml:space="preserve">
     <value>Lütfen silinecek bir satır seçiniz.</value>
+  </data>
+  <data name="HataSepetGoruntuleme" xml:space="preserve">
+    <value>Sepeti görüntülemek için giriş yapmalısınız.</value>
   </data>
   <data name="HataYetersizStok" xml:space="preserve">
     <value>Yetersiz stok! Şu ürün tükenmiş:</value>
@@ -453,6 +501,15 @@
   <data name="labelSifre" xml:space="preserve">
     <value>Şifre:</value>
   </data>
+  <data name="lblAciklama" xml:space="preserve">
+    <value>Bu program, bitki tohumlarının takibi, satışı ve blokzincir tabanlı güvenli kaydı için geliştirilmiştir.</value>
+  </data>
+  <data name="lblAramaBaslik" xml:space="preserve">
+    <value>Tohum Bankasında Ara...</value>
+  </data>
+  <data name="lblBilgiBulunamadi" xml:space="preserve">
+    <value>Aradığınız kriterlere uygun bitki bulunamadı.</value>
+  </data>
   <data name="lblBitkiAciklama" xml:space="preserve">
     <value>Açıklama:</value>
   </data>
@@ -486,11 +543,23 @@
   <data name="lblDetayToplam" xml:space="preserve">
     <value>Genel Toplam:</value>
   </data>
+  <data name="lblGelistirici" xml:space="preserve">
+    <value>Geliştirici: [Murat Gül]</value>
+  </data>
   <data name="lblKullaniciTipi" xml:space="preserve">
     <value>Yetki / Rol:</value>
   </data>
+  <data name="lblProjeAdi" xml:space="preserve">
+    <value>Tohum Bankası Otomasyonu</value>
+  </data>
   <data name="lblSepetGenelToplam" xml:space="preserve">
     <value>Genel Toplam:</value>
+  </data>
+  <data name="lblTelif" xml:space="preserve">
+    <value>© 2025 Tüm Hakları Saklıdır.</value>
+  </data>
+  <data name="lblVersiyon" xml:space="preserve">
+    <value>Sürüm: 1.0.0</value>
   </data>
   <data name="linkHesapSil" xml:space="preserve">
     <value>Hesabımı Kalıcı Olarak Kapat</value>
@@ -537,11 +606,20 @@
   <data name="tabBitkiTR" xml:space="preserve">
     <value>Türkçe Bilgiler</value>
   </data>
+  <data name="tabGenelBilgi" xml:space="preserve">
+    <value>Genel Bilgiler</value>
+  </data>
+  <data name="tabTeknikBilgi" xml:space="preserve">
+    <value>Yetiştirme ve Saklama</value>
+  </data>
   <data name="UserType_Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
   <data name="UserType_Kullanici" xml:space="preserve">
     <value>Kullanıcı</value>
+  </data>
+  <data name="UyariBaslik" xml:space="preserve">
+    <value>Uyarı</value>
   </data>
   <data name="ZorunluAlanlarHata" xml:space="preserve">
     <value>Yıldızlı (*) alanların tamamı doldurulmalıdır.</value>

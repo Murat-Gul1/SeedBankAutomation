@@ -133,9 +133,29 @@ namespace TohumBankasiOtomasyonu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap house {
+            get {
+                object obj = ResourceManager.GetObject("house", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap image {
             get {
                 object obj = ResourceManager.GetObject("image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap information {
+            get {
+                object obj = ResourceManager.GetObject("information", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,6 +176,16 @@ namespace TohumBankasiOtomasyonu.Properties {
         internal static System.Drawing.Bitmap language {
             get {
                 object obj = ResourceManager.GetObject("language", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap manifest {
+            get {
+                object obj = ResourceManager.GetObject("manifest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +216,16 @@ namespace TohumBankasiOtomasyonu.Properties {
         internal static System.Drawing.Bitmap save {
             get {
                 object obj = ResourceManager.GetObject("save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap seed {
+            get {
+                object obj = ResourceManager.GetObject("seed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

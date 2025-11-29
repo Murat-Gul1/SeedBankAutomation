@@ -123,6 +123,7 @@
             picUrunResmi.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             picUrunResmi.Size = new System.Drawing.Size(246, 150);
             picUrunResmi.TabIndex = 0;
+            picUrunResmi.Click += picUrunResmi_Click;
             // 
             // UcUrunKarti
             // 
