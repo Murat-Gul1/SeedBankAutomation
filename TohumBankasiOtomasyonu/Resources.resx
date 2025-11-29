@@ -249,6 +249,15 @@
   <data name="ButonSil" xml:space="preserve">
     <value>Sil</value>
   </data>
+  <data name="ChatDurum_Bekleyin" xml:space="preserve">
+    <value>⏳ Analiz yapılıyor, lütfen bekleyin...</value>
+  </data>
+  <data name="ChatSender_AI" xml:space="preserve">
+    <value>GEMINI:</value>
+  </data>
+  <data name="ChatSender_User" xml:space="preserve">
+    <value>SİZ:</value>
+  </data>
   <data name="CikisBasariliMesaj" xml:space="preserve">
     <value>Başarıyla çıkış yaptınız.</value>
   </data>

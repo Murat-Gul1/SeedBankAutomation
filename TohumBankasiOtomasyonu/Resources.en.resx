@@ -249,6 +249,15 @@
   <data name="ButonSil" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="ChatDurum_Bekleyin" xml:space="preserve">
+    <value>⏳ Analyzing, please wait...</value>
+  </data>
+  <data name="ChatSender_AI" xml:space="preserve">
+    <value>GEMINI:</value>
+  </data>
+  <data name="ChatSender_User" xml:space="preserve">
+    <value>YOU:</value>
+  </data>
   <data name="CikisBasariliMesaj" xml:space="preserve">
     <value>You have been logged out successfully.</value>
   </data>

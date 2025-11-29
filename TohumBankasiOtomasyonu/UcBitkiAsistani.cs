@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using TohumBankasiOtomasyonu.Properties;
-
+using DevExpress.XtraRichEdit.API.Native; // RichEdit kontrolü için gerekli
 namespace TohumBankasiOtomasyonu
 {
     public partial class UcBitkiAsistani : DevExpress.XtraEditors.XtraUserControl
@@ -86,14 +86,8 @@ namespace TohumBankasiOtomasyonu
         // Not: 'async' kelimesi çok önemli, donmayı engeller.
         private async void btnAsistanAnaliz_Click(object sender, EventArgs e)
         {
-            // A. Kontroller
-            if (picAsistanResim.Image == null)
-            {
-                XtraMessageBox.Show(Resources.HataResimSecilmedi, "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            // 1. Key Kontrolü
             string kayitliKey = Properties.Settings.Default.KullaniciApiKey;
-
             if (string.IsNullOrEmpty(kayitliKey))
             {
                 XtraMessageBox.Show(Resources.HataKeyEksik, "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -101,38 +95,68 @@ namespace TohumBankasiOtomasyonu
                 return;
             }
 
-            // Eğer soru boşsa varsayılan bir soru sor
+            // 2. Soru Hazırlığı
             string soru = txtAsistanSoru.Text.Trim();
-            if (string.IsNullOrEmpty(soru))
+
+            // Eğer hem resim yok hem soru yoksa uyarı ver
+            if (string.IsNullOrEmpty(soru) && picAsistanResim.Image == null)
             {
-                soru = "What is the name of this plant, what does it look like, and what do you recommend for its care?";
+                XtraMessageBox.Show("Lütfen bir resim yükleyin veya bir soru yazın.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
-            // B. Arayüzü "Bekleyin" Moduna Al
-            btnAsistanAnaliz.Enabled = false; // Butonu kilitle (tekrar basılmasın)
-            btnAsistanResimSec.Enabled = false;
-            txtAsistanCevap.Text = Resources.DurumAnalizEdiliyor; // "Lütfen bekleyin..." yazısı
+            // Varsayılan soru (Sadece resim atıldıysa)
+            if (string.IsNullOrEmpty(soru) && picAsistanResim.Image != null)
+            {
+                soru = "What is this?";
+            }
 
-            // (İsteğe bağlı: Mouse imlecini bekleme moduna al)
-            Cursor = Cursors.WaitCursor;
+            // 3. Gönderilecek Resmi Al (Varsa)
+            Image gonderilecekResim = null;
+            if (picAsistanResim.Image != null)
+            {
+                // Resmi kopyala (Çünkü aşağıda picAsistanResim'i temizleyeceğiz)
+                gonderilecekResim = new Bitmap(picAsistanResim.Image);
+            }
+
+            // --- CHAT EKRANINA YAZ (Resim varsa o da eklenecek) ---
+            MesajEkle(Resources.ChatSender_User + " " + soru, gonderilecekResim, true);
+
+            // --- TEMİZLİK ---
+            txtAsistanSoru.Text = "";
+            picAsistanResim.Image = null; // Sol taraftaki resmi kaldır (İsteğiniz)
+
+            // Arayüz Kilitleme
+            btnAsistanAnaliz.Enabled = false;
+            btnAsistanResimSec.Enabled = false;
+
+            // Bekleme Mesajı (Resimsiz)
+            DocumentRange beklemeMesaji = MesajEkle(Resources.ChatDurum_Bekleyin, null, false, true);
 
             try
             {
-                string cevap = await GeminiManager.BitkiAnalizEt(soru, picAsistanResim.Image, kayitliKey);
+                string formatTalimati = " (Cevabı verirken başlıkları BÜYÜK HARFLE yaz. Markdown kullanma.)";
+                string tamSoru = soru + formatTalimati;
 
+                // API'ye Gönder (Resim null ise sadece metin gider)
+                string cevap = await GeminiManager.BitkiAnalizEt(tamSoru, gonderilecekResim, kayitliKey);
                 string guzelCevap = MetniGuzellestir(cevap);
-                txtAsistanCevap.Text = guzelCevap;
+
+                // Bekleme mesajını sil
+                chatEkrani.Document.Delete(beklemeMesaji);
+
+                // Cevabı Yaz (Resimsiz)
+                MesajEkle(Resources.ChatSender_AI + "\n" + guzelCevap, null, false);
             }
             catch (Exception ex)
             {
-                txtAsistanCevap.Text = "Hata oluştu: " + ex.Message;
+                chatEkrani.Document.Delete(beklemeMesaji);
+                MesajEkle("HATA: " + ex.Message, null, false);
             }
             finally
             {
-                // E. İşlem Bitince Arayüzü Eski Haline Getir
                 btnAsistanAnaliz.Enabled = true;
                 btnAsistanResimSec.Enabled = true;
-                Cursor = Cursors.Default;
             }
         }
         // Gelen metindeki yıldızları ve işaretleri temizleyip düzenleyen metot
@@ -203,6 +227,61 @@ namespace TohumBankasiOtomasyonu
                 // Anahtar yoksa:
                 txtApiKey.Properties.NullValuePrompt = Resources.MsgKeyGirin; // Enter key...
             }
+        }
+        // Geriye DocumentRange döndürüyoruz ki sonradan silebilelim
+        // Parametreye 'resim' eklendi (Opsiyonel, null olabilir)
+        // Change 'void' back to 'DocumentRange'
+        private DocumentRange MesajEkle(string mesaj, Image resim, bool kullaniciMi, bool sistemMesajiMi = false)
+        {
+            Document doc = chatEkrani.Document;
+            doc.AppendText("\n");
+
+            // --- 1. ADD IMAGE (IF EXISTS) ---
+            if (resim != null)
+            {
+                Image kucukResim = new Bitmap(resim, new Size(150, 150));
+                DocumentPosition pos = doc.Range.End;
+                doc.Images.Insert(pos, kucukResim);
+                doc.AppendText("\n");
+
+                ParagraphProperties ppImg = doc.BeginUpdateParagraphs(doc.CreateRange(pos.ToInt(), 1));
+                ppImg.Alignment = kullaniciMi ? ParagraphAlignment.Right : ParagraphAlignment.Left;
+                doc.EndUpdateParagraphs(ppImg);
+            }
+
+            // --- 2. ADD TEXT ---
+            // Capture the range of the added text so we can return it
+            DocumentRange range = doc.AppendText(mesaj + "\n");
+
+            ParagraphProperties pp = doc.BeginUpdateParagraphs(range);
+            CharacterProperties cp = doc.BeginUpdateCharacters(range);
+
+            if (sistemMesajiMi)
+            {
+                pp.Alignment = ParagraphAlignment.Center;
+                cp.ForeColor = Color.Gray;
+                cp.Italic = true;
+                cp.Bold = false;
+            }
+            else if (kullaniciMi)
+            {
+                pp.Alignment = ParagraphAlignment.Right;
+                cp.ForeColor = Color.DarkBlue;
+                cp.Bold = true;
+            }
+            else
+            {
+                pp.Alignment = ParagraphAlignment.Left;
+                cp.ForeColor = Color.Black;
+                cp.Bold = false;
+            }
+
+            doc.EndUpdateCharacters(cp);
+            doc.EndUpdateParagraphs(pp);
+            chatEkrani.ScrollToCaret();
+
+            // RETURN THE RANGE (Crucial for deleting the 'Please Wait' message later)
+            return range;
         }
     }
 }

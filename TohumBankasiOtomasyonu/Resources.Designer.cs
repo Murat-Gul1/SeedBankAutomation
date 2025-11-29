@@ -457,6 +457,33 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ⏳ Analiz yapılıyor, lütfen bekleyin....
+        /// </summary>
+        internal static string ChatDurum_Bekleyin {
+            get {
+                return ResourceManager.GetString("ChatDurum_Bekleyin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GEMINI:.
+        /// </summary>
+        internal static string ChatSender_AI {
+            get {
+                return ResourceManager.GetString("ChatSender_AI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SİZ:.
+        /// </summary>
+        internal static string ChatSender_User {
+            get {
+                return ResourceManager.GetString("ChatSender_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Başarıyla çıkış yaptınız..
         /// </summary>
         internal static string CikisBasariliMesaj {

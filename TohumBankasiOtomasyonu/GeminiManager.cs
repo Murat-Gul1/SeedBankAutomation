@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using System.Collections.Generic;
 namespace TohumBankasiOtomasyonu
 {
     public static class GeminiManager
@@ -23,71 +23,61 @@ namespace TohumBankasiOtomasyonu
         /// </summary>
         public static async Task<string> BitkiAnalizEt(string soru, Image bitkiResmi, string kullaniciApiKey)
         {
-            if (bitkiResmi == null)
-                return "Hata: Analiz için bir resim alınamadı.";
+            // Sadece API Key kontrolü kalsın, resim zorunluluğunu kaldırdık.
+            if (string.IsNullOrEmpty(kullaniciApiKey)) return "Hata: API Anahtarı eksik.";
 
             try
             {
                 using (var client = new HttpClient())
                 {
-                    // API anahtarını header olarak ekle
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Add("x-goog-api-key", kullaniciApiKey);
 
-                    // 1. Resmi Base64 formatına çevir
-                    string base64Image = ResimToBase64(bitkiResmi);
+                    // --- DİNAMİK İÇERİK OLUŞTURMA ---
+                    // Google'a göndereceğimiz parça listesi (Soru kesin var, resim opsiyonel)
+                    var parcalar = new List<object>();
 
-                    // 2. Google'ın istediği JSON formatını hazırla
+                    // 1. Soruyu ekle
+                    parcalar.Add(new { text = soru });
+
+                    // 2. Resim varsa, onu da listeye ekle
+                    if (bitkiResmi != null)
+                    {
+                        string base64Image = ResimToBase64(bitkiResmi);
+                        parcalar.Add(new
+                        {
+                            inline_data = new
+                            {
+                                mime_type = "image/jpeg",
+                                data = base64Image
+                            }
+                        });
+                    }
+
+                    // JSON Gövdesini oluştur
                     var requestBody = new
                     {
                         contents = new[]
                         {
-                            new
-                            {
-                                parts = new object[]
-                                {
-                                    new { text = soru }, // Kullanıcının sorusu
-                                    new
-                                    {
-                                        inline_data = new
-                                        {
-                                            mime_type = "image/jpeg",
-                                            data = base64Image
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    new { parts = parcalar }
+                }
                     };
 
-                    // 3. Veriyi JSON'a çevir
                     string jsonContent = JsonConvert.SerializeObject(requestBody);
                     var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-                    string urlWithKey = $"{ApiUrl}?key={kullaniciApiKey}";
-
-                    // 4. İsteği gönder
-                    var response = await client.PostAsync(urlWithKey, content);
-
-
-                    // 5. Cevabı oku
+                    var response = await client.PostAsync(ApiUrl, content);
                     string responseString = await response.Content.ReadAsStringAsync();
 
                     if (response.IsSuccessStatusCode)
                     {
-                        // JSON içinden sadece metin cevabını çek
                         var jsonResponse = JObject.Parse(responseString);
-
                         string cevap = jsonResponse["candidates"]?[0]?["content"]?["parts"]?[0]?["text"]?.ToString();
-
-                        if (string.IsNullOrWhiteSpace(cevap))
-                            return "Yapay zeka boş bir cevap döndürdü.";
-
-                        return cevap.Trim();
+                        return cevap?.Trim() ?? "Cevap alınamadı.";
                     }
                     else
                     {
-                        return $"Hata oluştu! Kod: {response.StatusCode}\nDetay: {responseString}";
+                        return $"Hata: {response.StatusCode} - {responseString}";
                     }
                 }
             }

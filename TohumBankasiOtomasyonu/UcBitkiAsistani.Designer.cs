@@ -38,7 +38,7 @@
             btnAsistanResimSec = new DevExpress.XtraEditors.SimpleButton();
             picAsistanResim = new DevExpress.XtraEditors.PictureEdit();
             panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            txtAsistanCevap = new DevExpress.XtraEditors.MemoEdit();
+            chatEkrani = new DevExpress.XtraRichEdit.RichEditControl();
             lblCevapBaslik = new DevExpress.XtraEditors.LabelControl();
             lblSoruBaslik = new DevExpress.XtraEditors.LabelControl();
             txtAsistanSoru = new DevExpress.XtraEditors.MemoEdit();
@@ -51,7 +51,6 @@
             ((System.ComponentModel.ISupportInitialize)picAsistanResim.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl3).BeginInit();
             panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)txtAsistanCevap.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtAsistanSoru.Properties).BeginInit();
             SuspendLayout();
             // 
@@ -151,7 +150,7 @@
             // 
             // panelControl3
             // 
-            panelControl3.Controls.Add(txtAsistanCevap);
+            panelControl3.Controls.Add(chatEkrani);
             panelControl3.Controls.Add(lblCevapBaslik);
             panelControl3.Controls.Add(lblSoruBaslik);
             panelControl3.Controls.Add(txtAsistanSoru);
@@ -162,22 +161,25 @@
             panelControl3.Size = new System.Drawing.Size(545, 511);
             panelControl3.TabIndex = 2;
             // 
-            // txtAsistanCevap
+            // chatEkrani
             // 
-            txtAsistanCevap.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtAsistanCevap.Location = new System.Drawing.Point(4, 25);
-            txtAsistanCevap.Name = "txtAsistanCevap";
-            txtAsistanCevap.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
-            txtAsistanCevap.Properties.Appearance.Options.UseFont = true;
-            txtAsistanCevap.Properties.ReadOnly = true;
-            txtAsistanCevap.Size = new System.Drawing.Size(536, 344);
-            txtAsistanCevap.TabIndex = 4;
+            chatEkrani.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Simple;
+            chatEkrani.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            chatEkrani.Dock = System.Windows.Forms.DockStyle.Fill;
+            chatEkrani.LayoutUnit = DevExpress.XtraRichEdit.DocumentLayoutUnit.Pixel;
+            chatEkrani.Location = new System.Drawing.Point(2, 18);
+            chatEkrani.Name = "chatEkrani";
+            chatEkrani.Options.DocumentSaveOptions.CurrentFormat = DevExpress.XtraRichEdit.DocumentFormat.PlainText;
+            chatEkrani.ReadOnly = true;
+            chatEkrani.Size = new System.Drawing.Size(541, 354);
+            chatEkrani.TabIndex = 4;
             // 
             // lblCevapBaslik
             // 
             lblCevapBaslik.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 162);
             lblCevapBaslik.Appearance.Options.UseFont = true;
-            lblCevapBaslik.Location = new System.Drawing.Point(4, 6);
+            lblCevapBaslik.Dock = System.Windows.Forms.DockStyle.Top;
+            lblCevapBaslik.Location = new System.Drawing.Point(2, 2);
             lblCevapBaslik.Name = "lblCevapBaslik";
             lblCevapBaslik.Size = new System.Drawing.Size(75, 16);
             lblCevapBaslik.TabIndex = 3;
@@ -238,7 +240,6 @@
             ((System.ComponentModel.ISupportInitialize)panelControl3).EndInit();
             panelControl3.ResumeLayout(false);
             panelControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)txtAsistanCevap.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtAsistanSoru.Properties).EndInit();
             ResumeLayout(false);
         }
@@ -254,11 +255,11 @@
         private DevExpress.XtraEditors.SimpleButton btnAsistanAnaliz;
         private DevExpress.XtraEditors.MemoEdit txtAsistanSoru;
         private DevExpress.XtraEditors.LabelControl lblSoruBaslik;
-        private DevExpress.XtraEditors.MemoEdit txtAsistanCevap;
         private DevExpress.XtraEditors.LabelControl lblCevapBaslik;
         private DevExpress.XtraEditors.TextEdit txtApiKey;
         private DevExpress.XtraEditors.LabelControl lblApiKey;
         private DevExpress.XtraEditors.HyperlinkLabelControl lnkGoogleAI;
         private DevExpress.XtraEditors.SimpleButton btnKeyKaydet;
+        private DevExpress.XtraRichEdit.RichEditControl chatEkrani;
     }
 }
