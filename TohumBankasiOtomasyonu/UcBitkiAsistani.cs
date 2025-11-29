@@ -23,6 +23,9 @@ namespace TohumBankasiOtomasyonu
             lblCevapBaslik.Text = Resources.lblCevapBaslik;
             btnAsistanResimSec.Text = Resources.btnAsistanResimSec;
             btnAsistanAnaliz.Text = Resources.btnAsistanAnaliz;
+            lnkGoogleAI.Text = Resources.linkApiKeyAl;
+            lblApiKey.Text = Resources.lblApiKeyBaslik;
+            btnKeyKaydet.Text = Resources.btnKeyKaydet;
 
             // İpuçları
             btnAsistanResimSec.ToolTip = "Bir bitki fotoğrafı seçin / Select a plant photo";
@@ -33,6 +36,22 @@ namespace TohumBankasiOtomasyonu
             if (!this.DesignMode)
             {
                 UygulaDil();
+
+                //  Duruma göre "İpucu Yazısı" (Placeholder) gösterelim
+                string kayitliKey = Properties.Settings.Default.KullaniciApiKey;
+                if (!string.IsNullOrEmpty(kayitliKey))
+                {
+                    // Anahtar varsa, kutu boş kalsın ama arkada silik yazı yazsın
+                    txtApiKey.Text = "";
+                    txtApiKey.Properties.NullValuePrompt = Resources.MsgKeyMevcut;
+                    // İsterseniz kullanıcının kafası karışmasın diye butonu "Güncelle" yapabilirsiniz
+                    btnKeyKaydet.Text = Resources.btnKeyGuncelle;
+                }
+                else
+                {
+                    // Anahtar yoksa
+                    txtApiKey.Properties.NullValuePrompt = Resources.MsgKeyGirin;
+                }
             }
         }
 
@@ -73,6 +92,14 @@ namespace TohumBankasiOtomasyonu
                 XtraMessageBox.Show(Resources.HataResimSecilmedi, "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            string kayitliKey = Properties.Settings.Default.KullaniciApiKey;
+
+            if (string.IsNullOrEmpty(kayitliKey))
+            {
+                XtraMessageBox.Show(Resources.HataKeyEksik, "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtApiKey.Focus();
+                return;
+            }
 
             // Eğer soru boşsa varsayılan bir soru sor
             string soru = txtAsistanSoru.Text.Trim();
@@ -91,13 +118,8 @@ namespace TohumBankasiOtomasyonu
 
             try
             {
-                // C. API'ye GÖNDER VE BEKLE (await)
-                // Arka planda Gemini'ye gidip gelene kadar burası bekler ama program donmaz.
-                string formatTalimati = " (When answering, write the title in CAPITAL LETTERS. Leave a blank line after each section. Do not use Markdown symbols.)";
-                string tamSoru = soru + formatTalimati;
-                string cevap = await GeminiManager.BitkiAnalizEt(soru, picAsistanResim.Image);
+                string cevap = await GeminiManager.BitkiAnalizEt(soru, picAsistanResim.Image, kayitliKey);
 
-                // D. Cevabı Yazdır
                 string guzelCevap = MetniGuzellestir(cevap);
                 txtAsistanCevap.Text = guzelCevap;
             }
@@ -131,6 +153,56 @@ namespace TohumBankasiOtomasyonu
             temiz = temiz.Replace("\n", Environment.NewLine);
 
             return temiz.Trim();
+        }
+
+        private void lnkGoogleAI_Click(object sender, EventArgs e)
+        {
+            // Varsayılan tarayıcıda siteyi aç
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "https://aistudio.google.com/",
+                UseShellExecute = true
+            });
+        }
+
+        private void btnKeyKaydet_Click(object sender, EventArgs e)
+        {
+            string girilenKey = txtApiKey.Text.Trim();
+
+            if (!string.IsNullOrEmpty(girilenKey))
+            {
+                // 1. Ayarlara kaydet
+                Properties.Settings.Default.KullaniciApiKey = girilenKey;
+                Properties.Settings.Default.Save();
+
+                // 2. Bilgi ver
+                XtraMessageBox.Show(Resources.MsgKeyKaydedildi, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // 3. Kutuyu Temizle (YENİ EKLENEN SATIR)
+                txtApiKey.Text = "";
+            }
+        }
+        public void DiliYenile()
+        {
+            // 1. Sabit yazıları (Başlık, Butonlar, Linkler) güncelle
+            // (Bu metot zaten yukarıda tanımlıydı, onu tekrar çağırıyoruz)
+            UygulaDil();
+
+            // 2. API Key kutusunun içindeki "İpucu" yazısını (Placeholder) güncelle
+            // (Çünkü dil değişince "Kayıtlı" -> "Saved" olmalı)
+            string kayitliKey = Properties.Settings.Default.KullaniciApiKey;
+
+            if (!string.IsNullOrEmpty(kayitliKey))
+            {
+                // Anahtar varsa:
+                txtApiKey.Properties.NullValuePrompt = Resources.MsgKeyMevcut; // ******* (Saved) / (Kayıtlı)
+                btnKeyKaydet.Text = Resources.btnKeyGuncelle; // Update / Güncelle
+            }
+            else
+            {
+                // Anahtar yoksa:
+                txtApiKey.Properties.NullValuePrompt = Resources.MsgKeyGirin; // Enter key...
+            }
         }
     }
 }

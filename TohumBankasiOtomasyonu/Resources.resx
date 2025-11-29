@@ -207,6 +207,12 @@
   <data name="btnKayitTemizle_Text" xml:space="preserve">
     <value>Temizle</value>
   </data>
+  <data name="btnKeyGuncelle" xml:space="preserve">
+    <value>Güncelle</value>
+  </data>
+  <data name="btnKeyKaydet" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
   <data name="btnKullaniciAyarlari_ToolTip" xml:space="preserve">
     <value>Kullanıcı Ayarları</value>
   </data>
@@ -438,6 +444,9 @@
   <data name="HataGirisGerekli" xml:space="preserve">
     <value>Sepete ürün eklemek için lütfen giriş yapınız.</value>
   </data>
+  <data name="HataKeyEksik" xml:space="preserve">
+    <value>Lütfen önce bir API Anahtarı girip kaydedin.</value>
+  </data>
   <data name="HataResimSecilmedi" xml:space="preserve">
     <value>Lütfen analiz edilecek bir bitki fotoğrafı seçiniz.</value>
   </data>
@@ -519,6 +528,9 @@
   <data name="lblAciklama" xml:space="preserve">
     <value>Bu program, bitki tohumlarının takibi, satışı ve blokzincir tabanlı güvenli kaydı için geliştirilmiştir.</value>
   </data>
+  <data name="lblApiKeyBaslik" xml:space="preserve">
+    <value>Gemini API Anahtarı:</value>
+  </data>
   <data name="lblAramaBaslik" xml:space="preserve">
     <value>Tohum Bankasında Ara...</value>
   </data>
@@ -585,11 +597,23 @@
   <data name="lblVersiyon" xml:space="preserve">
     <value>Sürüm: 1.0.0</value>
   </data>
+  <data name="linkApiKeyAl" xml:space="preserve">
+    <value>Google API Anahtarı Al (Ücretsiz)</value>
+  </data>
   <data name="linkHesapSil" xml:space="preserve">
     <value>Hesabımı Kalıcı Olarak Kapat</value>
   </data>
   <data name="MevcutSifreHatali" xml:space="preserve">
     <value>Değişiklikleri kaydetmek için girdiğiniz mevcut şifre hatalı.</value>
+  </data>
+  <data name="MsgKeyGirin" xml:space="preserve">
+    <value>API Anahtarınızı buraya girin...</value>
+  </data>
+  <data name="MsgKeyKaydedildi" xml:space="preserve">
+    <value>API Anahtarı başarıyla kaydedildi!</value>
+  </data>
+  <data name="MsgKeyMevcut" xml:space="preserve">
+    <value>********** (Kayıtlı)</value>
   </data>
   <data name="MsgSepetBos" xml:space="preserve">
     <value>Sepetiniz şu an boş.</value>

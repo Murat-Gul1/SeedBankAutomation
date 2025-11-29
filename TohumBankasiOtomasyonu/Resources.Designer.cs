@@ -331,6 +331,24 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Güncelle.
+        /// </summary>
+        internal static string btnKeyGuncelle {
+            get {
+                return ResourceManager.GetString("btnKeyGuncelle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kaydet.
+        /// </summary>
+        internal static string btnKeyKaydet {
+            get {
+                return ResourceManager.GetString("btnKeyKaydet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kullanıcı Ayarları.
         /// </summary>
         internal static string btnKullaniciAyarlari_ToolTip {
@@ -1024,6 +1042,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lütfen önce bir API Anahtarı girip kaydedin..
+        /// </summary>
+        internal static string HataKeyEksik {
+            get {
+                return ResourceManager.GetString("HataKeyEksik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lütfen analiz edilecek bir bitki fotoğrafı seçiniz..
         /// </summary>
         internal static string HataResimSecilmedi {
@@ -1267,6 +1294,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gemini API Anahtarı:.
+        /// </summary>
+        internal static string lblApiKeyBaslik {
+            get {
+                return ResourceManager.GetString("lblApiKeyBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tohum Bankasında Ara....
         /// </summary>
         internal static string lblAramaBaslik {
@@ -1465,6 +1501,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Google API Anahtarı Al (Ücretsiz).
+        /// </summary>
+        internal static string linkApiKeyAl {
+            get {
+                return ResourceManager.GetString("linkApiKeyAl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hesabımı Kalıcı Olarak Kapat.
         /// </summary>
         internal static string linkHesapSil {
@@ -1479,6 +1524,33 @@ namespace TohumBankasiOtomasyonu {
         internal static string MevcutSifreHatali {
             get {
                 return ResourceManager.GetString("MevcutSifreHatali", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API Anahtarınızı buraya girin....
+        /// </summary>
+        internal static string MsgKeyGirin {
+            get {
+                return ResourceManager.GetString("MsgKeyGirin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API Anahtarı başarıyla kaydedildi!.
+        /// </summary>
+        internal static string MsgKeyKaydedildi {
+            get {
+                return ResourceManager.GetString("MsgKeyKaydedildi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ********** (Kayıtlı).
+        /// </summary>
+        internal static string MsgKeyMevcut {
+            get {
+                return ResourceManager.GetString("MsgKeyMevcut", resourceCulture);
             }
         }
         

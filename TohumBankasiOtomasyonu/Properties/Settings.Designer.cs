@@ -70,5 +70,17 @@ namespace TohumBankasiOtomasyonu.Properties {
                 this["FirstLaunch"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string KullaniciApiKey {
+            get {
+                return ((string)(this["KullaniciApiKey"]));
+            }
+            set {
+                this["KullaniciApiKey"] = value;
+            }
+        }
     }
 }

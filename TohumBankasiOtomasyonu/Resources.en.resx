@@ -207,6 +207,12 @@
   <data name="btnKayitTemizle_Text" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="btnKeyGuncelle" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="btnKeyKaydet" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="btnKullaniciAyarlari_ToolTip" xml:space="preserve">
     <value>User Settings</value>
   </data>
@@ -438,6 +444,9 @@
   <data name="HataGirisGerekli" xml:space="preserve">
     <value>Please log in to add items to the cart.</value>
   </data>
+  <data name="HataKeyEksik" xml:space="preserve">
+    <value>Please enter and save an API Key first</value>
+  </data>
   <data name="HataResimSecilmedi" xml:space="preserve">
     <value>Please select a plant photo to analyze.</value>
   </data>
@@ -519,6 +528,9 @@
   <data name="lblAciklama" xml:space="preserve">
     <value>This application is developed for tracking, selling, and blockchain-based secure recording of plant seeds.</value>
   </data>
+  <data name="lblApiKeyBaslik" xml:space="preserve">
+    <value>Gemini API Key:</value>
+  </data>
   <data name="lblAramaBaslik" xml:space="preserve">
     <value>Search the Seed Bank...</value>
   </data>
@@ -585,11 +597,23 @@
   <data name="lblVersiyon" xml:space="preserve">
     <value>Version: 1.0.0</value>
   </data>
+  <data name="linkApiKeyAl" xml:space="preserve">
+    <value>Get Google API Key (Free)</value>
+  </data>
   <data name="linkHesapSil" xml:space="preserve">
     <value>Permanently Delete My Account</value>
   </data>
   <data name="MevcutSifreHatali" xml:space="preserve">
     <value>The current password you entered to save changes is incorrect.</value>
+  </data>
+  <data name="MsgKeyGirin" xml:space="preserve">
+    <value>Enter your API Key here...</value>
+  </data>
+  <data name="MsgKeyKaydedildi" xml:space="preserve">
+    <value>API Key saved successfully!</value>
+  </data>
+  <data name="MsgKeyMevcut" xml:space="preserve">
+    <value>********** (Saved)</value>
   </data>
   <data name="MsgSepetBos" xml:space="preserve">
     <value>Your cart is currently empty.</value>

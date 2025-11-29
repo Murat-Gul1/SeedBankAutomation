@@ -88,8 +88,8 @@
             // 
             // memoAnaAciklama
             // 
-            memoAnaAciklama.Dock = System.Windows.Forms.DockStyle.Bottom;
-            memoAnaAciklama.Location = new System.Drawing.Point(500, 37);
+            memoAnaAciklama.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            memoAnaAciklama.Location = new System.Drawing.Point(516, 37);
             memoAnaAciklama.Name = "memoAnaAciklama";
             memoAnaAciklama.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(214, 219, 233);
             memoAnaAciklama.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 162);
@@ -97,14 +97,14 @@
             memoAnaAciklama.Properties.Appearance.Options.UseFont = true;
             memoAnaAciklama.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             memoAnaAciklama.Properties.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            memoAnaAciklama.Size = new System.Drawing.Size(600, 243);
+            memoAnaAciklama.Size = new System.Drawing.Size(584, 243);
             memoAnaAciklama.TabIndex = 2;
             // 
             // lblAnaBaslik
             // 
             lblAnaBaslik.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
             lblAnaBaslik.Appearance.Options.UseFont = true;
-            lblAnaBaslik.Location = new System.Drawing.Point(506, 3);
+            lblAnaBaslik.Location = new System.Drawing.Point(516, 3);
             lblAnaBaslik.Name = "lblAnaBaslik";
             lblAnaBaslik.Size = new System.Drawing.Size(140, 25);
             lblAnaBaslik.TabIndex = 1;

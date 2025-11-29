@@ -11,9 +11,8 @@ namespace TohumBankasiOtomasyonu
 {
     public static class GeminiManager
     {
-        // Google AI Studio'dan aldığın yeni API anahtarı
-        // (BURAYA KENDİ KEY'İNİ YAZ)
-        private const string ApiKey = "AIzaSyCrieAFLw3VR0QfRJK2rD2dmzEpUeRN2_E";
+
+        
 
         // Kullanacağımız model (Gemini 2.5 Flash - hızlı ve resim destekli)
         private const string ApiUrl =
@@ -22,7 +21,7 @@ namespace TohumBankasiOtomasyonu
         /// <summary>
         /// Bitki resmini ve soruyu Gemini'ye gönderip analiz cevabını döner.
         /// </summary>
-        public static async Task<string> BitkiAnalizEt(string soru, Image bitkiResmi)
+        public static async Task<string> BitkiAnalizEt(string soru, Image bitkiResmi, string kullaniciApiKey)
         {
             if (bitkiResmi == null)
                 return "Hata: Analiz için bir resim alınamadı.";
@@ -33,7 +32,7 @@ namespace TohumBankasiOtomasyonu
                 {
                     // API anahtarını header olarak ekle
                     client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Add("x-goog-api-key", ApiKey);
+                    client.DefaultRequestHeaders.Add("x-goog-api-key", kullaniciApiKey);
 
                     // 1. Resmi Base64 formatına çevir
                     string base64Image = ResimToBase64(bitkiResmi);
@@ -65,8 +64,11 @@ namespace TohumBankasiOtomasyonu
                     string jsonContent = JsonConvert.SerializeObject(requestBody);
                     var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
+                    string urlWithKey = $"{ApiUrl}?key={kullaniciApiKey}";
+
                     // 4. İsteği gönder
-                    var response = await client.PostAsync(ApiUrl, content);
+                    var response = await client.PostAsync(urlWithKey, content);
+
 
                     // 5. Cevabı oku
                     string responseString = await response.Content.ReadAsStringAsync();

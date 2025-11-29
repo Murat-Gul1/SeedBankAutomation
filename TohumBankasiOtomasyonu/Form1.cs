@@ -497,6 +497,13 @@ namespace TohumBankasiOtomasyonu
             {
                 ((UcBitkiBilgi)aktifKontrol).DiliYenile();
             }
+            else if (aktifKontrol is UcBitkiAsistani)
+            {
+                // UcBitkiAsistani içinde 'DiliYenile' diye bir metot yoksa
+                // 'UygulaDil()' metodunu public yapıp onu da çağırabilirsiniz.
+                // Ancak en doğrusu oraya da bir 'DiliYenile' metodu eklemektir.
+                ((UcBitkiAsistani)aktifKontrol).DiliYenile();
+            }
         }
 
         private void btnAnaSayfa_Click(object sender, EventArgs e)
