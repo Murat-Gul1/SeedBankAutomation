@@ -115,6 +115,7 @@ namespace TohumBankasiOtomasyonu
             btnAnaSayfa.ToolTip = Resources.btnAnaSayfa_ToolTip;
             btnSiparisGecmisi.ToolTip = Resources.btnSiparisGecmisi_ToolTip;
             btnHakkinda.ToolTip = Resources.btnHakkinda_ToolTip;
+            btnAsistan.ToolTip = Resources.btnAsistan_ToolTip;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -518,6 +519,15 @@ namespace TohumBankasiOtomasyonu
         {
             FormHakkinda frm = new FormHakkinda();
             frm.ShowDialog();
+        }
+
+        private void btnAsistan_Click(object sender, EventArgs e)
+        {
+            // Asistan sayfasını yükle
+            pnlAnaIcerik.Controls.Clear();
+            UcBitkiAsistani uc = new UcBitkiAsistani();
+            uc.Dock = DockStyle.Fill;
+            pnlAnaIcerik.Controls.Add(uc);
         }
     }
 }

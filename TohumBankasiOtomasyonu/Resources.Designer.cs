@@ -196,6 +196,33 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AI Bitki Asistanı.
+        /// </summary>
+        internal static string btnAsistan_ToolTip {
+            get {
+                return ResourceManager.GetString("btnAsistan_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analiz Et / Gönder.
+        /// </summary>
+        internal static string btnAsistanAnaliz {
+            get {
+                return ResourceManager.GetString("btnAsistanAnaliz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fotoğraf Yükle....
+        /// </summary>
+        internal static string btnAsistanResimSec {
+            get {
+                return ResourceManager.GetString("btnAsistanResimSec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitki Ara / Bilgi Bankası.
         /// </summary>
         internal static string btnBitkiBilgi_ToolTip {
@@ -772,6 +799,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lütfen bekleyin, Gemini bitkinizi inceliyor....
+        /// </summary>
+        internal static string DurumAnalizEdiliyor {
+            get {
+                return ResourceManager.GetString("DurumAnalizEdiliyor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tohum Bankası Otomasyonu.
         /// </summary>
         internal static string Form1_Title {
@@ -984,6 +1020,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string HataGirisGerekli {
             get {
                 return ResourceManager.GetString("HataGirisGerekli", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lütfen analiz edilecek bir bitki fotoğrafı seçiniz..
+        /// </summary>
+        internal static string HataResimSecilmedi {
+            get {
+                return ResourceManager.GetString("HataResimSecilmedi", resourceCulture);
             }
         }
         
@@ -1231,6 +1276,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yapay Zeka Bitki Analizi.
+        /// </summary>
+        internal static string lblAsistanBaslik {
+            get {
+                return ResourceManager.GetString("lblAsistanBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aradığınız kriterlere uygun bitki bulunamadı..
         /// </summary>
         internal static string lblBilgiBulunamadi {
@@ -1312,6 +1366,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gemini AI Cevabı:.
+        /// </summary>
+        internal static string lblCevapBaslik {
+            get {
+                return ResourceManager.GetString("lblCevapBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Makbuz No:.
         /// </summary>
         internal static string lblDetayMakbuzNo {
@@ -1371,6 +1434,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string lblSepetGenelToplam {
             get {
                 return ResourceManager.GetString("lblSepetGenelToplam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitkiniz hakkında ne sormak istersiniz?.
+        /// </summary>
+        internal static string lblSoruBaslik {
+            get {
+                return ResourceManager.GetString("lblSoruBaslik", resourceCulture);
             }
         }
         

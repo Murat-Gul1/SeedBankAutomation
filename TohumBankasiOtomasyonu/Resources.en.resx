@@ -162,6 +162,15 @@
   <data name="btnAnaSayfa_ToolTip" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="btnAsistanAnaliz" xml:space="preserve">
+    <value>Analyze / Send</value>
+  </data>
+  <data name="btnAsistanResimSec" xml:space="preserve">
+    <value>Upload Photo...</value>
+  </data>
+  <data name="btnAsistan_ToolTip" xml:space="preserve">
+    <value>AI Plant Assistant</value>
+  </data>
   <data name="btnBitkiBilgi_ToolTip" xml:space="preserve">
     <value>Search Plants / Knowledge Base</value>
   </data>
@@ -354,6 +363,9 @@
   <data name="colZamanDamgasi" xml:space="preserve">
     <value>Timestamp</value>
   </data>
+  <data name="DurumAnalizEdiliyor" xml:space="preserve">
+    <value>Please wait, Gemini is examining your plant...</value>
+  </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Seed Bank Automation</value>
   </data>
@@ -425,6 +437,9 @@
   </data>
   <data name="HataGirisGerekli" xml:space="preserve">
     <value>Please log in to add items to the cart.</value>
+  </data>
+  <data name="HataResimSecilmedi" xml:space="preserve">
+    <value>Please select a plant photo to analyze.</value>
   </data>
   <data name="HataSatirSecilmedi" xml:space="preserve">
     <value>Please select a row to delete.</value>
@@ -507,6 +522,9 @@
   <data name="lblAramaBaslik" xml:space="preserve">
     <value>Search the Seed Bank...</value>
   </data>
+  <data name="lblAsistanBaslik" xml:space="preserve">
+    <value>AI Plant Analysis</value>
+  </data>
   <data name="lblBilgiBulunamadi" xml:space="preserve">
     <value>No plants found matching your criteria.</value>
   </data>
@@ -534,6 +552,9 @@
   <data name="lblBitkiYetistirme" xml:space="preserve">
     <value>Growing Conditions:</value>
   </data>
+  <data name="lblCevapBaslik" xml:space="preserve">
+    <value>Gemini AI Response:</value>
+  </data>
   <data name="lblDetayMakbuzNo" xml:space="preserve">
     <value>Receipt No:</value>
   </data>
@@ -554,6 +575,9 @@
   </data>
   <data name="lblSepetGenelToplam" xml:space="preserve">
     <value>Grand Total:</value>
+  </data>
+  <data name="lblSoruBaslik" xml:space="preserve">
+    <value>What would you like to ask about your plant?</value>
   </data>
   <data name="lblTelif" xml:space="preserve">
     <value>© 2025 All Rights Reserved.</value>

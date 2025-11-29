@@ -162,6 +162,15 @@
   <data name="btnAnaSayfa_ToolTip" xml:space="preserve">
     <value>Ana Sayfa</value>
   </data>
+  <data name="btnAsistanAnaliz" xml:space="preserve">
+    <value>Analiz Et / Gönder</value>
+  </data>
+  <data name="btnAsistanResimSec" xml:space="preserve">
+    <value>Fotoğraf Yükle...</value>
+  </data>
+  <data name="btnAsistan_ToolTip" xml:space="preserve">
+    <value>AI Bitki Asistanı</value>
+  </data>
   <data name="btnBitkiBilgi_ToolTip" xml:space="preserve">
     <value>Bitki Ara / Bilgi Bankası</value>
   </data>
@@ -354,6 +363,9 @@
   <data name="colZamanDamgasi" xml:space="preserve">
     <value>Zaman Damgası</value>
   </data>
+  <data name="DurumAnalizEdiliyor" xml:space="preserve">
+    <value>Lütfen bekleyin, Gemini bitkinizi inceliyor...</value>
+  </data>
   <data name="Form1_Title" xml:space="preserve">
     <value>Tohum Bankası Otomasyonu</value>
   </data>
@@ -425,6 +437,9 @@
   </data>
   <data name="HataGirisGerekli" xml:space="preserve">
     <value>Sepete ürün eklemek için lütfen giriş yapınız.</value>
+  </data>
+  <data name="HataResimSecilmedi" xml:space="preserve">
+    <value>Lütfen analiz edilecek bir bitki fotoğrafı seçiniz.</value>
   </data>
   <data name="HataSatirSecilmedi" xml:space="preserve">
     <value>Lütfen silinecek bir satır seçiniz.</value>
@@ -507,6 +522,9 @@
   <data name="lblAramaBaslik" xml:space="preserve">
     <value>Tohum Bankasında Ara...</value>
   </data>
+  <data name="lblAsistanBaslik" xml:space="preserve">
+    <value>Yapay Zeka Bitki Analizi</value>
+  </data>
   <data name="lblBilgiBulunamadi" xml:space="preserve">
     <value>Aradığınız kriterlere uygun bitki bulunamadı.</value>
   </data>
@@ -534,6 +552,9 @@
   <data name="lblBitkiYetistirme" xml:space="preserve">
     <value>Yetiştirme Koşulları:</value>
   </data>
+  <data name="lblCevapBaslik" xml:space="preserve">
+    <value>Gemini AI Cevabı:</value>
+  </data>
   <data name="lblDetayMakbuzNo" xml:space="preserve">
     <value>Makbuz No:</value>
   </data>
@@ -554,6 +575,9 @@
   </data>
   <data name="lblSepetGenelToplam" xml:space="preserve">
     <value>Genel Toplam:</value>
+  </data>
+  <data name="lblSoruBaslik" xml:space="preserve">
+    <value>Bitkiniz hakkında ne sormak istersiniz?</value>
   </data>
   <data name="lblTelif" xml:space="preserve">
     <value>© 2025 Tüm Hakları Saklıdır.</value>

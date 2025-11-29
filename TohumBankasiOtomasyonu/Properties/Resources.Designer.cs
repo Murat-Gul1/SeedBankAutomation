@@ -93,6 +93,36 @@ namespace TohumBankasiOtomasyonu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ai_assistant {
+            get {
+                object obj = ResourceManager.GetObject("ai-assistant", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap artificial_intelligence {
+            get {
+                object obj = ResourceManager.GetObject("artificial-intelligence", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap artificial_intelligence1 {
+            get {
+                object obj = ResourceManager.GetObject("artificial-intelligence1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Basket {
             get {
                 object obj = ResourceManager.GetObject("Basket", resourceCulture);
@@ -106,6 +136,16 @@ namespace TohumBankasiOtomasyonu.Properties {
         internal static System.Drawing.Bitmap blockchain {
             get {
                 object obj = ResourceManager.GetObject("blockchain", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap camera {
+            get {
+                object obj = ResourceManager.GetObject("camera", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,6 +243,16 @@ namespace TohumBankasiOtomasyonu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap paper_plane {
+            get {
+                object obj = ResourceManager.GetObject("paper-plane", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap plant {
             get {
                 object obj = ResourceManager.GetObject("plant", resourceCulture);
@@ -236,6 +286,16 @@ namespace TohumBankasiOtomasyonu.Properties {
         internal static System.Drawing.Bitmap sell {
             get {
                 object obj = ResourceManager.GetObject("sell", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap send {
+            get {
+                object obj = ResourceManager.GetObject("send", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
