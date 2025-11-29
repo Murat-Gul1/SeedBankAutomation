@@ -123,6 +123,9 @@
   <data name="BaslikSaklama" xml:space="preserve">
     <value>STORAGE:</value>
   </data>
+  <data name="BaslikSil" xml:space="preserve">
+    <value>Remove</value>
+  </data>
   <data name="BaslikYetistirme" xml:space="preserve">
     <value>CULTIVATION:</value>
   </data>
@@ -465,6 +468,9 @@
   <data name="HataSepetGoruntuleme" xml:space="preserve">
     <value>You must log in to view your cart.</value>
   </data>
+  <data name="HataSoruVeyaResimEksik" xml:space="preserve">
+    <value>Please upload an image or ask a question.</value>
+  </data>
   <data name="HataYetersizStok" xml:space="preserve">
     <value>Insufficient stock for product:</value>
   </data>
@@ -623,6 +629,9 @@
   </data>
   <data name="MsgKeyMevcut" xml:space="preserve">
     <value>********** (Saved)</value>
+  </data>
+  <data name="MsgResimSilOnay" xml:space="preserve">
+    <value>Do you want to remove this image?</value>
   </data>
   <data name="MsgSepetBos" xml:space="preserve">
     <value>Your cart is currently empty.</value>

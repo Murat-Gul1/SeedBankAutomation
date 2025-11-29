@@ -36,7 +36,7 @@
             txtApiKey = new DevExpress.XtraEditors.TextEdit();
             lblApiKey = new DevExpress.XtraEditors.LabelControl();
             btnAsistanResimSec = new DevExpress.XtraEditors.SimpleButton();
-            picAsistanResim = new DevExpress.XtraEditors.PictureEdit();
+            flowResimPaneli = new System.Windows.Forms.FlowLayoutPanel();
             panelControl3 = new DevExpress.XtraEditors.PanelControl();
             chatEkrani = new DevExpress.XtraRichEdit.RichEditControl();
             lblCevapBaslik = new DevExpress.XtraEditors.LabelControl();
@@ -48,7 +48,6 @@
             ((System.ComponentModel.ISupportInitialize)panelControl2).BeginInit();
             panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtApiKey.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)picAsistanResim.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl3).BeginInit();
             panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtAsistanSoru.Properties).BeginInit();
@@ -80,7 +79,7 @@
             panelControl2.Controls.Add(txtApiKey);
             panelControl2.Controls.Add(lblApiKey);
             panelControl2.Controls.Add(btnAsistanResimSec);
-            panelControl2.Controls.Add(picAsistanResim);
+            panelControl2.Controls.Add(flowResimPaneli);
             panelControl2.Dock = System.Windows.Forms.DockStyle.Left;
             panelControl2.Location = new System.Drawing.Point(0, 60);
             panelControl2.Name = "panelControl2";
@@ -89,39 +88,43 @@
             // 
             // lnkGoogleAI
             // 
-            lnkGoogleAI.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            lnkGoogleAI.Location = new System.Drawing.Point(5, 482);
+            lnkGoogleAI.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 162);
+            lnkGoogleAI.Appearance.Options.UseFont = true;
+            lnkGoogleAI.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkGoogleAI.Location = new System.Drawing.Point(2, 451);
             lnkGoogleAI.Name = "lnkGoogleAI";
-            lnkGoogleAI.Size = new System.Drawing.Size(109, 13);
+            lnkGoogleAI.Size = new System.Drawing.Size(129, 16);
             lnkGoogleAI.TabIndex = 5;
             lnkGoogleAI.Text = "hyperlinkLabelControl1";
             lnkGoogleAI.Click += lnkGoogleAI_Click;
             // 
             // btnKeyKaydet
             // 
-            btnKeyKaydet.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            btnKeyKaydet.Dock = System.Windows.Forms.DockStyle.Top;
             btnKeyKaydet.ImageOptions.Image = Properties.Resources.save;
             btnKeyKaydet.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            btnKeyKaydet.Location = new System.Drawing.Point(5, 444);
+            btnKeyKaydet.Location = new System.Drawing.Point(2, 419);
             btnKeyKaydet.Name = "btnKeyKaydet";
-            btnKeyKaydet.Size = new System.Drawing.Size(133, 32);
+            btnKeyKaydet.Size = new System.Drawing.Size(396, 32);
             btnKeyKaydet.TabIndex = 4;
             btnKeyKaydet.Click += btnKeyKaydet_Click;
             // 
             // txtApiKey
             // 
-            txtApiKey.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txtApiKey.Location = new System.Drawing.Point(5, 418);
+            txtApiKey.Dock = System.Windows.Forms.DockStyle.Top;
+            txtApiKey.Location = new System.Drawing.Point(2, 399);
             txtApiKey.Name = "txtApiKey";
-            txtApiKey.Size = new System.Drawing.Size(389, 20);
+            txtApiKey.Size = new System.Drawing.Size(396, 20);
             txtApiKey.TabIndex = 3;
             // 
             // lblApiKey
             // 
-            lblApiKey.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            lblApiKey.Location = new System.Drawing.Point(5, 399);
+            lblApiKey.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            lblApiKey.Appearance.Options.UseFont = true;
+            lblApiKey.Dock = System.Windows.Forms.DockStyle.Top;
+            lblApiKey.Location = new System.Drawing.Point(2, 383);
             lblApiKey.Name = "lblApiKey";
-            lblApiKey.Size = new System.Drawing.Size(63, 13);
+            lblApiKey.Size = new System.Drawing.Size(85, 16);
             lblApiKey.TabIndex = 2;
             lblApiKey.Text = "labelControl1";
             // 
@@ -130,7 +133,7 @@
             btnAsistanResimSec.Dock = System.Windows.Forms.DockStyle.Top;
             btnAsistanResimSec.ImageOptions.Image = Properties.Resources.camera;
             btnAsistanResimSec.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            btnAsistanResimSec.Location = new System.Drawing.Point(2, 355);
+            btnAsistanResimSec.Location = new System.Drawing.Point(2, 345);
             btnAsistanResimSec.LookAndFeel.UseDefaultLookAndFeel = false;
             btnAsistanResimSec.Name = "btnAsistanResimSec";
             btnAsistanResimSec.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
@@ -138,15 +141,15 @@
             btnAsistanResimSec.TabIndex = 1;
             btnAsistanResimSec.Click += btnAsistanResimSec_Click;
             // 
-            // picAsistanResim
+            // flowResimPaneli
             // 
-            picAsistanResim.Dock = System.Windows.Forms.DockStyle.Top;
-            picAsistanResim.Location = new System.Drawing.Point(2, 2);
-            picAsistanResim.Name = "picAsistanResim";
-            picAsistanResim.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            picAsistanResim.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-            picAsistanResim.Size = new System.Drawing.Size(396, 353);
-            picAsistanResim.TabIndex = 0;
+            flowResimPaneli.AutoScroll = true;
+            flowResimPaneli.BackColor = System.Drawing.Color.White;
+            flowResimPaneli.Dock = System.Windows.Forms.DockStyle.Top;
+            flowResimPaneli.Location = new System.Drawing.Point(2, 2);
+            flowResimPaneli.Name = "flowResimPaneli";
+            flowResimPaneli.Size = new System.Drawing.Size(396, 343);
+            flowResimPaneli.TabIndex = 6;
             // 
             // panelControl3
             // 
@@ -236,7 +239,6 @@
             panelControl2.ResumeLayout(false);
             panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)txtApiKey.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)picAsistanResim.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)panelControl3).EndInit();
             panelControl3.ResumeLayout(false);
             panelControl3.PerformLayout();
@@ -250,7 +252,6 @@
         private DevExpress.XtraEditors.LabelControl lblBaslik;
         private DevExpress.XtraEditors.PanelControl panelControl2;
         private DevExpress.XtraEditors.SimpleButton btnAsistanResimSec;
-        private DevExpress.XtraEditors.PictureEdit picAsistanResim;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.SimpleButton btnAsistanAnaliz;
         private DevExpress.XtraEditors.MemoEdit txtAsistanSoru;
@@ -261,5 +262,6 @@
         private DevExpress.XtraEditors.HyperlinkLabelControl lnkGoogleAI;
         private DevExpress.XtraEditors.SimpleButton btnKeyKaydet;
         private DevExpress.XtraRichEdit.RichEditControl chatEkrani;
+        private System.Windows.Forms.FlowLayoutPanel flowResimPaneli;
     }
 }

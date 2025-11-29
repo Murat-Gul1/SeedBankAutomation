@@ -21,9 +21,9 @@ namespace TohumBankasiOtomasyonu
         /// <summary>
         /// Bitki resmini ve soruyu Gemini'ye gönderip analiz cevabını döner.
         /// </summary>
-        public static async Task<string> BitkiAnalizEt(string soru, Image bitkiResmi, string kullaniciApiKey)
+        // Parametre değişti: 'Image bitkiResmi' -> 'List<Image> resimler'
+        public static async Task<string> BitkiAnalizEt(string soru, List<Image> resimler, string kullaniciApiKey)
         {
-            // Sadece API Key kontrolü kalsın, resim zorunluluğunu kaldırdık.
             if (string.IsNullOrEmpty(kullaniciApiKey)) return "Hata: API Anahtarı eksik.";
 
             try
@@ -33,28 +33,30 @@ namespace TohumBankasiOtomasyonu
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Add("x-goog-api-key", kullaniciApiKey);
 
-                    // --- DİNAMİK İÇERİK OLUŞTURMA ---
-                    // Google'a göndereceğimiz parça listesi (Soru kesin var, resim opsiyonel)
+                    // --- İÇERİK PARÇALARINI HAZIRLA ---
                     var parcalar = new List<object>();
 
                     // 1. Soruyu ekle
                     parcalar.Add(new { text = soru });
 
-                    // 2. Resim varsa, onu da listeye ekle
-                    if (bitkiResmi != null)
+                    // 2. Resim listesini döngüyle ekle
+                    if (resimler != null && resimler.Count > 0)
                     {
-                        string base64Image = ResimToBase64(bitkiResmi);
-                        parcalar.Add(new
+                        foreach (var img in resimler)
                         {
-                            inline_data = new
+                            string base64Image = ResimToBase64(img);
+                            parcalar.Add(new
                             {
-                                mime_type = "image/jpeg",
-                                data = base64Image
-                            }
-                        });
+                                inline_data = new
+                                {
+                                    mime_type = "image/jpeg",
+                                    data = base64Image
+                                }
+                            });
+                        }
                     }
 
-                    // JSON Gövdesini oluştur
+                    // JSON Gövdesi
                     var requestBody = new
                     {
                         contents = new[]

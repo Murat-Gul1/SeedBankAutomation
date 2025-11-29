@@ -1,15 +1,18 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraRichEdit.API.Native; // RichEdit kontrolü için gerekli
 using System;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TohumBankasiOtomasyonu.Properties;
-using DevExpress.XtraRichEdit.API.Native; // RichEdit kontrolü için gerekli
+using System.Collections.Generic;
 namespace TohumBankasiOtomasyonu
 {
     public partial class UcBitkiAsistani : DevExpress.XtraEditors.XtraUserControl
     {
+        // Seçilen resimleri hafızada tutacağımız liste
+        private List<Image> _secilenResimler = new List<Image>();
         public UcBitkiAsistani()
         {
             InitializeComponent();
@@ -58,25 +61,42 @@ namespace TohumBankasiOtomasyonu
         // --- 1. RESİM SEÇME İŞLEMİ ---
         private void btnAsistanResimSec_Click(object sender, EventArgs e)
         {
+            // 1. Sınır Kontrolü (En fazla 4 resim)
+            if (_secilenResimler.Count >= 4)
+            {
+                XtraMessageBox.Show("En fazla 4 adet fotoğraf ekleyebilirsiniz.", "Sınır", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                // Sözlükteki filtreyi kullanıyoruz (Daha önce düzeltmiştik: | işareti ile)
                 ofd.Filter = Resources.ResimSecDialogFilter;
                 ofd.Title = Resources.ResimSecDialogTitle;
+                ofd.Multiselect = true; // Birden fazla seçime izin ver
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    try
+                    foreach (string dosyaYolu in ofd.FileNames)
                     {
-                        // Resmi dosyayı kilitlemeden yükle
-                        using (var stream = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read))
+                        // Tekrar sınır kontrolü (Çoklu seçimde 4'ü geçerse dur)
+                        if (_secilenResimler.Count >= 4) break;
+
+                        try
                         {
-                            picAsistanResim.Image = Image.FromStream(stream);
+                            // Resmi yükle
+                            Image img;
+                            using (var stream = new FileStream(dosyaYolu, FileMode.Open, FileAccess.Read))
+                            {
+                                img = Image.FromStream(stream);
+                            }
+
+                            // Listeye ekle
+                            _secilenResimler.Add(img);
+
+                            // Ekrana (FlowPanel) Küçük Resim Olarak Ekle
+                            ResimKutusunuOlustur(img);
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        XtraMessageBox.Show("Resim yüklenirken hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        catch { }
                     }
                 }
             }
@@ -86,7 +106,7 @@ namespace TohumBankasiOtomasyonu
         // Not: 'async' kelimesi çok önemli, donmayı engeller.
         private async void btnAsistanAnaliz_Click(object sender, EventArgs e)
         {
-            // 1. Key Kontrolü
+            // ... (Key Kontrolü aynı) ...
             string kayitliKey = Properties.Settings.Default.KullaniciApiKey;
             if (string.IsNullOrEmpty(kayitliKey))
             {
@@ -95,42 +115,36 @@ namespace TohumBankasiOtomasyonu
                 return;
             }
 
-            // 2. Soru Hazırlığı
             string soru = txtAsistanSoru.Text.Trim();
 
-            // Eğer hem resim yok hem soru yoksa uyarı ver
-            if (string.IsNullOrEmpty(soru) && picAsistanResim.Image == null)
+            // Resim listesi veya soru kontrolü
+            if (string.IsNullOrEmpty(soru) && _secilenResimler.Count == 0)
             {
-                XtraMessageBox.Show("Lütfen bir resim yükleyin veya bir soru yazın.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show(Resources.HataSoruVeyaResimEksik, Resources.UyariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Varsayılan soru (Sadece resim atıldıysa)
-            if (string.IsNullOrEmpty(soru) && picAsistanResim.Image != null)
+            if (string.IsNullOrEmpty(soru) && _secilenResimler.Count > 0)
             {
-                soru = "What is this?";
+                soru = "What can you tell me about these plants?";
             }
 
-            // 3. Gönderilecek Resmi Al (Varsa)
-            Image gonderilecekResim = null;
-            if (picAsistanResim.Image != null)
-            {
-                // Resmi kopyala (Çünkü aşağıda picAsistanResim'i temizleyeceğiz)
-                gonderilecekResim = new Bitmap(picAsistanResim.Image);
-            }
+            // --- CHAT EKRANINA YAZ ---
+            // Artık tüm listeyi (_secilenResimler) gönderiyoruz, böylece hepsi yan yana çıkacak.
+            // Listeyi kopyalıyoruz çünkü birazdan temizleyeceğiz.
+            List<Image> chatResimleri = new List<Image>(_secilenResimler);
 
-            // --- CHAT EKRANINA YAZ (Resim varsa o da eklenecek) ---
-            MesajEkle(Resources.ChatSender_User + " " + soru, gonderilecekResim, true);
+            MesajEkle(Resources.ChatSender_User + " " + soru, chatResimleri, true);
 
             // --- TEMİZLİK ---
             txtAsistanSoru.Text = "";
-            picAsistanResim.Image = null; // Sol taraftaki resmi kaldır (İsteğiniz)
+            _secilenResimler.Clear(); // Listeyi temizle
+            flowResimPaneli.Controls.Clear(); // Ekranı temizle
 
             // Arayüz Kilitleme
             btnAsistanAnaliz.Enabled = false;
             btnAsistanResimSec.Enabled = false;
 
-            // Bekleme Mesajı (Resimsiz)
             DocumentRange beklemeMesaji = MesajEkle(Resources.ChatDurum_Bekleyin, null, false, true);
 
             try
@@ -138,14 +152,12 @@ namespace TohumBankasiOtomasyonu
                 string formatTalimati = " (Cevabı verirken başlıkları BÜYÜK HARFLE yaz. Markdown kullanma.)";
                 string tamSoru = soru + formatTalimati;
 
-                // API'ye Gönder (Resim null ise sadece metin gider)
-                string cevap = await GeminiManager.BitkiAnalizEt(tamSoru, gonderilecekResim, kayitliKey);
+                // API'ye Gönder (chatResimleri listesini kullanıyoruz)
+                string cevap = await GeminiManager.BitkiAnalizEt(tamSoru, chatResimleri, kayitliKey);
+
                 string guzelCevap = MetniGuzellestir(cevap);
 
-                // Bekleme mesajını sil
                 chatEkrani.Document.Delete(beklemeMesaji);
-
-                // Cevabı Yaz (Resimsiz)
                 MesajEkle(Resources.ChatSender_AI + "\n" + guzelCevap, null, false);
             }
             catch (Exception ex)
@@ -231,26 +243,41 @@ namespace TohumBankasiOtomasyonu
         // Geriye DocumentRange döndürüyoruz ki sonradan silebilelim
         // Parametreye 'resim' eklendi (Opsiyonel, null olabilir)
         // Change 'void' back to 'DocumentRange'
-        private DocumentRange MesajEkle(string mesaj, Image resim, bool kullaniciMi, bool sistemMesajiMi = false)
+        // Parametre değişti: 'Image resim' -> 'List<Image> resimler'
+        private DocumentRange MesajEkle(string mesaj, List<Image> resimler, bool kullaniciMi, bool sistemMesajiMi = false)
         {
             Document doc = chatEkrani.Document;
             doc.AppendText("\n");
 
-            // --- 1. ADD IMAGE (IF EXISTS) ---
-            if (resim != null)
+            // --- 1. RESİMLERİ EKLE (YAN YANA) ---
+            if (resimler != null && resimler.Count > 0)
             {
-                Image kucukResim = new Bitmap(resim, new Size(150, 150));
-                DocumentPosition pos = doc.Range.End;
-                doc.Images.Insert(pos, kucukResim);
+                // Resimlerin başlangıç pozisyonunu al
+                DocumentPosition startPos = doc.Range.End;
+
+                foreach (var img in resimler)
+                {
+                    // Resmi küçült (Thumbnail)
+                    Image kucukResim = new Bitmap(img, new Size(150, 150));
+
+                    // Resmi ekle
+                    doc.Images.Insert(doc.Range.End, kucukResim);
+
+                    // Resimler arasına biraz boşluk bırak (Space karakteri ile)
+                    doc.AppendText("  ");
+                }
+
+                // Resimler bitti, alt satıra geç
                 doc.AppendText("\n");
 
-                ParagraphProperties ppImg = doc.BeginUpdateParagraphs(doc.CreateRange(pos.ToInt(), 1));
+                // Tüm resim grubunu sağa veya sola hizala
+                DocumentRange imgRange = doc.CreateRange(startPos.ToInt(), doc.Range.End.ToInt() - startPos.ToInt());
+                ParagraphProperties ppImg = doc.BeginUpdateParagraphs(imgRange);
                 ppImg.Alignment = kullaniciMi ? ParagraphAlignment.Right : ParagraphAlignment.Left;
                 doc.EndUpdateParagraphs(ppImg);
             }
 
-            // --- 2. ADD TEXT ---
-            // Capture the range of the added text so we can return it
+            // --- 2. METNİ EKLE ---
             DocumentRange range = doc.AppendText(mesaj + "\n");
 
             ParagraphProperties pp = doc.BeginUpdateParagraphs(range);
@@ -280,8 +307,30 @@ namespace TohumBankasiOtomasyonu
             doc.EndUpdateParagraphs(pp);
             chatEkrani.ScrollToCaret();
 
-            // RETURN THE RANGE (Crucial for deleting the 'Please Wait' message later)
             return range;
+        }
+        private void ResimKutusunuOlustur(Image img)
+        {
+            PictureEdit pic = new PictureEdit();
+            pic.Image = img;
+            pic.Size = new Size(100, 100);
+            pic.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+            pic.Properties.ShowMenu = false;
+
+            pic.MouseClick += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    // DÜZELTME BURADA: Sözlükten çekiyoruz
+                    if (XtraMessageBox.Show(Resources.MsgResimSilOnay, Resources.BaslikSil, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        _secilenResimler.Remove(img);
+                        flowResimPaneli.Controls.Remove(pic);
+                    }
+                }
+            };
+
+            flowResimPaneli.Controls.Add(pic);
         }
     }
 }

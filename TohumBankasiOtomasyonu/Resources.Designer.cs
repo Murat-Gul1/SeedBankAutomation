@@ -79,6 +79,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sil.
+        /// </summary>
+        internal static string BaslikSil {
+            get {
+                return ResourceManager.GetString("BaslikSil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to YETİŞTİRME:.
         /// </summary>
         internal static string BaslikYetistirme {
@@ -1105,6 +1114,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lütfen bir resim yükleyin veya bir soru yazın..
+        /// </summary>
+        internal static string HataSoruVeyaResimEksik {
+            get {
+                return ResourceManager.GetString("HataSoruVeyaResimEksik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yetersiz stok! Şu ürün tükenmiş:.
         /// </summary>
         internal static string HataYetersizStok {
@@ -1578,6 +1596,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string MsgKeyMevcut {
             get {
                 return ResourceManager.GetString("MsgKeyMevcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bu resmi kaldırmak istiyor musunuz?.
+        /// </summary>
+        internal static string MsgResimSilOnay {
+            get {
+                return ResourceManager.GetString("MsgResimSilOnay", resourceCulture);
             }
         }
         

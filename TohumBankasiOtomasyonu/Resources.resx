@@ -123,6 +123,9 @@
   <data name="BaslikSaklama" xml:space="preserve">
     <value>SAKLAMA:</value>
   </data>
+  <data name="BaslikSil" xml:space="preserve">
+    <value>Sil</value>
+  </data>
   <data name="BaslikYetistirme" xml:space="preserve">
     <value>YETİŞTİRME:</value>
   </data>
@@ -465,6 +468,9 @@
   <data name="HataSepetGoruntuleme" xml:space="preserve">
     <value>Sepeti görüntülemek için giriş yapmalısınız.</value>
   </data>
+  <data name="HataSoruVeyaResimEksik" xml:space="preserve">
+    <value>Lütfen bir resim yükleyin veya bir soru yazın.</value>
+  </data>
   <data name="HataYetersizStok" xml:space="preserve">
     <value>Yetersiz stok! Şu ürün tükenmiş:</value>
   </data>
@@ -623,6 +629,9 @@
   </data>
   <data name="MsgKeyMevcut" xml:space="preserve">
     <value>********** (Kayıtlı)</value>
+  </data>
+  <data name="MsgResimSilOnay" xml:space="preserve">
+    <value>Bu resmi kaldırmak istiyor musunuz?</value>
   </data>
   <data name="MsgSepetBos" xml:space="preserve">
     <value>Sepetiniz şu an boş.</value>
