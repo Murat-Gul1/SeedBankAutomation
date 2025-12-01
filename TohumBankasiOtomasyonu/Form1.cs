@@ -116,6 +116,7 @@ namespace TohumBankasiOtomasyonu
             btnSiparisGecmisi.ToolTip = Resources.btnSiparisGecmisi_ToolTip;
             btnHakkinda.ToolTip = Resources.btnHakkinda_ToolTip;
             btnAsistan.ToolTip = Resources.btnAsistan_ToolTip;
+            btnBitkilerim.ToolTip = Resources.btnBitkilerim_ToolTip;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -345,7 +346,7 @@ namespace TohumBankasiOtomasyonu
                 btnKullaniciAyarlari.Visible = true;  // Ayarlar butonunu GÖSTER(Show the settings button)
                 btnCikisYap.Visible = true;           // Çıkış butonunu GÖSTER(Show the logout button)
                 btnSiparisGecmisi.Visible = true;
-
+                btnBitkilerim.Visible = true;
                 // Kullanıcı tipine göre Admin Panelini göster/gizle
                 // Show or hide the Admin Panel based on the user type
                 if (girisYapanKullanici.KullaniciTipi == "Admin")
@@ -367,6 +368,7 @@ namespace TohumBankasiOtomasyonu
                 btnCikisYap.Visible = false;          // Çıkış butonunu GİZLE(Hide the logout button)
                 btnAdminPaneli.Visible = false;       // Admin panelini GİZLE(Hide the admin panel)
                 btnSiparisGecmisi.Visible = false;
+                btnBitkilerim.Visible = false;
             }
         }
 
@@ -504,6 +506,10 @@ namespace TohumBankasiOtomasyonu
                 // Ancak en doğrusu oraya da bir 'DiliYenile' metodu eklemektir.
                 ((UcBitkiAsistani)aktifKontrol).DiliYenile();
             }
+            else if (aktifKontrol is UcBitkiTakip)
+            {
+                ((UcBitkiTakip)aktifKontrol).DiliYenile();
+            }
         }
 
         private void btnAnaSayfa_Click(object sender, EventArgs e)
@@ -533,6 +539,14 @@ namespace TohumBankasiOtomasyonu
             // Asistan sayfasını yükle
             pnlAnaIcerik.Controls.Clear();
             UcBitkiAsistani uc = new UcBitkiAsistani();
+            uc.Dock = DockStyle.Fill;
+            pnlAnaIcerik.Controls.Add(uc);
+        }
+
+        private void btnBitkilerim_Click(object sender, EventArgs e)
+        {
+            pnlAnaIcerik.Controls.Clear();
+            UcBitkiTakip uc = new UcBitkiTakip();
             uc.Dock = DockStyle.Fill;
             pnlAnaIcerik.Controls.Add(uc);
         }

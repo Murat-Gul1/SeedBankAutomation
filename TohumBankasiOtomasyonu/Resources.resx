@@ -177,8 +177,17 @@
   <data name="btnBitkiBilgi_ToolTip" xml:space="preserve">
     <value>Bitki Ara / Bilgi Bankası</value>
   </data>
+  <data name="btnBitkiDetay_ToolTip" xml:space="preserve">
+    <value>Detaylar ve Sohbet</value>
+  </data>
   <data name="btnBitkiKaydet" xml:space="preserve">
     <value>Kaydet</value>
+  </data>
+  <data name="btnBitkilerim_ToolTip" xml:space="preserve">
+    <value>Bitkilerim / Bahçem</value>
+  </data>
+  <data name="btnBitkiSil_ToolTip" xml:space="preserve">
+    <value>Bitkiyi Sil</value>
   </data>
   <data name="btnCikisYap_ToolTip" xml:space="preserve">
     <value>Güvenli Çıkış</value>
@@ -243,8 +252,14 @@
   <data name="btnSiparisGecmisi_ToolTip" xml:space="preserve">
     <value>Geçmiş Siparişlerim</value>
   </data>
+  <data name="btnTakipBaslat" xml:space="preserve">
+    <value>Takibi Başlat</value>
+  </data>
   <data name="btnTemizle_Text" xml:space="preserve">
     <value>Temizle</value>
+  </data>
+  <data name="btnYeniTakipEkle" xml:space="preserve">
+    <value>Yeni Bitki Takibi Başlat</value>
   </data>
   <data name="ButonIptal" xml:space="preserve">
     <value>İptal</value>
@@ -423,6 +438,9 @@
   <data name="FormSiparisGecmisi_Title" xml:space="preserve">
     <value>Sipariş Geçmişi</value>
   </data>
+  <data name="FormYeniBitkiEkle_Title" xml:space="preserve">
+    <value>Yeni Bitki Takibi</value>
+  </data>
   <data name="GenelHata" xml:space="preserve">
     <value>Kayıt sırasında beklenmedik bir hata oluştu:</value>
   </data>
@@ -453,6 +471,9 @@
   <data name="HataBitkiResim" xml:space="preserve">
     <value>Lütfen bir bitki görseli seçiniz.</value>
   </data>
+  <data name="HataBitkiYok" xml:space="preserve">
+    <value>Henüz takip ettiğiniz bir bitki yok.</value>
+  </data>
   <data name="HataGirisGerekli" xml:space="preserve">
     <value>Sepete ürün eklemek için lütfen giriş yapınız.</value>
   </data>
@@ -470,6 +491,12 @@
   </data>
   <data name="HataSoruVeyaResimEksik" xml:space="preserve">
     <value>Lütfen bir resim yükleyin veya bir soru yazın.</value>
+  </data>
+  <data name="HataTakipAd" xml:space="preserve">
+    <value>Lütfen bitkinize bir isim verin.</value>
+  </data>
+  <data name="HataTakipResim" xml:space="preserve">
+    <value>Lütfen takip edilecek bitkinin fotoğrafını yükleyin.</value>
   </data>
   <data name="HataYetersizStok" xml:space="preserve">
     <value>Yetersiz stok! Şu ürün tükenmiş:</value>
@@ -567,6 +594,9 @@
   <data name="lblBitkiFiyat" xml:space="preserve">
     <value>Fiyat (₺):</value>
   </data>
+  <data name="lblBitkilerimBaslik" xml:space="preserve">
+    <value>Takip Ettiğim Bitkiler</value>
+  </data>
   <data name="lblBitkiResim" xml:space="preserve">
     <value>Bitki Görseli:</value>
   </data>
@@ -605,6 +635,9 @@
   </data>
   <data name="lblSoruBaslik" xml:space="preserve">
     <value>Bitkiniz hakkında ne sormak istersiniz?</value>
+  </data>
+  <data name="lblTakipAdi" xml:space="preserve">
+    <value>Bitkine Bir İsim Ver:</value>
   </data>
   <data name="lblTelif" xml:space="preserve">
     <value>© 2025 Tüm Hakları Saklıdır.</value>

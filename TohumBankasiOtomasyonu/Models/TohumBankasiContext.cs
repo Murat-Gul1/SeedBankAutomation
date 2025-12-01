@@ -19,7 +19,11 @@ public partial class TohumBankasiContext : DbContext
 
     public virtual DbSet<BitkiGorselleri> BitkiGorselleris { get; set; }
 
+    public virtual DbSet<BitkiSohbetGecmisi> BitkiSohbetGecmisis { get; set; }
+
     public virtual DbSet<Bitkiler> Bitkilers { get; set; }
+
+    public virtual DbSet<KullaniciBitkileri> KullaniciBitkileris { get; set; }
 
     public virtual DbSet<Kullanicilar> Kullanicilars { get; set; }
 
@@ -62,6 +66,19 @@ public partial class TohumBankasiContext : DbContext
             entity.HasOne(d => d.Bitki).WithMany(p => p.BitkiGorselleris).HasForeignKey(d => d.BitkiId);
         });
 
+        modelBuilder.Entity<BitkiSohbetGecmisi>(entity =>
+        {
+            entity.HasKey(e => e.MesajId);
+
+            entity.ToTable("Bitki_Sohbet_Gecmisi");
+
+            entity.Property(e => e.Gonderen).IsRequired();
+            entity.Property(e => e.Mesaj).IsRequired();
+            entity.Property(e => e.Tarih).IsRequired();
+
+            entity.HasOne(d => d.KullaniciBitki).WithMany(p => p.BitkiSohbetGecmisis).HasForeignKey(d => d.KullaniciBitkiId);
+        });
+
         modelBuilder.Entity<Bitkiler>(entity =>
         {
             entity.HasKey(e => e.BitkiId);
@@ -70,6 +87,17 @@ public partial class TohumBankasiContext : DbContext
 
             entity.Property(e => e.BitkiId).HasColumnName("BitkiID");
             entity.Property(e => e.Aktif).HasDefaultValue(1);
+        });
+
+        modelBuilder.Entity<KullaniciBitkileri>(entity =>
+        {
+            entity.ToTable("Kullanici_Bitkileri");
+
+            entity.Property(e => e.BitkiAdi).IsRequired();
+            entity.Property(e => e.GorselYolu).IsRequired();
+            entity.Property(e => e.OlusturmaTarihi).IsRequired();
+
+            entity.HasOne(d => d.Kullanici).WithMany(p => p.KullaniciBitkileris).HasForeignKey(d => d.KullaniciId);
         });
 
         modelBuilder.Entity<Kullanicilar>(entity =>

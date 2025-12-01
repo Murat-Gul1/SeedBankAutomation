@@ -19,5 +19,7 @@ public partial class Kullanicilar
 
     public string Soyad { get; set; }
 
+    public virtual ICollection<KullaniciBitkileri> KullaniciBitkileris { get; set; } = new List<KullaniciBitkileri>();
+
     public virtual ICollection<Satislar> Satislars { get; set; } = new List<Satislar>();
 }

@@ -241,11 +241,38 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Detaylar ve Sohbet.
+        /// </summary>
+        internal static string btnBitkiDetay_ToolTip {
+            get {
+                return ResourceManager.GetString("btnBitkiDetay_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kaydet.
         /// </summary>
         internal static string btnBitkiKaydet {
             get {
                 return ResourceManager.GetString("btnBitkiKaydet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitkilerim / Bahçem.
+        /// </summary>
+        internal static string btnBitkilerim_ToolTip {
+            get {
+                return ResourceManager.GetString("btnBitkilerim_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitkiyi Sil.
+        /// </summary>
+        internal static string btnBitkiSil_ToolTip {
+            get {
+                return ResourceManager.GetString("btnBitkiSil_ToolTip", resourceCulture);
             }
         }
         
@@ -439,11 +466,29 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Takibi Başlat.
+        /// </summary>
+        internal static string btnTakipBaslat {
+            get {
+                return ResourceManager.GetString("btnTakipBaslat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Temizle.
         /// </summary>
         internal static string btnTemizle_Text {
             get {
                 return ResourceManager.GetString("btnTemizle_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeni Bitki Takibi Başlat.
+        /// </summary>
+        internal static string btnYeniTakipEkle {
+            get {
+                return ResourceManager.GetString("btnYeniTakipEkle", resourceCulture);
             }
         }
         
@@ -979,6 +1024,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yeni Bitki Takibi.
+        /// </summary>
+        internal static string FormYeniBitkiEkle_Title {
+            get {
+                return ResourceManager.GetString("FormYeniBitkiEkle_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kayıt sırasında beklenmedik bir hata oluştu:.
         /// </summary>
         internal static string GenelHata {
@@ -1069,6 +1123,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Henüz takip ettiğiniz bir bitki yok..
+        /// </summary>
+        internal static string HataBitkiYok {
+            get {
+                return ResourceManager.GetString("HataBitkiYok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sepete ürün eklemek için lütfen giriş yapınız..
         /// </summary>
         internal static string HataGirisGerekli {
@@ -1119,6 +1182,24 @@ namespace TohumBankasiOtomasyonu {
         internal static string HataSoruVeyaResimEksik {
             get {
                 return ResourceManager.GetString("HataSoruVeyaResimEksik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lütfen bitkinize bir isim verin..
+        /// </summary>
+        internal static string HataTakipAd {
+            get {
+                return ResourceManager.GetString("HataTakipAd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lütfen takip edilecek bitkinin fotoğrafını yükleyin..
+        /// </summary>
+        internal static string HataTakipResim {
+            get {
+                return ResourceManager.GetString("HataTakipResim", resourceCulture);
             }
         }
         
@@ -1411,6 +1492,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Takip Ettiğim Bitkiler.
+        /// </summary>
+        internal static string lblBitkilerimBaslik {
+            get {
+                return ResourceManager.GetString("lblBitkilerimBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitki Görseli:.
         /// </summary>
         internal static string lblBitkiResim {
@@ -1524,6 +1614,15 @@ namespace TohumBankasiOtomasyonu {
         internal static string lblSoruBaslik {
             get {
                 return ResourceManager.GetString("lblSoruBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitkine Bir İsim Ver:.
+        /// </summary>
+        internal static string lblTakipAdi {
+            get {
+                return ResourceManager.GetString("lblTakipAdi", resourceCulture);
             }
         }
         
