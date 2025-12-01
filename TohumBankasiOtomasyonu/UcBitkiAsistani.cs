@@ -22,7 +22,6 @@ namespace TohumBankasiOtomasyonu
         private void UygulaDil()
         {
             lblBaslik.Text = Resources.lblAsistanBaslik;
-            lblSoruBaslik.Text = Resources.lblSoruBaslik;
             lblCevapBaslik.Text = Resources.lblCevapBaslik;
             btnAsistanResimSec.Text = Resources.btnAsistanResimSec;
             btnAsistanAnaliz.Text = Resources.btnAsistanAnaliz;
@@ -32,6 +31,7 @@ namespace TohumBankasiOtomasyonu
 
             // İpuçları
             btnAsistanResimSec.ToolTip = "Bir bitki fotoğrafı seçin / Select a plant photo";
+            lblHafizaUyarisi.Text = Resources.LblUyariHafiza;
         }
 
         private void UcBitkiAsistani_Load(object sender, EventArgs e)

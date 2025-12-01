@@ -74,7 +74,7 @@
             btnDetay.LookAndFeel.UseDefaultLookAndFeel = false;
             btnDetay.Name = "btnDetay";
             btnDetay.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            btnDetay.Size = new System.Drawing.Size(110, 104);
+            btnDetay.Size = new System.Drawing.Size(101, 104);
             btnDetay.TabIndex = 3;
             btnDetay.Click += btnDetay_Click;
             // 
@@ -93,10 +93,13 @@
             // 
             lblBitkiAdi.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
             lblBitkiAdi.Appearance.Options.UseFont = true;
+            lblBitkiAdi.Appearance.Options.UseTextOptions = true;
+            lblBitkiAdi.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            lblBitkiAdi.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
             lblBitkiAdi.Dock = System.Windows.Forms.DockStyle.Top;
             lblBitkiAdi.Location = new System.Drawing.Point(2, 182);
             lblBitkiAdi.Name = "lblBitkiAdi";
-            lblBitkiAdi.Size = new System.Drawing.Size(110, 19);
+            lblBitkiAdi.Size = new System.Drawing.Size(216, 19);
             lblBitkiAdi.TabIndex = 1;
             lblBitkiAdi.Text = "labelControl1";
             // 

@@ -1,13 +1,14 @@
 ﻿using DevExpress.XtraEditors;
 using System;
+using System.Drawing;
 using System.Drawing.Imaging; 
 using System.Globalization;
 using System.IO; 
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using TohumBankasiOtomasyonu.Models;
 using TohumBankasiOtomasyonu.Properties;
-using System.Linq;
 namespace TohumBankasiOtomasyonu
 {
     public partial class FormBitkiIslemleri : DevExpress.XtraEditors.XtraForm
@@ -15,7 +16,8 @@ namespace TohumBankasiOtomasyonu
         // Bu değişken 0 ise "Yeni Kayıt", 0'dan büyükse "Düzenleme" modundayız demektir.
         // If this variable is 0, it means "New Record"; if greater than 0, we are in "Edit" mode.
         private int _gelenBitkiId = 0;
-
+        // YENİ: Resim değişti mi kontrolü için bayrak
+        private bool _resimDegisti = false;
         // 1. OLUŞTURUCU (Yeni Ekleme İçin)
         // 1. CONSTRUCTOR (For New Addition)
         public FormBitkiIslemleri()
@@ -133,25 +135,39 @@ namespace TohumBankasiOtomasyonu
 
         private void btnResimSec_Click(object sender, EventArgs e)
         {
-            
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                
+                // Sözlükten filtre ve başlığı al
                 openFileDialog.Filter = Resources.ResimSecDialogFilter;
                 openFileDialog.Title = Resources.ResimSecDialogTitle;
 
-                
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        
-                        picBitkiResmi.Image = System.Drawing.Image.FromFile(openFileDialog.FileName);
+                        // --- GÜVENLİ RESİM YÜKLEME (File Lock Önleme) ---
+                        // Resmi dosyadan 'akış' (stream) olarak okuyoruz
+                        using (var stream = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
+                        {
+                            // Geçici bir resim oluşturuyoruz
+                            using (var tempImage = Image.FromStream(stream))
+                            {
+                                // Bu resmin hafızada temiz bir kopyasını (Bitmap) oluşturup kutuya atıyoruz.
+                                // Böylece 'stream' kapansa bile resim hafızada kalıyor ve dosya kilitlenmiyor.
+                                picBitkiResmi.Image = new Bitmap(tempImage);
+                            }
+                        }
+
+                        // Görüntüleme ayarı
                         picBitkiResmi.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+
+                        // --- KRİTİK EKLEME ---
+                        // Kaydet butonuna "Bak, kullanıcı resmi değiştirdi" diye haber veriyoruz.
+                        _resimDegisti = true;
                     }
                     catch (Exception ex)
                     {
-                        
+                        // Hata mesajı (Dil destekli)
                         XtraMessageBox.Show(Resources.ResimYuklemeHata + " " + ex.Message, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -239,12 +255,46 @@ namespace TohumBankasiOtomasyonu
                                 en.BitkiAdi = kayitAdEN; en.BilimselAd = bilimselAd; en.Aciklama = memoAciklamaEN.Text; en.YetistirmeKosullari = memoYetistirmeEN.Text; en.SaklamaKosullari = memoSaklamaEN.Text;
                             }
 
-                            // (Resim güncelleme işlemi biraz daha karmaşıktır, şimdilik resmi değiştirmeyi es geçiyoruz veya
-                            // eskiyi silip yenisini eklemek gerekir. Basitlik adına şu an sadece metinleri güncelliyoruz.)
+                            // --- 4. RESİM GÜNCELLEME (YENİ EKLENEN KISIM) ---
+                            if (_resimDegisti && picBitkiResmi.Image != null)
+                            {
+                                // a. Yeni resmi diske kaydet (Yeni bir isimle)
+                                string klasorYolu = Path.Combine(Application.StartupPath, "Gorseller");
+                                string dosyaAdi = Guid.NewGuid().ToString() + ".jpg"; // Yeni benzersiz isim
+                                string tamYol = Path.Combine(klasorYolu, dosyaAdi);
+
+                                // GDI+ hatası olmaması için kopyasını kaydet
+                                using (Bitmap bmp = new Bitmap(picBitkiResmi.Image))
+                                {
+                                    bmp.Save(tamYol, ImageFormat.Jpeg);
+                                }
+
+                                // b. Veritabanındaki resim yolunu güncelle
+                                var gorselKaydi = db.BitkiGorselleris.FirstOrDefault(g => g.BitkiId == _gelenBitkiId && g.AnaGorsel == 1);
+
+                                if (gorselKaydi != null)
+                                {
+                                    // Eski kaydı güncelle
+                                    gorselKaydi.DosyaYolu = "Gorseller/" + dosyaAdi;
+
+                                    // (İsteğe bağlı: Eski resim dosyasını diskten silebilirsiniz ama riskli olabilir, şimdilik kalsın)
+                                }
+                                else
+                                {
+                                    // Eğer eskiden resmi yoksa yeni kayıt oluştur
+                                    db.BitkiGorselleris.Add(new BitkiGorselleri
+                                    {
+                                        BitkiId = _gelenBitkiId,
+                                        DosyaYolu = "Gorseller/" + dosyaAdi,
+                                        AnaGorsel = 1
+                                    });
+                                }
+                            }
+                            // ------------------------------------------------
 
                             db.SaveChanges();
                             XtraMessageBox.Show("Bitki başarıyla güncellendi.", Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Close(); // Güncelleme bitince formu kapat
+                            this.Close();
                         }
                     }
                 }

@@ -95,6 +95,9 @@
             lblBilimselAd.Appearance.ForeColor = System.Drawing.Color.Gray;
             lblBilimselAd.Appearance.Options.UseFont = true;
             lblBilimselAd.Appearance.Options.UseForeColor = true;
+            lblBilimselAd.Appearance.Options.UseTextOptions = true;
+            lblBilimselAd.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            lblBilimselAd.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
             lblBilimselAd.Location = new System.Drawing.Point(5, 180);
             lblBilimselAd.Name = "lblBilimselAd";
             lblBilimselAd.Size = new System.Drawing.Size(64, 13);
@@ -105,6 +108,8 @@
             // 
             lblUrunAdi.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
             lblUrunAdi.Appearance.Options.UseFont = true;
+            lblUrunAdi.Appearance.Options.UseTextOptions = true;
+            lblUrunAdi.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             lblUrunAdi.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
             lblUrunAdi.Location = new System.Drawing.Point(5, 158);
             lblUrunAdi.Name = "lblUrunAdi";

@@ -192,6 +192,9 @@
   <data name="btnCikisYap_ToolTip" xml:space="preserve">
     <value>Secure Logout</value>
   </data>
+  <data name="btnGecmisRaporlar" xml:space="preserve">
+    <value>Report Archive</value>
+  </data>
   <data name="btnGirisYap_Text" xml:space="preserve">
     <value>Login</value>
   </data>
@@ -230,6 +233,12 @@
   </data>
   <data name="btnKullaniciGuncelle" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="btnRaporAl_Text" xml:space="preserve">
+    <value>Generate Report</value>
+  </data>
+  <data name="btnResimEkle_Text" xml:space="preserve">
+    <value>Add Photo</value>
   </data>
   <data name="btnResimSec" xml:space="preserve">
     <value>Select Image...</value>
@@ -351,6 +360,12 @@
   <data name="colOncekiHash" xml:space="preserve">
     <value>Previous Hash</value>
   </data>
+  <data name="colRaporIndir" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="colRaporTarih" xml:space="preserve">
+    <value>Date Created</value>
+  </data>
   <data name="colSatirToplam" xml:space="preserve">
     <value>Subtotal</value>
   </data>
@@ -425,6 +440,9 @@
   </data>
   <data name="FormKullaniciDuzenle_Title" xml:space="preserve">
     <value>Edit User</value>
+  </data>
+  <data name="FormRaporListesi_Title" xml:space="preserve">
+    <value>My Reports</value>
   </data>
   <data name="FormResimGoruntule_Title" xml:space="preserve">
     <value>Product Image</value>
@@ -642,6 +660,9 @@
   <data name="lblTelif" xml:space="preserve">
     <value>© 2025 All Rights Reserved.</value>
   </data>
+  <data name="LblUyariHafiza" xml:space="preserve">
+    <value>⚠️ Note: Artificial intelligence does not remember your previous question. Please ask your question once and in detail.</value>
+  </data>
   <data name="lblVersiyon" xml:space="preserve">
     <value>Version: 1.0.0</value>
   </data>
@@ -663,6 +684,12 @@
   <data name="MsgKeyMevcut" xml:space="preserve">
     <value>********** (Saved)</value>
   </data>
+  <data name="MsgRaporBasarili" xml:space="preserve">
+    <value>Report created successfully.</value>
+  </data>
+  <data name="MsgRaporIndirildi" xml:space="preserve">
+    <value>PDF report downloaded successfully</value>
+  </data>
   <data name="MsgResimSilOnay" xml:space="preserve">
     <value>Do you want to remove this image?</value>
   </data>
@@ -677,6 +704,12 @@
   </data>
   <data name="OnaySepetBosalt" xml:space="preserve">
     <value>Are you sure you want to empty the cart?</value>
+  </data>
+  <data name="Promt_RaporEki" xml:space="preserve">
+    <value>\n\n(Based on this information and images, please issue a DETAILED STATUS REPORT with headings.)</value>
+  </data>
+  <data name="Promt_RaporIstegi" xml:space="preserve">
+    <value>Analyze everything we discussed and the photos I sent, and create a detailed GROWTH REPORT for this plant.</value>
   </data>
   <data name="ResimSecDialogFilter" xml:space="preserve">
     <value>Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif</value>

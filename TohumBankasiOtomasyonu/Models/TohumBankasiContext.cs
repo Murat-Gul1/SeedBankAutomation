@@ -19,6 +19,8 @@ public partial class TohumBankasiContext : DbContext
 
     public virtual DbSet<BitkiGorselleri> BitkiGorselleris { get; set; }
 
+    public virtual DbSet<BitkiRaporlari> BitkiRaporlaris { get; set; }
+
     public virtual DbSet<BitkiSohbetGecmisi> BitkiSohbetGecmisis { get; set; }
 
     public virtual DbSet<Bitkiler> Bitkilers { get; set; }
@@ -64,6 +66,17 @@ public partial class TohumBankasiContext : DbContext
             entity.Property(e => e.DosyaYolu).IsRequired();
 
             entity.HasOne(d => d.Bitki).WithMany(p => p.BitkiGorselleris).HasForeignKey(d => d.BitkiId);
+        });
+
+        modelBuilder.Entity<BitkiRaporlari>(entity =>
+        {
+            entity.HasKey(e => e.RaporId);
+
+            entity.ToTable("Bitki_Raporlari");
+
+            entity.Property(e => e.RaporTarihi).IsRequired();
+
+            entity.HasOne(d => d.KullaniciBitki).WithMany(p => p.BitkiRaporlaris).HasForeignKey(d => d.KullaniciBitkiId);
         });
 
         modelBuilder.Entity<BitkiSohbetGecmisi>(entity =>

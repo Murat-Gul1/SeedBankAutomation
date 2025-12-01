@@ -31,6 +31,7 @@
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
             lblBaslik = new DevExpress.XtraEditors.LabelControl();
             panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            lblHafizaUyarisi = new DevExpress.XtraEditors.LabelControl();
             lnkGoogleAI = new DevExpress.XtraEditors.HyperlinkLabelControl();
             btnKeyKaydet = new DevExpress.XtraEditors.SimpleButton();
             txtApiKey = new DevExpress.XtraEditors.TextEdit();
@@ -40,7 +41,6 @@
             panelControl3 = new DevExpress.XtraEditors.PanelControl();
             chatEkrani = new DevExpress.XtraRichEdit.RichEditControl();
             lblCevapBaslik = new DevExpress.XtraEditors.LabelControl();
-            lblSoruBaslik = new DevExpress.XtraEditors.LabelControl();
             txtAsistanSoru = new DevExpress.XtraEditors.MemoEdit();
             btnAsistanAnaliz = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
@@ -74,6 +74,7 @@
             // 
             // panelControl2
             // 
+            panelControl2.Controls.Add(lblHafizaUyarisi);
             panelControl2.Controls.Add(lnkGoogleAI);
             panelControl2.Controls.Add(btnKeyKaydet);
             panelControl2.Controls.Add(txtApiKey);
@@ -85,6 +86,20 @@
             panelControl2.Name = "panelControl2";
             panelControl2.Size = new System.Drawing.Size(400, 511);
             panelControl2.TabIndex = 1;
+            // 
+            // lblHafizaUyarisi
+            // 
+            lblHafizaUyarisi.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 162);
+            lblHafizaUyarisi.Appearance.ForeColor = System.Drawing.Color.Red;
+            lblHafizaUyarisi.Appearance.Options.UseFont = true;
+            lblHafizaUyarisi.Appearance.Options.UseForeColor = true;
+            lblHafizaUyarisi.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
+            lblHafizaUyarisi.Dock = System.Windows.Forms.DockStyle.Top;
+            lblHafizaUyarisi.Location = new System.Drawing.Point(2, 467);
+            lblHafizaUyarisi.Name = "lblHafizaUyarisi";
+            lblHafizaUyarisi.Size = new System.Drawing.Size(396, 13);
+            lblHafizaUyarisi.TabIndex = 7;
+            lblHafizaUyarisi.Text = "labelControl2";
             // 
             // lnkGoogleAI
             // 
@@ -155,7 +170,6 @@
             // 
             panelControl3.Controls.Add(chatEkrani);
             panelControl3.Controls.Add(lblCevapBaslik);
-            panelControl3.Controls.Add(lblSoruBaslik);
             panelControl3.Controls.Add(txtAsistanSoru);
             panelControl3.Controls.Add(btnAsistanAnaliz);
             panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -174,7 +188,7 @@
             chatEkrani.Name = "chatEkrani";
             chatEkrani.Options.DocumentSaveOptions.CurrentFormat = DevExpress.XtraRichEdit.DocumentFormat.PlainText;
             chatEkrani.ReadOnly = true;
-            chatEkrani.Size = new System.Drawing.Size(541, 354);
+            chatEkrani.Size = new System.Drawing.Size(541, 370);
             chatEkrani.TabIndex = 4;
             // 
             // lblCevapBaslik
@@ -187,17 +201,6 @@
             lblCevapBaslik.Size = new System.Drawing.Size(75, 16);
             lblCevapBaslik.TabIndex = 3;
             lblCevapBaslik.Text = "labelControl1";
-            // 
-            // lblSoruBaslik
-            // 
-            lblSoruBaslik.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 162);
-            lblSoruBaslik.Appearance.Options.UseFont = true;
-            lblSoruBaslik.Dock = System.Windows.Forms.DockStyle.Bottom;
-            lblSoruBaslik.Location = new System.Drawing.Point(2, 372);
-            lblSoruBaslik.Name = "lblSoruBaslik";
-            lblSoruBaslik.Size = new System.Drawing.Size(75, 16);
-            lblSoruBaslik.TabIndex = 0;
-            lblSoruBaslik.Text = "labelControl1";
             // 
             // txtAsistanSoru
             // 
@@ -255,7 +258,6 @@
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.SimpleButton btnAsistanAnaliz;
         private DevExpress.XtraEditors.MemoEdit txtAsistanSoru;
-        private DevExpress.XtraEditors.LabelControl lblSoruBaslik;
         private DevExpress.XtraEditors.LabelControl lblCevapBaslik;
         private DevExpress.XtraEditors.TextEdit txtApiKey;
         private DevExpress.XtraEditors.LabelControl lblApiKey;
@@ -263,5 +265,6 @@
         private DevExpress.XtraEditors.SimpleButton btnKeyKaydet;
         private DevExpress.XtraRichEdit.RichEditControl chatEkrani;
         private System.Windows.Forms.FlowLayoutPanel flowResimPaneli;
+        private DevExpress.XtraEditors.LabelControl lblHafizaUyarisi;
     }
 }
