@@ -531,6 +531,24 @@
   <data name="HesapSilUyariMesaj" xml:space="preserve">
     <value>Your account will be permanently and irreversibly deleted. Are you sure you want to perform this action?</value>
   </data>
+  <data name="KasaAlarm_Baslik" xml:space="preserve">
+    <value>Vault / Storage Alarm</value>
+  </data>
+  <data name="KasaAlarm_Gaz" xml:space="preserve">
+    <value>- Gas level high. (Gas: {0}, Limit: {1})</value>
+  </data>
+  <data name="KasaAlarm_Hareket" xml:space="preserve">
+    <value>- Motion detected.</value>
+  </data>
+  <data name="KasaAlarm_Nem" xml:space="preserve">
+    <value>- Humidity high. (Humidity: {0} %, Limit: {1} %)</value>
+  </data>
+  <data name="KasaAlarm_SebepBaslik" xml:space="preserve">
+    <value>Alarm reason(s):</value>
+  </data>
+  <data name="KasaAlarm_Sicaklik" xml:space="preserve">
+    <value>- Temperature high. (Temperature: {0} °C, Limit: {1} °C)</value>
+  </data>
   <data name="Kasa_Baslik" xml:space="preserve">
     <value>Vault &amp; Depot</value>
   </data>

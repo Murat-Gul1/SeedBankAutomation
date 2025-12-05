@@ -1375,6 +1375,60 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kasa / Depo Alarm.
+        /// </summary>
+        public static string KasaAlarm_Baslik {
+            get {
+                return ResourceManager.GetString("KasaAlarm_Baslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - Gaz seviyesi yüksek. (Gaz: {0}, Limit: {1}).
+        /// </summary>
+        public static string KasaAlarm_Gaz {
+            get {
+                return ResourceManager.GetString("KasaAlarm_Gaz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - Hareket algılandı..
+        /// </summary>
+        public static string KasaAlarm_Hareket {
+            get {
+                return ResourceManager.GetString("KasaAlarm_Hareket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - Nem yüksek. (Nem: {0} %, Limit: {1} %).
+        /// </summary>
+        public static string KasaAlarm_Nem {
+            get {
+                return ResourceManager.GetString("KasaAlarm_Nem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alarm sebebi:.
+        /// </summary>
+        public static string KasaAlarm_SebepBaslik {
+            get {
+                return ResourceManager.GetString("KasaAlarm_SebepBaslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - Sıcaklık yüksek. (Sıcaklık: {0} °C, Limit: {1} °C).
+        /// </summary>
+        public static string KasaAlarm_Sicaklik {
+            get {
+                return ResourceManager.GetString("KasaAlarm_Sicaklik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kaydınız başarıyla tamamlandı. Şimdi giriş yapabilirsiniz..
         /// </summary>
         public static string KayitBasariliMesaj {

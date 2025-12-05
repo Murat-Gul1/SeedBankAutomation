@@ -269,28 +269,44 @@ namespace TohumBankasiOtomasyonu
                 {
                     // 1) Önce buzzer'ı / LED'i çalıştır
                     AlarmCalistir();
-
+                    // 2) Mesajı seçili dile göre Resources'tan oluştur
+                    var culture = CultureInfo.CurrentUICulture;
                     // 2) Kullanıcıya sebebi göster
-                    string mesaj = "Alarm sebebi:\n";
+                    string mesaj = Resources.KasaAlarm_SebepBaslik + Environment.NewLine;
 
                     if (alarmHareket)
-                        mesaj += "- Hareket algılandı.\n";
+                        mesaj += Resources.KasaAlarm_Hareket + Environment.NewLine;
 
                     if (alarmNem)
-                        mesaj += $"- Nem yüksek. (Nem: {nem:F1} %, Limit: {LIMIT_NEM:F1} %)\n";
+                        mesaj += string.Format(
+            culture,
+            Resources.KasaAlarm_Nem,
+            nem.ToString("F1", culture),
+            LIMIT_NEM.ToString("F1", culture)
+        ) + Environment.NewLine;
 
                     if (alarmGaz)
-                        mesaj += $"- Gaz seviyesi yüksek. (Gaz: {gaz}, Limit: {LIMIT_GAZ})\n";
+                        mesaj += string.Format(
+            culture,
+            Resources.KasaAlarm_Gaz,
+            gaz.ToString(culture),
+            LIMIT_GAZ.ToString(culture)
+        ) + Environment.NewLine;
 
                     if (alarmSicaklik)
-                        mesaj += $"- Sıcaklık yüksek. (Sıcaklık: {sicaklik:F1} °C, Limit: {LIMIT_SICAKLIK:F1} °C)\n";
+                        mesaj += string.Format(
+            culture,
+            Resources.KasaAlarm_Sicaklik,
+            sicaklik.ToString("F1", culture),
+            LIMIT_SICAKLIK.ToString("F1", culture)
+        ) + Environment.NewLine;
 
                     XtraMessageBox.Show(
-                        mesaj,
-                        "Kasa / Depo Alarm",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
-                    );
+     mesaj,
+     Resources.KasaAlarm_Baslik,
+     MessageBoxButtons.OK,
+     MessageBoxIcon.Warning
+ );
                 }
 
                 // --- FAN MANTIĞI ---

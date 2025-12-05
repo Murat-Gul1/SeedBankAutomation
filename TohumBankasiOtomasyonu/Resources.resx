@@ -531,6 +531,24 @@
   <data name="HesapSilUyariMesaj" xml:space="preserve">
     <value>Hesabınız kalıcı olarak ve geri döndürülemez şekilde silinecektir. Bu işlemi yapmak istediğinizden emin misiniz?</value>
   </data>
+  <data name="KasaAlarm_Baslik" xml:space="preserve">
+    <value>Kasa / Depo Alarm</value>
+  </data>
+  <data name="KasaAlarm_Gaz" xml:space="preserve">
+    <value>- Gaz seviyesi yüksek. (Gaz: {0}, Limit: {1})</value>
+  </data>
+  <data name="KasaAlarm_Hareket" xml:space="preserve">
+    <value>- Hareket algılandı.</value>
+  </data>
+  <data name="KasaAlarm_Nem" xml:space="preserve">
+    <value>- Nem yüksek. (Nem: {0} %, Limit: {1} %)</value>
+  </data>
+  <data name="KasaAlarm_SebepBaslik" xml:space="preserve">
+    <value>Alarm sebebi:</value>
+  </data>
+  <data name="KasaAlarm_Sicaklik" xml:space="preserve">
+    <value>- Sıcaklık yüksek. (Sıcaklık: {0} °C, Limit: {1} °C)</value>
+  </data>
   <data name="Kasa_Baslik" xml:space="preserve">
     <value>Kasa ve Depo</value>
   </data>

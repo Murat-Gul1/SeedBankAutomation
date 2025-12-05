@@ -228,29 +228,27 @@ namespace TohumBankasiOtomasyonu
 
         private void btnTurkce_Click(object sender, EventArgs e)
         {
-            // 1. Dili değiştir
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("tr-TR");
+            var culture = new CultureInfo("tr-TR");
 
-            // 2. Form1'i güncelle
+            Thread.CurrentThread.CurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;   // sayısal formatlar için
+            Resources.Culture = culture;                     // <<< ÖNEMLİ EK
+
             UygulaDil();
-
-            // 3. Aktif sayfayı (Ana Sayfa veya Arama Sayfası) güncelle
-            AktifSayfayiYenile(); // <-- YENİ METOT
-
+            AktifSayfayiYenile();
             pnlDilSecenekleri.Visible = false;
         }
 
         private void btnIngilizce_Click(object sender, EventArgs e)
         {
-            // 1. Dili değiştir
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            var culture = new CultureInfo("en-US");
 
-            // 2. Form1'i güncelle
+            Thread.CurrentThread.CurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;   // sayısal formatlar için
+            Resources.Culture = culture;                     // <<< ÖNEMLİ EK
+
             UygulaDil();
-
-            // 3. Aktif sayfayı güncelle
-            AktifSayfayiYenile(); // <-- YENİ METOT
-
+            AktifSayfayiYenile();
             pnlDilSecenekleri.Visible = false;
         }
 
