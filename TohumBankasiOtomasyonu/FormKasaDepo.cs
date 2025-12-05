@@ -224,31 +224,39 @@ namespace TohumBankasiOtomasyonu
                 // --- ALARM / KÖRLEME MANTIĞI ---
                 DateTime simdi = DateTime.Now;
                 bool yeniAlarmVar = false;
-                // Eğer veriler hatalıysa (Örn: Gaz 1000'den büyükse sensör bozuk olabilir) alarm çalma
-                // Buraya ekstra mantıksal kontroller eklenebilir.
+
+                // BU TURDA YENİ TETİKLENEN SEBEPLER
+                bool alarmHareket = false;
+                bool alarmNem = false;
+                bool alarmGaz = false;
+                bool alarmSicaklik = false;
 
                 if (hareketTehlike && simdi > hareketYasakBitis)
                 {
                     yeniAlarmVar = true;
+                    alarmHareket = true;
                     hareketYasakBitis = simdi.AddSeconds(30);
                 }
 
                 if (nemTehlike && simdi > nemYasakBitis)
                 {
                     yeniAlarmVar = true;
+                    alarmNem = true;
                     nemYasakBitis = simdi.AddSeconds(30);
                 }
 
                 if (gazTehlike && simdi > gazYasakBitis)
                 {
                     yeniAlarmVar = true;
+                    alarmGaz = true;
                     gazYasakBitis = simdi.AddSeconds(30);
                 }
 
                 if (sicaklikTehlike && simdi > sicaklikYasakBitis)
                 {
                    yeniAlarmVar = true;
-                  sicaklikYasakBitis = simdi.AddSeconds(30);
+                    alarmSicaklik = true;
+                    sicaklikYasakBitis = simdi.AddSeconds(30);
                 }
 
                 //if (isikTehlike && simdi > isikYasakBitis)
@@ -259,7 +267,30 @@ namespace TohumBankasiOtomasyonu
 
                 if (yeniAlarmVar)
                 {
+                    // 1) Önce buzzer'ı / LED'i çalıştır
                     AlarmCalistir();
+
+                    // 2) Kullanıcıya sebebi göster
+                    string mesaj = "Alarm sebebi:\n";
+
+                    if (alarmHareket)
+                        mesaj += "- Hareket algılandı.\n";
+
+                    if (alarmNem)
+                        mesaj += $"- Nem yüksek. (Nem: {nem:F1} %, Limit: {LIMIT_NEM:F1} %)\n";
+
+                    if (alarmGaz)
+                        mesaj += $"- Gaz seviyesi yüksek. (Gaz: {gaz}, Limit: {LIMIT_GAZ})\n";
+
+                    if (alarmSicaklik)
+                        mesaj += $"- Sıcaklık yüksek. (Sıcaklık: {sicaklik:F1} °C, Limit: {LIMIT_SICAKLIK:F1} °C)\n";
+
+                    XtraMessageBox.Show(
+                        mesaj,
+                        "Kasa / Depo Alarm",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
                 }
 
                 // --- FAN MANTIĞI ---
