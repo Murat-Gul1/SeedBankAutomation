@@ -285,34 +285,34 @@
             linearScaleComponent1.MajorTickmark.ShapeOffset = -23F;
             linearScaleComponent1.MajorTickmark.ShapeType = DevExpress.XtraGauges.Core.Model.TickmarkShapeType.Linear_Style19_1;
             linearScaleComponent1.MajorTickmark.TextOffset = -35F;
-            linearScaleComponent1.MaxValue = 1023F;
+            linearScaleComponent1.MaxValue = 400F;
             linearScaleComponent1.MinorTickCount = 4;
             linearScaleComponent1.MinorTickmark.ShapeOffset = -23F;
             linearScaleComponent1.MinorTickmark.ShapeType = DevExpress.XtraGauges.Core.Model.TickmarkShapeType.Linear_Style19_2;
             linearScaleComponent1.Name = "scale1";
             linearScaleRange1.AppearanceRange.ContentBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:#059172");
             linearScaleRange1.EndThickness = 14F;
-            linearScaleRange1.EndValue = 300F;
+            linearScaleRange1.EndValue = 50F;
             linearScaleRange1.Name = "Range0";
             linearScaleRange1.ShapeOffset = -23F;
             linearScaleRange1.StartThickness = 14F;
             linearScaleRange2.AppearanceRange.ContentBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:#CAB461");
             linearScaleRange2.EndThickness = 14F;
-            linearScaleRange2.EndValue = 700F;
+            linearScaleRange2.EndValue = 300F;
             linearScaleRange2.Name = "Range1";
             linearScaleRange2.ShapeOffset = -23F;
             linearScaleRange2.StartThickness = 14F;
-            linearScaleRange2.StartValue = 300F;
+            linearScaleRange2.StartValue = 50F;
             linearScaleRange3.AppearanceRange.ContentBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:#A5648E");
             linearScaleRange3.EndThickness = 14F;
-            linearScaleRange3.EndValue = 1023F;
+            linearScaleRange3.EndValue = 400F;
             linearScaleRange3.Name = "Range2";
             linearScaleRange3.ShapeOffset = -23F;
             linearScaleRange3.StartThickness = 14F;
-            linearScaleRange3.StartValue = 700F;
+            linearScaleRange3.StartValue = 300F;
             linearScaleComponent1.Ranges.AddRange(new DevExpress.XtraGauges.Core.Model.IRange[] { linearScaleRange1, linearScaleRange2, linearScaleRange3 });
             linearScaleComponent1.StartPoint = new DevExpress.XtraGauges.Core.Base.PointF2D(62.5F, 212F);
-            linearScaleComponent1.Value = 100F;
+            linearScaleComponent1.Value = 5F;
             // 
             // linearScaleLevelComponent1
             // 

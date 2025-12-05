@@ -116,6 +116,10 @@ namespace TohumBankasiOtomasyonu
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+            GostergeAraliginiAyarla(gaugeSicaklik, 0, 40);
+            GostergeAraliginiAyarla(gaugeNem, 0, 100);
+            GostergeAraliginiAyarla(gaugeGaz, 0, 400);  // GAZ
+            GostergeAraliginiAyarla(gaugeIsik, 0, 1023); // IŞIK
         }
 
         // --- ARDUINO'DAN VERİ GELDİĞİNDE (AYRI THREAD) ---
@@ -392,20 +396,46 @@ namespace TohumBankasiOtomasyonu
         {
             try
             {
-                if (kutu == null || kutu.Gauges == null)
+                if (kutu == null || kutu.Gauges == null || kutu.Gauges.Count == 0)
                     return;
 
-                if (kutu.Gauges.Count > 0)
+                var gauge = kutu.Gauges[0];
+
+                // DAİRESEL GÖSTERGE
+                if (gauge is CircularGauge yuvarlak)
                 {
-                    if (kutu.Gauges[0] is CircularGauge yuvarlak)
+                    if (yuvarlak.Scales.Count > 0)
                     {
-                        if (yuvarlak.Scales.Count > 0)
-                            yuvarlak.Scales[0].Value = deger;
+                        var sc = yuvarlak.Scales[0];
+                        float v = deger;
+                        if (v < sc.MinValue) v = sc.MinValue;
+                        if (v > sc.MaxValue) v = sc.MaxValue;
+                        sc.Value = v;
                     }
-                    else if (kutu.Gauges[0] is LinearGauge cubuk)
+                }
+                // ÇUBUK (LINEAR) GÖSTERGE
+                else if (gauge is LinearGauge cubuk)
+                {
+                    if (cubuk.Scales.Count > 0)
                     {
-                        if (cubuk.Scales.Count > 0)
-                            cubuk.Scales[0].Value = deger;
+                        var sc = cubuk.Scales[0];
+
+                        float v = deger;
+                        if (v < sc.MinValue) v = sc.MinValue;
+                        if (v > sc.MaxValue) v = sc.MaxValue;
+
+                        // 1) Scale değeri
+                        sc.Value = v;
+
+                        // 2) LEVEL (mavi çubuk) değeri
+                        if (cubuk.Levels != null && cubuk.Levels.Count > 0)
+                        {
+                            foreach (var lvl in cubuk.Levels)
+                            {
+                                if (lvl != null)
+                                    lvl.Value = v;
+                            }
+                        }
                     }
                 }
             }
@@ -414,6 +444,41 @@ namespace TohumBankasiOtomasyonu
                 Debug.WriteLine("GostergeAyarla hata: " + ex);
             }
         }
+
+
+        private void GostergeAraliginiAyarla(GaugeControl kutu, float min, float max)
+        {
+            try
+            {
+                if (kutu == null || kutu.Gauges == null || kutu.Gauges.Count == 0)
+                    return;
+
+                if (kutu.Gauges[0] is CircularGauge yuvarlak)
+                {
+                    foreach (var sc in yuvarlak.Scales)
+                    {
+                        if (sc == null) continue;
+                        sc.MinValue = min;
+                        sc.MaxValue = max;
+                    }
+                }
+                else if (kutu.Gauges[0] is LinearGauge cubuk)
+                {
+                    foreach (var sc in cubuk.Scales)
+                    {
+                        if (sc == null) continue;
+                        sc.MinValue = min;
+                        sc.MaxValue = max;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("GostergeAraliginiAyarla hata: " + ex);
+            }
+        }
+
+
 
         // --- DİL UYGULAMA ---
         public void UygulaDil()
