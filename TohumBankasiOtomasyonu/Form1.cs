@@ -13,6 +13,7 @@ using TohumBankasiOtomasyonu.Models;
 using TohumBankasiOtomasyonu.Properties;
 namespace TohumBankasiOtomasyonu
 {
+    
     public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
         private UcAnaSayfa _anaSayfaControl;
@@ -117,6 +118,7 @@ namespace TohumBankasiOtomasyonu
             btnHakkinda.ToolTip = Resources.btnHakkinda_ToolTip;
             btnAsistan.ToolTip = Resources.btnAsistan_ToolTip;
             btnBitkilerim.ToolTip = Resources.btnBitkilerim_ToolTip;
+            btnKasaDepo.ToolTip = Resources.btnKasaDepo_ToolTip;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -347,6 +349,7 @@ namespace TohumBankasiOtomasyonu
                 btnCikisYap.Visible = true;           // Çıkış butonunu GÖSTER(Show the logout button)
                 btnSiparisGecmisi.Visible = true;
                 btnBitkilerim.Visible = true;
+                btnKasaDepo.Visible = true;
                 // Kullanıcı tipine göre Admin Panelini göster/gizle
                 // Show or hide the Admin Panel based on the user type
                 if (girisYapanKullanici.KullaniciTipi == "Admin")
@@ -369,6 +372,7 @@ namespace TohumBankasiOtomasyonu
                 btnAdminPaneli.Visible = false;       // Admin panelini GİZLE(Hide the admin panel)
                 btnSiparisGecmisi.Visible = false;
                 btnBitkilerim.Visible = false;
+                btnKasaDepo.Visible = false;
             }
         }
 
@@ -550,5 +554,18 @@ namespace TohumBankasiOtomasyonu
             uc.Dock = DockStyle.Fill;
             pnlAnaIcerik.Controls.Add(uc);
         }
+
+
+        private void btnKasaDepo_Click(object sender, EventArgs e)
+        {
+            // 'using' bloğu, süslü parantez bittiği anda formu RAM'den siler (Dispose eder).
+            using (FormKasaDepo frm = new FormKasaDepo())
+            {
+                frm.ShowDialog();
+            }
+            // Buraya gelindiğinde frm tamamen yok edilmiştir, COM4 serbest kalmıştır.
+        }
+
+
     }
 }

@@ -213,6 +213,9 @@
   <data name="btnKapat" xml:space="preserve">
     <value>Kapat</value>
   </data>
+  <data name="btnKasaDepo_ToolTip" xml:space="preserve">
+    <value>Kasa ve Depo Durumu</value>
+  </data>
   <data name="btnKaydol_Text" xml:space="preserve">
     <value>Kayıt Ol</value>
   </data>
@@ -435,6 +438,9 @@
   <data name="FormHesapAyarlari_Title" xml:space="preserve">
     <value>Hesap Ayarları</value>
   </data>
+  <data name="FormKasaDepo_Title" xml:space="preserve">
+    <value>Depo / Kasa Durumu</value>
+  </data>
   <data name="FormKayitOl_Title" xml:space="preserve">
     <value>Kullanıcı Kaydı</value>
   </data>
@@ -524,6 +530,30 @@
   </data>
   <data name="HesapSilUyariMesaj" xml:space="preserve">
     <value>Hesabınız kalıcı olarak ve geri döndürülemez şekilde silinecektir. Bu işlemi yapmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="Kasa_Baslik" xml:space="preserve">
+    <value>Kasa ve Depo</value>
+  </data>
+  <data name="Kasa_Btn_Baglan" xml:space="preserve">
+    <value>Bağlantıyı Başlat</value>
+  </data>
+  <data name="Kasa_Btn_Kes" xml:space="preserve">
+    <value>Bağlantıyı Kes</value>
+  </data>
+  <data name="Kasa_Lbl_Gaz" xml:space="preserve">
+    <value>Hava Kalitesi (Gaz)</value>
+  </data>
+  <data name="Kasa_Lbl_Hareket" xml:space="preserve">
+    <value>Güvenlik Durumu</value>
+  </data>
+  <data name="Kasa_Lbl_Isik" xml:space="preserve">
+    <value>Işık Seviyesi</value>
+  </data>
+  <data name="Kasa_Lbl_Nem" xml:space="preserve">
+    <value>Nem Oranı (%)</value>
+  </data>
+  <data name="Kasa_Lbl_Sicaklik" xml:space="preserve">
+    <value>Sıcaklık (°C)</value>
   </data>
   <data name="KayitBasariliMesaj" xml:space="preserve">
     <value>Kaydınız başarıyla tamamlandı. Şimdi giriş yapabilirsiniz.</value>

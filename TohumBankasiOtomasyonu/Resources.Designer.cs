@@ -349,6 +349,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kasa ve Depo Durumu.
+        /// </summary>
+        public static string btnKasaDepo_ToolTip {
+            get {
+                return ResourceManager.GetString("btnKasaDepo_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kayıt Ol.
         /// </summary>
         public static string btnKaydol_Text {
@@ -1015,6 +1024,15 @@ namespace TohumBankasiOtomasyonu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Depo / Kasa Durumu.
+        /// </summary>
+        public static string FormKasaDepo_Title {
+            get {
+                return ResourceManager.GetString("FormKasaDepo_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kullanıcı Kaydı.
         /// </summary>
         public static string FormKayitOl_Title {
@@ -1281,6 +1299,78 @@ namespace TohumBankasiOtomasyonu {
         public static string HesapSilUyariMesaj {
             get {
                 return ResourceManager.GetString("HesapSilUyariMesaj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kasa ve Depo.
+        /// </summary>
+        public static string Kasa_Baslik {
+            get {
+                return ResourceManager.GetString("Kasa_Baslik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bağlantıyı Başlat.
+        /// </summary>
+        public static string Kasa_Btn_Baglan {
+            get {
+                return ResourceManager.GetString("Kasa_Btn_Baglan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bağlantıyı Kes.
+        /// </summary>
+        public static string Kasa_Btn_Kes {
+            get {
+                return ResourceManager.GetString("Kasa_Btn_Kes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hava Kalitesi (Gaz).
+        /// </summary>
+        public static string Kasa_Lbl_Gaz {
+            get {
+                return ResourceManager.GetString("Kasa_Lbl_Gaz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Güvenlik Durumu.
+        /// </summary>
+        public static string Kasa_Lbl_Hareket {
+            get {
+                return ResourceManager.GetString("Kasa_Lbl_Hareket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Işık Seviyesi.
+        /// </summary>
+        public static string Kasa_Lbl_Isik {
+            get {
+                return ResourceManager.GetString("Kasa_Lbl_Isik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nem Oranı (%).
+        /// </summary>
+        public static string Kasa_Lbl_Nem {
+            get {
+                return ResourceManager.GetString("Kasa_Lbl_Nem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sıcaklık (°C).
+        /// </summary>
+        public static string Kasa_Lbl_Sicaklik {
+            get {
+                return ResourceManager.GetString("Kasa_Lbl_Sicaklik", resourceCulture);
             }
         }
         

@@ -213,6 +213,9 @@
   <data name="btnKapat" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="btnKasaDepo_ToolTip" xml:space="preserve">
+    <value>Warehouse / Safe Status</value>
+  </data>
   <data name="btnKaydol_Text" xml:space="preserve">
     <value>Register</value>
   </data>
@@ -435,6 +438,9 @@
   <data name="FormHesapAyarlari_Title" xml:space="preserve">
     <value>Account Settings</value>
   </data>
+  <data name="FormKasaDepo_Title" xml:space="preserve">
+    <value>Warehouse / Safe Status</value>
+  </data>
   <data name="FormKayitOl_Title" xml:space="preserve">
     <value>User Registration</value>
   </data>
@@ -524,6 +530,30 @@
   </data>
   <data name="HesapSilUyariMesaj" xml:space="preserve">
     <value>Your account will be permanently and irreversibly deleted. Are you sure you want to perform this action?</value>
+  </data>
+  <data name="Kasa_Baslik" xml:space="preserve">
+    <value>Vault &amp; Depot</value>
+  </data>
+  <data name="Kasa_Btn_Baglan" xml:space="preserve">
+    <value>Start Connection</value>
+  </data>
+  <data name="Kasa_Btn_Kes" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="Kasa_Lbl_Gaz" xml:space="preserve">
+    <value>Air Quality (Gas)</value>
+  </data>
+  <data name="Kasa_Lbl_Hareket" xml:space="preserve">
+    <value>Security Status</value>
+  </data>
+  <data name="Kasa_Lbl_Isik" xml:space="preserve">
+    <value>Light Level</value>
+  </data>
+  <data name="Kasa_Lbl_Nem" xml:space="preserve">
+    <value>Humidity (%)</value>
+  </data>
+  <data name="Kasa_Lbl_Sicaklik" xml:space="preserve">
+    <value>Temperature (°C)</value>
   </data>
   <data name="KayitBasariliMesaj" xml:space="preserve">
     <value>Your registration is complete. You can now log in.</value>

@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\fan_pervane.png" />
+    <None Remove="Resources\fan_pervane1.png" />
+    <None Remove="Resources\safety.png" />
     <None Remove="Tohumbankasi.db" />
   </ItemGroup>
 
@@ -26,6 +29,7 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+    <PackageReference Include="System.IO.Ports" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>

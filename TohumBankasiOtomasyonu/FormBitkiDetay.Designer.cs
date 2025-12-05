@@ -170,6 +170,8 @@
             txtMesaj.Dock = System.Windows.Forms.DockStyle.Bottom;
             txtMesaj.Location = new System.Drawing.Point(2, 418);
             txtMesaj.Name = "txtMesaj";
+            txtMesaj.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 162);
+            txtMesaj.Properties.Appearance.Options.UseFont = true;
             txtMesaj.Size = new System.Drawing.Size(779, 64);
             txtMesaj.TabIndex = 0;
             // 

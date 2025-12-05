@@ -203,6 +203,16 @@ namespace TohumBankasiOtomasyonu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fan {
+            get {
+                object obj = ResourceManager.GetObject("fan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gardening {
             get {
                 object obj = ResourceManager.GetObject("gardening", resourceCulture);
@@ -316,6 +326,16 @@ namespace TohumBankasiOtomasyonu.Properties {
         internal static System.Drawing.Bitmap report {
             get {
                 object obj = ResourceManager.GetObject("report", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap safety {
+            get {
+                object obj = ResourceManager.GetObject("safety", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
