@@ -27,7 +27,7 @@ namespace TohumBankasiOtomasyonu
         float LIMIT_SICAKLIK = 27.0f;   // °C
         float LIMIT_NEM = 55.0f;        // %RH
         int LIMIT_GAZ = 350;
-        int LIMIT_ISIK = 800;
+        int LIMIT_ISIK_HAM = 20;
 
         // --- HER SENSÖR İÇİN AYRI 30 SN KÖRLEME ---
         DateTime hareketYasakBitis = DateTime.MinValue;
@@ -119,7 +119,7 @@ namespace TohumBankasiOtomasyonu
             GostergeAraliginiAyarla(gaugeSicaklik, 0, 40);
             GostergeAraliginiAyarla(gaugeNem, 0, 100);
             GostergeAraliginiAyarla(gaugeGaz, 0, 400);  // GAZ
-            GostergeAraliginiAyarla(gaugeIsik, 0, 1023); // IŞIK
+            GostergeAraliginiAyarla(gaugeIsik, 0, 100);  // IŞIK
         }
 
         // --- ARDUINO'DAN VERİ GELDİĞİNDE (AYRI THREAD) ---
@@ -190,21 +190,26 @@ namespace TohumBankasiOtomasyonu
                     return;
 
                 float sicaklik = 0, nem = 0;
-                int gaz = 0, isik = 0, hareket = 0;
+
+                int gaz = 0, isikHam = 0, hareket = 0;
 
                 // --- GÜVENLİ PARSE İŞLEMİ (Nokta/Virgül sorununu çözer) ---
                 // CultureInfo.InvariantCulture sayesinde replace yapmaya gerek kalmaz.
                 float.TryParse(parcalar[0], NumberStyles.Any, CultureInfo.InvariantCulture, out sicaklik);
                 float.TryParse(parcalar[1], NumberStyles.Any, CultureInfo.InvariantCulture, out nem);
                 int.TryParse(parcalar[2], out gaz);
-                int.TryParse(parcalar[3], out isik);
+                int.TryParse(parcalar[3], out isikHam);
                 int.TryParse(parcalar[4], out hareket);
+
+                float isikYuzde = (1023 - isikHam) * 100f / 1023f;
+                if (isikYuzde < 0) isikYuzde = 0;
+                if (isikYuzde > 100) isikYuzde = 100;
 
                 // --- GÖSTERGELERİ GÜNCELLE ---
                 GostergeAyarla(gaugeSicaklik, sicaklik);
                 GostergeAyarla(gaugeNem, nem);
                 GostergeAyarla(gaugeGaz, gaz);
-                GostergeAyarla(gaugeIsik, isik);
+                GostergeAyarla(gaugeIsik, isikYuzde);
 
                 if (stateHareket != null)
                     stateHareket.StateIndex = (hareket == 1) ? 3 : 1;
@@ -214,12 +219,11 @@ namespace TohumBankasiOtomasyonu
                 bool nemTehlike = (nem >= LIMIT_NEM);
                 bool gazTehlike = (gaz > LIMIT_GAZ);
                 bool sicaklikTehlike = (sicaklik > LIMIT_SICAKLIK);
-                bool isikTehlike = (isik > LIMIT_ISIK);
+                bool isikTehlike = false;   // Örn. %75 üstü ise alarm
 
                 // --- ALARM / KÖRLEME MANTIĞI ---
                 DateTime simdi = DateTime.Now;
                 bool yeniAlarmVar = false;
-
                 // Eğer veriler hatalıysa (Örn: Gaz 1000'den büyükse sensör bozuk olabilir) alarm çalma
                 // Buraya ekstra mantıksal kontroller eklenebilir.
 
@@ -243,15 +247,15 @@ namespace TohumBankasiOtomasyonu
 
                 if (sicaklikTehlike && simdi > sicaklikYasakBitis)
                 {
-                    yeniAlarmVar = true;
-                    sicaklikYasakBitis = simdi.AddSeconds(30);
+                   yeniAlarmVar = true;
+                  sicaklikYasakBitis = simdi.AddSeconds(30);
                 }
 
-                if (isikTehlike && simdi > isikYasakBitis)
-                {
-                    yeniAlarmVar = true;
-                    isikYasakBitis = simdi.AddSeconds(30);
-                }
+                //if (isikTehlike && simdi > isikYasakBitis)
+                //{
+                //    yeniAlarmVar = true;
+                //    isikYasakBitis = simdi.AddSeconds(30);
+                //}
 
                 if (yeniAlarmVar)
                 {

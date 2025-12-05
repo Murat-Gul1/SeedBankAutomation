@@ -365,25 +365,25 @@
             linearScaleComponent2.MajorTickmark.ShapeType = DevExpress.XtraGauges.Core.Model.TickmarkShapeType.Linear_Style11_2;
             linearScaleComponent2.MajorTickmark.TextOffset = 35F;
             linearScaleComponent2.MajorTickmark.TextOrientation = DevExpress.XtraGauges.Core.Model.LabelOrientation.BottomToTop;
-            linearScaleComponent2.MaxValue = 1023F;
+            linearScaleComponent2.MaxValue = 100F;
             linearScaleComponent2.MinorTickCount = 4;
             linearScaleComponent2.MinorTickmark.ShapeOffset = 6F;
             linearScaleComponent2.MinorTickmark.ShapeType = DevExpress.XtraGauges.Core.Model.TickmarkShapeType.Linear_Style11_1;
             linearScaleComponent2.Name = "scale1";
             linearScaleRange4.AppearanceRange.ContentBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:Black");
-            linearScaleRange4.EndValue = 400F;
+            linearScaleRange4.EndValue = 30F;
             linearScaleRange4.Name = "Range 1";
             linearScaleRange5.AppearanceRange.ContentBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:Orange");
-            linearScaleRange5.EndValue = 800F;
+            linearScaleRange5.EndValue = 60F;
             linearScaleRange5.Name = "Range 2";
-            linearScaleRange5.StartValue = 400F;
+            linearScaleRange5.StartValue = 30F;
             linearScaleRange6.AppearanceRange.ContentBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:Yellow");
-            linearScaleRange6.EndValue = 1023F;
+            linearScaleRange6.EndValue = 100F;
             linearScaleRange6.Name = "Range 3";
-            linearScaleRange6.StartValue = 800F;
+            linearScaleRange6.StartValue = 60F;
             linearScaleComponent2.Ranges.AddRange(new DevExpress.XtraGauges.Core.Model.IRange[] { linearScaleRange4, linearScaleRange5, linearScaleRange6 });
             linearScaleComponent2.StartPoint = new DevExpress.XtraGauges.Core.Base.PointF2D(62.5F, 230F);
-            linearScaleComponent2.Value = 250F;
+            linearScaleComponent2.Value = 100F;
             // 
             // linearScaleLevelComponent2
             // 
@@ -407,7 +407,7 @@
             linearScaleComponent3.MajorTickmark.ShapeType = DevExpress.XtraGauges.Core.Model.TickmarkShapeType.Linear_Style11_3;
             linearScaleComponent3.MajorTickmark.TextOffset = -32F;
             linearScaleComponent3.MajorTickmark.TextOrientation = DevExpress.XtraGauges.Core.Model.LabelOrientation.BottomToTop;
-            linearScaleComponent3.MaxValue = 1023F;
+            linearScaleComponent3.MaxValue = 100F;
             linearScaleComponent3.MinorTickCount = 4;
             linearScaleComponent3.MinorTickmark.ShapeOffset = -12F;
             linearScaleComponent3.MinorTickmark.ShapeType = DevExpress.XtraGauges.Core.Model.TickmarkShapeType.Linear_Style11_4;
