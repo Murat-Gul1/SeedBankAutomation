@@ -24,8 +24,8 @@ namespace TohumBankasiOtomasyonu
         private static readonly object portKilidi = new object();
 
         // --- EŞİK DEĞERLERİ ---
-        float LIMIT_SICAKLIK = 27.0f;   // °C
-        float LIMIT_NEM = 55.0f;        // %RH
+        float LIMIT_SICAKLIK = 25.0f;   // °C
+        float LIMIT_NEM = 75.0f;        // %RH
         int LIMIT_GAZ = 350;
         int LIMIT_ISIK_HAM = 20;
 

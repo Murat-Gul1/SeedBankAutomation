@@ -100,7 +100,7 @@
             lblBilimselAd.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
             lblBilimselAd.Location = new System.Drawing.Point(5, 180);
             lblBilimselAd.Name = "lblBilimselAd";
-            lblBilimselAd.Size = new System.Drawing.Size(64, 13);
+            lblBilimselAd.Size = new System.Drawing.Size(240, 13);
             lblBilimselAd.TabIndex = 2;
             lblBilimselAd.Text = "labelControl1";
             // 
