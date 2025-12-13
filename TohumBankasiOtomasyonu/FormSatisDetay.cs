@@ -23,6 +23,8 @@ namespace TohumBankasiOtomasyonu
         public FormSatisDetay() { InitializeComponent(); }
 
         // --- RESİM YÜKLEME YARDIMCISI ---
+        // --- IMAGE UPLOAD HELPER ---
+        
         private Image ResmiYukle(string yol)
         {
             try
@@ -36,6 +38,8 @@ namespace TohumBankasiOtomasyonu
                     {
                         // Resmi yükle ve küçük bir kopyasını (Thumbnail) döndür
                         // (Performans için resmi küçültmek iyidir)
+                        // Load the image and return a small copy (Thumbnail)
+                        // (Downsizing image is good for performance)
                         Image img = Image.FromStream(stream);
                         return new Bitmap(img, new Size(50, 50));
                     }
@@ -52,18 +56,21 @@ namespace TohumBankasiOtomasyonu
             using (var db = new TohumBankasiContext())
             {
                 // 1. Başlık Bilgilerini Çek
+                // 1. Fetch Header Information
                 var satis = db.Satislars.Find(_gelenSatisId);
                 if (satis != null)
                 {
                     txtMakbuzNo.Text = satis.MakbuzNo;
                     txtTarih.Text = satis.SatisTarihi;
-                    txtToplamTutar.Text = satis.ToplamTutar.ToString("C2"); // Para formatı
+                    txtToplamTutar.Text = satis.ToplamTutar.ToString("C2"); // Para formatı (Currency format)
                 }
 
                 // 2. Detayları Çek (GÜNCELLENMİŞ KISIM)
+                // 2. Fetch Details (UPDATED PART)
                 string aktifDil = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
                 // a. Önce ham veriyi çek (Resim yolu dahil)
+                // a. First fetch raw data (Including image path)
                 var hamListe = (from d in db.SatisDetaylaris
                                 where d.SatisId == _gelenSatisId
                                 select new
@@ -72,11 +79,13 @@ namespace TohumBankasiOtomasyonu
                                     d.Miktar,
                                     d.SatisAnindakiFiyat,
                                     // Çevirileri ve Resimleri al
+                                    // Get Translations and Images
                                     Ceviriler = db.BitkiCevirileris.Where(c => c.BitkiId == d.BitkiId).ToList(),
                                     Gorsel = db.BitkiGorselleris.FirstOrDefault(g => g.BitkiId == d.BitkiId && g.AnaGorsel == 1)
                                 }).ToList();
 
                 // b. Bellekte işle (Dil seçimi ve Resim Yükleme)
+                // b. Process in memory (Language selection and Image Loading)
                 var sonucListesi = hamListe.Select(item => {
                     var uygunCeviri = item.Ceviriler.FirstOrDefault(c => c.DilKodu == aktifDil) ??
                                       item.Ceviriler.FirstOrDefault(c => c.DilKodu == "tr");
@@ -87,9 +96,9 @@ namespace TohumBankasiOtomasyonu
 
                     return new
                     {
-                        Resim = ResmiYukle(resimYolu), // Resmi Image objesi olarak döndür
+                        Resim = ResmiYukle(resimYolu), // Resmi Image objesi olarak döndür (Return Image as object)
                         UrunAdi = urunAdi,
-                        BilimselAd = bilimselAd, // Yeni Sütun
+                        BilimselAd = bilimselAd, // Yeni Sütun (New Column)
                         BirimFiyat = item.SatisAnindakiFiyat,
                         Miktar = item.Miktar,
                         AraToplam = item.Miktar * item.SatisAnindakiFiyat
@@ -99,6 +108,7 @@ namespace TohumBankasiOtomasyonu
                 gridDetaylar.DataSource = sonucListesi;
 
                 // 3. Ayarları Yap (Başlıklar ve Resim Sütunu)
+                // 3. Configure Settings (Headers and Image Column)
                 GridAyarlariniYap();
             }
         }
@@ -109,6 +119,7 @@ namespace TohumBankasiOtomasyonu
             if (view != null)
             {
                 // Başlıkları Ayarla (Sözlükten)
+                // Set Headers (From Dictionary)
                 if (view.Columns["Resim"] != null) view.Columns["Resim"].Caption = Resources.colDetayResim;
                 if (view.Columns["UrunAdi"] != null) view.Columns["UrunAdi"].Caption = Resources.colUrunAdi;
                 if (view.Columns["BilimselAd"] != null) view.Columns["BilimselAd"].Caption = Resources.colDetayBilimselAd;
@@ -117,13 +128,15 @@ namespace TohumBankasiOtomasyonu
                 if (view.Columns["AraToplam"] != null) view.Columns["AraToplam"].Caption = Resources.colSatirToplam;
 
                 // Resim Sütunu Ayarı (Görünmesi için önemli)
+                // Image Column Setting (Important for visibility)
                 if (view.Columns["Resim"] != null)
                 {
-                    view.Columns["Resim"].Width = 60; // Biraz genişlik ver
+                    view.Columns["Resim"].Width = 60; // Biraz genişlik ver (Give some width)
                 }
-                view.RowHeight = 60; // Satır yüksekliğini artır ki resim sığsın
+                view.RowHeight = 60; // Satır yüksekliğini artır ki resim sığsın (Increase row height to fit image)
 
                 // Para Formatı
+                // Currency Format
                 if (view.Columns["BirimFiyat"] != null)
                 {
                     view.Columns["BirimFiyat"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -135,13 +148,13 @@ namespace TohumBankasiOtomasyonu
                     view.Columns["AraToplam"].DisplayFormat.FormatString = "c2";
                 }
 
-                view.OptionsBehavior.Editable = false; // Düzenlenemesin
+                view.OptionsBehavior.Editable = false; // Düzenlenemesin (Not editable)
             }
         }
 
         private void FormSatisDetay_Load(object sender, EventArgs e)
         {
-            // UygulaDil(); // Başlıkları zaten GridAyarlariniYap içinde hallettik
+            // UygulaDil(); // Başlıkları zaten GridAyarlariniYap içinde hallettik (We already handled headers in GridAyarlariniYap)
             this.Text = Resources.FormSatisDetay_Title;
             layoutControl1.GetItemByControl(txtMakbuzNo).Text = Resources.lblDetayMakbuzNo;
             layoutControl1.GetItemByControl(txtTarih).Text = Resources.lblDetayTarih;

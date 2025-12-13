@@ -15,12 +15,14 @@ namespace TohumBankasiOtomasyonu
         }
 
         // Sütun başlıklarını dile göre ayarla
+        // Adjust column headers according to language
         private void SutunBasliklariniAyarla()
         {
             var view = gridBlockchain.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
             if (view != null)
             {
                 // Veritabanındaki sütun isimleri: BlokID, ZamanDamgasi, OncekiHash, Hash, Veri
+                // Database column names: BlockID, Timestamp, PreviousHash, Hash, Data
                 if (view.Columns["BlokID"] != null) view.Columns["BlokID"].Caption = Resources.colBlokID;
                 if (view.Columns["ZamanDamgasi"] != null) view.Columns["ZamanDamgasi"].Caption = Resources.colZamanDamgasi;
                 if (view.Columns["OncekiHash"] != null) view.Columns["OncekiHash"].Caption = Resources.colOncekiHash;
@@ -35,6 +37,8 @@ namespace TohumBankasiOtomasyonu
             {
                 // Sahte_Blokzincir tablosunu çek
                 // (Scaffold yaparken 'SahteBlokzincirs' olarak gelmiş olabilir, kontrol edin)
+                // Retrieve the `Fake_Blockchain` table.
+                // (It might have come as 'FakeBlockchains' when creating the scaffold, check it.)
                 var blokListesi = db.SahteBlokzincirs.ToList();
 
                 gridBlockchain.DataSource = blokListesi;

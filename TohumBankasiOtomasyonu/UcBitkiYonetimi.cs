@@ -27,23 +27,29 @@ namespace TohumBankasiOtomasyonu
                 string aktifDil = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
                 // 1. Önce tüm bitkileri (Ana Tabloyu) çek
+                // 1. First fetch all plants (Main Table)
                 var tumBitkiler = db.Bitkilers.ToList();
 
                 // 2. Tüm çevirileri de çek (Bellekte eşleştirmek daha kolaydır)
+                // 2. Fetch all translations too (Easier to match in memory)
                 var tumCeviriler = db.BitkiCevirileris.ToList();
 
                 // 3. Bellekte (Memory) birleştirme ve dil seçimi yap
                 var bitkiListesi = tumBitkiler.Select(b => {
                     // Bu bitkinin aktif dildeki çevirisini bul
+                    // 3. Perform joining and language selection in Memory
+                    // Find the translation of this plant in the active language
                     var ceviri = tumCeviriler.FirstOrDefault(c => c.BitkiId == b.BitkiId && c.DilKodu == aktifDil);
 
                     // Eğer yoksa, Türkçe çevirisini bul (Fallback)
+                    // If not found, find Turkish translation (Fallback)
                     if (ceviri == null)
                     {
                         ceviri = tumCeviriler.FirstOrDefault(c => c.BitkiId == b.BitkiId && c.DilKodu == "tr");
                     }
 
                     // Hala yoksa (ki olmamalı), boş bir nesne oluştur
+                    // If still not found (which shouldn't happen), create an empty object
                     if (ceviri == null) ceviri = new BitkiCevirileri { BitkiAdi = "İsimsiz", BilimselAd = "Bilinmiyor" };
 
                     return new
@@ -60,18 +66,22 @@ namespace TohumBankasiOtomasyonu
                 gridBitkiler.DataSource = bitkiListesi;
 
                 // --- ÇÖZÜM 2: SÜTUN BAŞLIKLARINI DÜZELTME ---
+                // --- SOLUTION 2: FIXING COLUMN HEADERS ---
                 SutunBasliklariniAyarla();
             }
         }
         private void SutunBasliklariniAyarla()
         {
             // GridView'e erişim (Varsayılan adı gridView1'dir)
+            // Access to GridView (Default name is gridView1)
             var view = gridBitkiler.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
 
             if (view != null)
             {
                 // Sütunlar veritabanından gelen isimlerle oluşur (ID, BitkiAdi, Fiyat...)
                 // Biz bunların görünen başlıklarını (Caption) değiştiriyoruz.
+                // Columns are created with names coming from database (ID, BitkiAdi, Fiyat...)
+                // We are changing their visible headers (Caption).
 
                 if (view.Columns["ID"] != null) view.Columns["ID"].Caption = Resources.colBitkiID;
                 if (view.Columns["BitkiAdi"] != null) view.Columns["BitkiAdi"].Caption = Resources.colBitkiAdi;
@@ -125,10 +135,14 @@ namespace TohumBankasiOtomasyonu
             // 1. Grid üzerinden seçili satırın "ID" değerini al
             // (Not: GridView isminiz varsayılan olarak 'gridView1'dir. 
             // Eğer değiştirdiyseniz kendi verdiğiniz ismi kullanın)
+            // 1. Get the "ID" value of the selected row from the Grid
+            // (Note: Your GridView name is 'gridView1' by default.
+            // If you changed it, use the name you gave)
 
             var seciliIdObj = gridView1.GetFocusedRowCellValue("ID");
 
             // Eğer hiçbir satır seçilmemişse veya liste boşsa
+            // If no row is selected or list is empty
             if (seciliIdObj == null)
             {
                 XtraMessageBox.Show(Resources.HataSatirSecilmedi, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -138,6 +152,7 @@ namespace TohumBankasiOtomasyonu
             int silinecekId = Convert.ToInt32(seciliIdObj);
 
             // 2. Kullanıcıdan ONAY iste (Güvenlik için şart)
+            // 2. Request CONFIRMATION from user (Required for security)
             DialogResult onay = XtraMessageBox.Show(Resources.BitkiSilOnayMesaj, Resources.BitkiSilOnayBaslik, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (onay == DialogResult.Yes)
@@ -147,6 +162,7 @@ namespace TohumBankasiOtomasyonu
                     using (var db = new TohumBankasiContext())
                     {
                         // 3. Veritabanında bu ID'ye sahip bitkiyi bul
+                        // 3. Find the plant with this ID in the database
                         var silinecekBitki = db.Bitkilers.Find(silinecekId);
 
                         if (silinecekBitki != null)
@@ -154,13 +170,18 @@ namespace TohumBankasiOtomasyonu
                             // 4. Sil ve Kaydet
                             // (EF Core, ilişkili tabloları -Çeviriler ve Görseller- otomatik silebilir, 
                             // eğer silmezse veritabanı ayarlarından Cascade Delete açılmalıdır)
+                            // 4. Delete and Save
+                            // (EF Core can automatically delete related tables -Translations and Images-,
+                            // if it doesn't, Cascade Delete must be enabled in database settings)
                             db.Bitkilers.Remove(silinecekBitki);
                             db.SaveChanges();
 
                             // 5. Başarı mesajı ver
+                            // 5. Give success message
                             XtraMessageBox.Show(Resources.BitkiSilBasarili, Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             // 6. LİSTEYİ YENİLE (Çok Önemli: Silinen satırın ekrandan gitmesi için)
+                            // 6. REFRESH LIST (Very Important: So the deleted row disappears from screen)
                             BitkileriListele();
                         }
                     }
@@ -175,6 +196,7 @@ namespace TohumBankasiOtomasyonu
         private void btnBitkiDuzenle_Click(object sender, EventArgs e)
         {
             // 1. Seçili ID'yi al (Silme işlemindeki gibi)
+            // 1. Get selected ID (Same as in delete operation)
             var seciliIdObj = gridView1.GetFocusedRowCellValue("ID");
             if (seciliIdObj == null)
             {
@@ -184,12 +206,15 @@ namespace TohumBankasiOtomasyonu
             int id = Convert.ToInt32(seciliIdObj);
 
             // 2. Formu bu ID ile oluştur (Düzenleme Modu)
+            // 2. Create form with this ID (Edit Mode)
             FormBitkiIslemleri frmIslem = new FormBitkiIslemleri(id);
 
             // 3. Aç
+            // 3. Open
             frmIslem.ShowDialog();
 
             // 4. Kapanınca listeyi yenile
+            // 4. Refresh list when closed
             BitkileriListele();
         }
     }

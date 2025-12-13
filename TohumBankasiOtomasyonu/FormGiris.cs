@@ -103,10 +103,12 @@ namespace TohumBankasiOtomasyonu
             try
             {
                 // 1. Kullanıcı adı ve şifreyi al
+                // 1. Get username and password
                 string kullaniciAdi = txtKullaniciAdi.Text.Trim();
                 string sifre = txtSifre.Text;
 
                 // Alanların boş olup olmadığını kontrol et
+                // Check if fields are empty
                 if (string.IsNullOrEmpty(kullaniciAdi) || string.IsNullOrEmpty(sifre))
                 {
                     
@@ -115,31 +117,41 @@ namespace TohumBankasiOtomasyonu
                 }
 
                 // 2. Girilen şifreyi hash'le
+                // 2. Hash the entered password
                 string sifreHash = ComputeSha256Hash(sifre);
 
                 // --- Veritabanı Kontrolü (EF Core) ---
+                // --- Database Control (EF Core) ---
                 using (var db = new TohumBankasiContext())
                 {
                     // 3. Kullanıcıyı bulmaya çalış (Kullanıcı adı VE Şifre Hash'i eşleşmeli)
                     // 'FirstOrDefault' eşleşen ilk kaydı getirir, yoksa null döner.
+                    // 3. Try to find user (Username AND Password Hash must match)
+                    // 'FirstOrDefault' returns first matching record, or null if none.
                     Kullanicilar bulunanKullanici = db.Kullanicilars
                                                      .FirstOrDefault(k => k.KullaniciAdi == kullaniciAdi && k.SifreHash == sifreHash);
 
                     // 4. Sonucu kontrol et
+                    // 4. Check the result
                     if (bulunanKullanici != null)
                     {
                         // --- BAŞARILI GİRİŞ ---
+                        // --- SUCCESSFUL LOGIN ---
                         // a. Giriş yapan kullanıcıyı public özelliğe ata
+                        // a. Assign logged-in user to public property
                         this.GirisYapanKullanici = bulunanKullanici;
 
                         // b. Formu kapat (Form1'deki döngü bu özelliği kontrol edecek)
+                        // b. Close form (Loop in Form1 will check this property)
                         this.Close();
                     }
                     else
                     {
                         // --- BAŞARISIZ GİRİŞ ---
+                        // --- FAILED LOGIN ---
                         XtraMessageBox.Show(Resources.GirisHataliMesaj, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         // Şifre kutusunu temizle ve odaklan
+                        // Clear password box and focus
                         txtSifre.Text = "";
                         txtSifre.Focus();
                     }
@@ -148,6 +160,7 @@ namespace TohumBankasiOtomasyonu
             catch (Exception ex)
             {
                 // Beklenmedik bir veritabanı hatası olursa
+                // If an unexpected database error occurs
                 XtraMessageBox.Show(Resources.GenelHata + " " + ex.Message, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }

@@ -109,9 +109,11 @@ namespace TohumBankasiOtomasyonu
         private void VerileriDoldur()
         {
             // Sakladığımız kullanıcı bilgisi (guncellenecekKullanici) boş değilse
+            // If the user information we stored (guncellenecekKullanici) is not empty
             if (guncellenecekKullanici != null)
             {
                 // Metin kutularını doldur
+                // Fill text boxes
                 txtAd.Text = guncellenecekKullanici.Ad;
                 txtSoyad.Text = guncellenecekKullanici.Soyad;
                 txtEmail.Text = guncellenecekKullanici.Email;
@@ -119,6 +121,8 @@ namespace TohumBankasiOtomasyonu
 
                 // GÜVENLİK ÖNLEMİ:
                 // Kullanıcı adının değiştirilmesini engelle (çünkü bu birincil anahtar gibidir)
+                // SECURITY MEASURE:
+                // Prevent username change (because it's like a primary key)
                 txtKullaniciAdi.ReadOnly = true;
             }
         }
@@ -249,6 +253,7 @@ namespace TohumBankasiOtomasyonu
                     XtraMessageBox.Show(Resources.GuncellemeBasarili, Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     this.GuncellemeBasarili = true; // Form1'e haber ver
+                    // Notify Form1
                     this.Close();
                 }
             }

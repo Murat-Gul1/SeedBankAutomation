@@ -20,16 +20,21 @@ namespace TohumBankasiOtomasyonu
         private bool formKapaniyor = false;
         DateTime sonUIGuncelleme = DateTime.MinValue;
         // --- SERİ PORT NESNESİ (UYGULAMA GENELİNDE TEK) ---
+        // --- SERIAL PORT OBJECT (SINGLETON IN APPLICATION) ---
+        // --- SERIAL PORT OBJECT (SINGLETON IN APPLICATION) ---
         private static SerialPort serialPort1;
         private static readonly object portKilidi = new object();
 
         // --- EŞİK DEĞERLERİ ---
+        // --- THRESHOLD VALUES ---
         float LIMIT_SICAKLIK = 25.0f;   // °C
         float LIMIT_NEM = 75.0f;        // %RH
         int LIMIT_GAZ = 350;
         int LIMIT_ISIK_HAM = 20;
 
         // --- HER SENSÖR İÇİN AYRI 30 SN KÖRLEME ---
+        // --- SEPARATE 30 SEC BLINDNESS FOR EACH SENSOR ---
+        // --- SEPARATE 30 SEC BLINDNESS FOR EACH SENSOR ---
         DateTime hareketYasakBitis = DateTime.MinValue;
         DateTime nemYasakBitis = DateTime.MinValue;
         DateTime gazYasakBitis = DateTime.MinValue;
@@ -40,6 +45,8 @@ namespace TohumBankasiOtomasyonu
         int fanAci = 0;
 
         // Arduino'ya düzenli "PING" göndermek için timer
+        // Timer to send regular "PING" to Arduino
+        // Timer to send regular "PING" to Arduino
         System.Windows.Forms.Timer tmrPing = new System.Windows.Forms.Timer();
 
         public FormKasaDepo()
@@ -47,9 +54,11 @@ namespace TohumBankasiOtomasyonu
             InitializeComponent();
 
             // --- TİMERLER ---
+            // --- TIMERS ---
             if (tmrAlarmSusturucu != null)
             {
                 // Alarm 2 saniye boyunca açık kalacak
+                // Alarm will stay on for 2 seconds
                 tmrAlarmSusturucu.Interval = 2000;
                 tmrAlarmSusturucu.Tick += TmrAlarmSusturucu_Tick;
             }
@@ -61,6 +70,7 @@ namespace TohumBankasiOtomasyonu
             }
 
             // --- PING TIMER AYARI ---
+            // --- PING TIMER SETTING ---
             tmrPing.Interval = 1000; // 1 saniyede bir PING
             tmrPing.Tick += TmrPing_Tick;
         }
@@ -70,13 +80,16 @@ namespace TohumBankasiOtomasyonu
             acilisZamani = DateTime.Now;
             UygulaDil();
             baslangicGecikmeSayaci = 0; // Sayacı sıfırla
+            // Reset counter
 
             // --- FAN RESMİ YÜKLE ---
+            // --- LOAD FAN IMAGE ---
             try { orjinalFanResmi = Properties.Resources.fan; }
             catch { if (picFan.Image != null) orjinalFanResmi = picFan.Image; }
             if (orjinalFanResmi != null) picFan.Image = orjinalFanResmi;
 
             // --- ARDUINO BAĞLANTISI ---
+            // --- ARDUINO CONNECTION ---
             try
             {
                 lock (portKilidi)
@@ -91,6 +104,8 @@ namespace TohumBankasiOtomasyonu
                     }
 
                     // Event çakışmasını önlemek için önce çıkar, sonra ekle
+                    // Remove then add to prevent event conflict
+                    // Remove then add to prevent event conflict
                     serialPort1.DataReceived -= SerialPort1_DataReceived;
                     serialPort1.DataReceived += SerialPort1_DataReceived;
 
@@ -99,13 +114,18 @@ namespace TohumBankasiOtomasyonu
                         serialPort1.Open();
 
                         // Açılır açılmaz buffer'da bekleyen eski veriyi SİL!
+                        // CLEAR old data waiting in buffer immediately after opening!
+                        // CLEAR old data waiting in buffer immediately after opening!
                         Thread.Sleep(250);            // Çeyrek saniye bekle ki veri akışı otursun
+                        // Wait quarter second for data flow to settle
+                        // Wait quarter second for data flow to settle
                         serialPort1.DiscardInBuffer();
                         serialPort1.DiscardOutBuffer();
                     }
                 }
 
                 // Timer'ı başlat
+                // Start Timer
                 tmrPing.Start();
             }
             catch (Exception ex)
@@ -123,6 +143,8 @@ namespace TohumBankasiOtomasyonu
         }
 
         // --- ARDUINO'DAN VERİ GELDİĞİNDE (AYRI THREAD) ---
+        // --- WHEN DATA RECEIVED FROM ARDUINO (SEPARATE THREAD) ---
+        // --- WHEN DATA RECEIVED FROM ARDUINO (SEPARATE THREAD) ---
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if (formKapaniyor) return;
@@ -141,6 +163,7 @@ namespace TohumBankasiOtomasyonu
                 catch
                 {
                     // Timeout / kesinti vs.
+                    // Timeout / interruption etc.
                     return;
                 }
 
@@ -150,10 +173,14 @@ namespace TohumBankasiOtomasyonu
                 gelenVeri = gelenVeri.Trim();
 
                 // >>> THROTTLE: En fazla 10 Hz (100 ms'de bir)
+                // >>> THROTTLE: Max 10 Hz (Every 100 ms)
+                // >>> THROTTLE: Max 10 Hz (Every 100 ms)
                 var simdi = DateTime.Now;
                 if ((simdi - sonUIGuncelleme).TotalMilliseconds < 100)
                 {
                     // 100ms dolmadan yeni veri geldiyse, UI'ya yollamadan çöpe at
+                    // If new data came before 100ms, trash it without sending to UI
+                    // If new data came before 100ms, trash it without sending to UI
                     return;
                 }
                 sonUIGuncelleme = simdi;
@@ -163,21 +190,29 @@ namespace TohumBankasiOtomasyonu
                     return;
 
                 // Artık gerçekten UI'da işlenecek veri bu
+                // This is the data that will actually be processed in UI
                 this.BeginInvoke(new Action<string>(VeriIsle), gelenVeri);
             }
             catch
             {
                 // Kapanış sırasında oluşabilecek saçma hataları yutuyoruz
+                // We swallow nonsense errors that may occur during closing
             }
         }
 
 
 
         // --- VERİ İŞLEME (UI THREAD) ---
+        // --- DATA PROCESSING (UI THREAD) ---
+        // --- DATA PROCESSING (UI THREAD) ---
         private void VeriIsle(string gelenVeri)
         {
             // 1. GÜVENLİK KİLİDİ: Form açıldıktan sonraki ilk 4 saniye işlem yapma!
+            // 1. SECURITY LOCK: Do not process for the first 4 seconds after form opens!
+            // 1. SECURITY LOCK: Do not process for the first 4 seconds after form opens!
             // Sensörlerin (özellikle Gaz ve PIR) kendine gelmesi için zaman tanı.
+            // Give time for sensors (especially Gas and PIR) to stabilize.
+            // Give time for sensors (especially Gas and PIR) to stabilize.
             if ((DateTime.Now - acilisZamani).TotalSeconds < 4)
             {
                 return;
@@ -195,6 +230,8 @@ namespace TohumBankasiOtomasyonu
 
                 // --- GÜVENLİ PARSE İŞLEMİ (Nokta/Virgül sorununu çözer) ---
                 // CultureInfo.InvariantCulture sayesinde replace yapmaya gerek kalmaz.
+                // --- SAFE PARSE OPERATION (Solves Dot/Comma problem) ---
+                // Thanks to CultureInfo.InvariantCulture, no need to replace.
                 float.TryParse(parcalar[0], NumberStyles.Any, CultureInfo.InvariantCulture, out sicaklik);
                 float.TryParse(parcalar[1], NumberStyles.Any, CultureInfo.InvariantCulture, out nem);
                 int.TryParse(parcalar[2], out gaz);
@@ -206,6 +243,7 @@ namespace TohumBankasiOtomasyonu
                 if (isikYuzde > 100) isikYuzde = 100;
 
                 // --- GÖSTERGELERİ GÜNCELLE ---
+                // --- UPDATE GAUGES ---
                 GostergeAyarla(gaugeSicaklik, sicaklik);
                 GostergeAyarla(gaugeNem, nem);
                 GostergeAyarla(gaugeGaz, gaz);
@@ -215,17 +253,21 @@ namespace TohumBankasiOtomasyonu
                     stateHareket.StateIndex = (hareket == 1) ? 3 : 1;
 
                 // --- TEHLİKE DURUMLARI ---
+                // --- DANGER STATES ---
                 bool hareketTehlike = (hareket == 1);
                 bool nemTehlike = (nem >= LIMIT_NEM);
                 bool gazTehlike = (gaz > LIMIT_GAZ);
                 bool sicaklikTehlike = (sicaklik > LIMIT_SICAKLIK);
                 bool isikTehlike = false;   // Örn. %75 üstü ise alarm
+                // Ex. Alarm if above 75%
 
                 // --- ALARM / KÖRLEME MANTIĞI ---
+                // --- ALARM / BLINDING LOGIC ---
                 DateTime simdi = DateTime.Now;
                 bool yeniAlarmVar = false;
 
                 // BU TURDA YENİ TETİKLENEN SEBEPLER
+                // REASONS NEWLY TRIGGERED IN THIS TURN
                 bool alarmHareket = false;
                 bool alarmNem = false;
                 bool alarmGaz = false;
@@ -259,19 +301,16 @@ namespace TohumBankasiOtomasyonu
                     sicaklikYasakBitis = simdi.AddSeconds(30);
                 }
 
-                //if (isikTehlike && simdi > isikYasakBitis)
-                //{
-                //    yeniAlarmVar = true;
-                //    isikYasakBitis = simdi.AddSeconds(30);
-                //}
-
                 if (yeniAlarmVar)
                 {
                     // 1) Önce buzzer'ı / LED'i çalıştır
+                    // 1) First start buzzer / LED
                     AlarmCalistir();
                     // 2) Mesajı seçili dile göre Resources'tan oluştur
+                    // 2) Create message from Resources according to selected language
                     var culture = CultureInfo.CurrentUICulture;
                     // 2) Kullanıcıya sebebi göster
+                    // 2) Show reason to user
                     string mesaj = Resources.KasaAlarm_SebepBaslik + Environment.NewLine;
 
                     if (alarmHareket)
@@ -310,7 +349,10 @@ namespace TohumBankasiOtomasyonu
                 }
 
                 // --- FAN MANTIĞI ---
+                // --- FAN LOGIC ---
+                // --- FAN LOGIC ---
                 // Fan butonu (toggle) null kontrolü ve sıcaklık kontrolü
+                // Fan button (toggle) null check and temperature check
                 bool fanManuelAcik = (tglFan != null && tglFan.IsOn);
 
                 if (sicaklik > LIMIT_SICAKLIK || fanManuelAcik)
@@ -325,6 +367,7 @@ namespace TohumBankasiOtomasyonu
         }
 
         // --- ARDUINO'YA DÜZENLİ PING GÖNDEREN TIMER ---
+        // --- TIMER SENDING REGULAR PING TO ARDUINO ---
         private void TmrPing_Tick(object sender, EventArgs e)
         {
             if (formKapaniyor) return;
@@ -345,12 +388,14 @@ namespace TohumBankasiOtomasyonu
         }
 
         // --- ALARM / BUZZER KONTROLÜ ---
+        // --- ALARM / BUZZER CONTROL ---
         void AlarmCalistir()
         {
             if (formKapaniyor) return;
             try
             {
                 // Zaten alarm çalıyorsa yeniden başlatma
+                // If alarm is already ringing do not restart
                 if (tmrAlarmSusturucu != null && tmrAlarmSusturucu.Enabled)
                     return;
 
@@ -358,6 +403,8 @@ namespace TohumBankasiOtomasyonu
                 {
                     if (serialPort1 != null && serialPort1.IsOpen)
                         serialPort1.Write("ALARM_AC\n");  // Arduino: BUZZER HIGH + kırmızı LED
+                        // Arduino: BUZZER HIGH + red LED
+                        // Arduino: BUZZER HIGH + red LED
                 }
 
                 if (tmrAlarmSusturucu != null)
@@ -379,6 +426,7 @@ namespace TohumBankasiOtomasyonu
                     if (serialPort1 != null && serialPort1.IsOpen)
                     {
                         serialPort1.Write("ALARM_KAPAT\n"); // Arduino: BUZZER LOW + yeşil LED
+                        // Arduino: BUZZER LOW + green LED
                         Thread.Sleep(10);
                         serialPort1.Write("ALARM_KAPAT\n");
                     }
@@ -396,10 +444,12 @@ namespace TohumBankasiOtomasyonu
         private void TmrAlarmSusturucu_Tick(object sender, EventArgs e)
         {
             // 2 saniye doldu → buzzer + kırmızı LED kapat, yeşili yak
+            // 2 seconds up -> turn off buzzer + red LED, turn on green
             AlarmDurdur();
         }
 
         // --- FAN KONTROLÜ ---
+        // --- FAN CONTROL ---
         void FanKontrol(bool ac)
         {
             if (formKapaniyor) return;
@@ -443,6 +493,7 @@ namespace TohumBankasiOtomasyonu
         }
 
         // --- GÖSTERGE AYARI ---
+        // --- GAUGE SETTING ---
         private void GostergeAyarla(GaugeControl kutu, float deger)
         {
             try
@@ -453,6 +504,7 @@ namespace TohumBankasiOtomasyonu
                 var gauge = kutu.Gauges[0];
 
                 // DAİRESEL GÖSTERGE
+                // CIRCULAR GAUGE
                 if (gauge is CircularGauge yuvarlak)
                 {
                     if (yuvarlak.Scales.Count > 0)
@@ -465,6 +517,7 @@ namespace TohumBankasiOtomasyonu
                     }
                 }
                 // ÇUBUK (LINEAR) GÖSTERGE
+                // BAR (LINEAR) GAUGE
                 else if (gauge is LinearGauge cubuk)
                 {
                     if (cubuk.Scales.Count > 0)
@@ -476,9 +529,11 @@ namespace TohumBankasiOtomasyonu
                         if (v > sc.MaxValue) v = sc.MaxValue;
 
                         // 1) Scale değeri
+                        // 1) Scale value
                         sc.Value = v;
 
                         // 2) LEVEL (mavi çubuk) değeri
+                        // 2) LEVEL (blue bar) value
                         if (cubuk.Levels != null && cubuk.Levels.Count > 0)
                         {
                             foreach (var lvl in cubuk.Levels)
@@ -532,6 +587,7 @@ namespace TohumBankasiOtomasyonu
 
 
         // --- DİL UYGULAMA ---
+        // --- LANGUAGE APPLICATION ---
         public void UygulaDil()
         {
             try
@@ -550,6 +606,7 @@ namespace TohumBankasiOtomasyonu
         }
 
         // --- FAN RESMİ DÖNDÜRME ---
+        // --- ROTATING FAN IMAGE ---
         private Image ResimDondur(Image img, float angle)
         {
             if (img == null) return null;
@@ -599,14 +656,17 @@ namespace TohumBankasiOtomasyonu
         private void FormKasaDepo_FormClosing(object sender, FormClosingEventArgs e)
         {
             // 1. Bayrağı kaldır: Artık veri işleme!
+            // 1. Remove flag: Do not process data anymore!
             formKapaniyor = true;
 
             // 2. Timerları durdur
+            // 2. Stop Timers
             if (tmrPing != null) tmrPing.Stop();
             if (tmrFanAnimasyon != null) tmrFanAnimasyon.Stop();
             if (tmrAlarmSusturucu != null) tmrAlarmSusturucu.Stop();
 
             // 3. Portun Eventini İptal Et (Önce veri akışını kes)
+            // 3. Cancel Port Event (First cut off data flow)
             try
             {
                 if (serialPort1 != null)
@@ -615,20 +675,28 @@ namespace TohumBankasiOtomasyonu
             catch { }
 
             // 4. KRİTİK NOKTA: UI Thread ile SerialPort Thread'in vedalaşması için
+            // 4. CRITICAL POINT: To say goodbye between UI Thread and SerialPort Thread
+            // 4. CRITICAL POINT: To say goodbye between UI Thread and SerialPort Thread
             // çok kısa bekle. Bu, "Deadlock" (Donma) riskini %99 azaltır.
+            // wait briefly. This reduces "Deadlock" risk by 99%.
+            // wait briefly. This reduces "Deadlock" risk by 99%.
             System.Threading.Thread.Sleep(100);
 
             // 5. Portu tamamen kapat ve yok et
+            // 5. Completely close and destroy port
             SeriPortuKapat();
         }
 
         // Uygulama tamamen kapanırken çağırmak için yardımcı metot (Form1'den çağırabilirsin)
         // Bu metot FormKasaDepo class'ının en altında
+        // Helper method to call when application is closing completely (You can call from Form1)
+        // This method is at the bottom of FormKasaDepo class
         public static void SeriPortuKapat()
         {
             SerialPort port = null;
 
             // 1) Sadece referansı çek ve static alanı boşalt
+            // 1) Just take reference and clear static field
             lock (portKilidi)
             {
                 if (serialPort1 == null)
@@ -636,9 +704,11 @@ namespace TohumBankasiOtomasyonu
 
                 port = serialPort1;
                 serialPort1 = null;   // Artık başka kimse bu portu kullanmasın
+                // No one else should use this port anymore
             }
 
             // 2) Asıl işi kilidin DIŞINDA yap
+            // 2) Do real work OUTSIDE the lock
             try
             {
                 if (port.IsOpen)

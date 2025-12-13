@@ -11,9 +11,11 @@ namespace TohumBankasiOtomasyonu
     public partial class UcKullaniciBitkiKarti : DevExpress.XtraEditors.XtraUserControl
     {
         // Bu kart hangi bitkiyi tutuyor?
+        // Which plant does this card hold?
         public int TakipBitkiId { get; private set; }
 
         // Ana listeyi yenilemek için bir olay (Event) tanımlıyoruz
+        // We define an event to refresh the main list
         public event EventHandler Silindi;
         public event EventHandler DetayIstendi;
 
@@ -29,6 +31,7 @@ namespace TohumBankasiOtomasyonu
         }
 
         // Verileri Doldurma Metodu
+        // Data Filling Method
         public void BilgileriDoldur(int id, string ad, string tarih, string resimYolu)
         {
             TakipBitkiId = id;
@@ -36,6 +39,7 @@ namespace TohumBankasiOtomasyonu
             lblTarih.Text = tarih;
 
             // Resmi Yükle
+            // Load Image
             if (!string.IsNullOrEmpty(resimYolu))
             {
                 try
@@ -56,9 +60,11 @@ namespace TohumBankasiOtomasyonu
         }
 
         // --- SİLME İŞLEMİ ---
+        // --- DELETION PROCESS ---
         private void btnSil_Click(object sender, EventArgs e)
         {
             // Onay al
+            // Get confirmation
             if (XtraMessageBox.Show(Resources.MsgResimSilOnay, Resources.BaslikSil, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 try
@@ -67,6 +73,8 @@ namespace TohumBankasiOtomasyonu
                     {
                         // Veritabanından sil (Kullanici_Bitkileri tablosu)
                         // (Not: Tablo adını Scaffold sonrası kontrol edin, 'KullaniciBitkileris' olabilir)
+                        // Delete from database (Kullanici_Bitkileri table)
+                        // (Note: Check the table name after Scaffold, it might be 'KullaniciBitkileris')
                         var bitki = db.KullaniciBitkileris.Find(TakipBitkiId);
                         if (bitki != null)
                         {
@@ -74,6 +82,7 @@ namespace TohumBankasiOtomasyonu
                             db.SaveChanges();
 
                             // Ana forma haber ver ki listeyi yenilesin
+                            // Notify the main form to refresh the list
                             if (Silindi != null) Silindi(this, EventArgs.Empty);
                         }
                     }
@@ -86,9 +95,11 @@ namespace TohumBankasiOtomasyonu
         }
 
         // --- DETAY BUTONU ---
+        // --- DETAIL BUTTON ---
         private void btnDetay_Click(object sender, EventArgs e)
         {
             // Ana forma "Bu karta tıklandı, detayını aç" haberi ver
+            // Signal main form "This card clicked, open details"
             if (DetayIstendi != null) DetayIstendi(this, EventArgs.Empty);
         }
     }

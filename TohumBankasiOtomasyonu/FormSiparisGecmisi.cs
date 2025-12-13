@@ -26,6 +26,7 @@ namespace TohumBankasiOtomasyonu
         }
 
         // Resim Yükleme Yardımcısı
+        // Image Upload Helper
         private Image ResmiYukle(string yol)
         {
             try
@@ -37,7 +38,7 @@ namespace TohumBankasiOtomasyonu
                     using (var stream = new FileStream(tamYol, FileMode.Open, FileAccess.Read))
                     {
                         Image img = Image.FromStream(stream);
-                        return new Bitmap(img, new Size(50, 50)); // Küçük resim
+                        return new Bitmap(img, new Size(50, 50)); // Küçük resim (Thumbnail)
                     }
                 }
             }
@@ -53,6 +54,7 @@ namespace TohumBankasiOtomasyonu
             if (view != null)
             {
                 // Başlıkları Ayarla
+                // Set Headers
                 if (view.Columns["Resim"] != null) view.Columns["Resim"].Caption = Resources.colDetayResim;
                 if (view.Columns["UrunAdi"] != null) view.Columns["UrunAdi"].Caption = Resources.colSepetUrunAdi;
                 if (view.Columns["BilimselAd"] != null) view.Columns["BilimselAd"].Caption = Resources.colDetayBilimselAd;
@@ -72,6 +74,7 @@ namespace TohumBankasiOtomasyonu
                 string aktifDil = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
                 // Kullanıcının aldığı TÜM ürünleri (Detayları) çekiyoruz
+                // We are fetching ALL products (Details) purchased by the user
                 var gecmisListesi = (from d in db.SatisDetaylaris
                                      join s in db.Satislars on d.SatisId equals s.SatisId
                                      where s.KullaniciId == _aktifKullanici.KullaniciId
@@ -80,15 +83,17 @@ namespace TohumBankasiOtomasyonu
                                      {
                                          d.BitkiId,
                                          d.Miktar,
-                                         BirimFiyat = d.SatisAnindakiFiyat, // O anki fiyat
+                                         BirimFiyat = d.SatisAnindakiFiyat, // O anki fiyat (Price at that moment)
                                          s.SatisTarihi,
                                          s.MakbuzNo,
                                          // Çevirileri ve Resimleri alt sorgu ile alıyoruz
+                                         // We get Translations and Images with a subquery
                                          Ceviriler = db.BitkiCevirileris.Where(c => c.BitkiId == d.BitkiId).ToList(),
                                          Gorsel = db.BitkiGorselleris.FirstOrDefault(g => g.BitkiId == d.BitkiId && g.AnaGorsel == 1)
                                      }).ToList();
 
                 // Bellekte resim ve dil işlemleri
+                // Image and language operations in memory
                 var sonucListesi = gecmisListesi.Select(item => {
                     var uygunCeviri = item.Ceviriler.FirstOrDefault(c => c.DilKodu == aktifDil) ??
                                       item.Ceviriler.FirstOrDefault(c => c.DilKodu == "tr");
@@ -99,9 +104,9 @@ namespace TohumBankasiOtomasyonu
 
                     return new
                     {
-                        Resim = ResmiYukle(resimYolu), // RESİM SÜTUNU
-                        UrunAdi = urunAdi,             // BİTKİ ADI
-                        BilimselAd = bilimselAd,       // BİLİMSEL AD
+                        Resim = ResmiYukle(resimYolu), // RESİM SÜTUNU (IMAGE COLUMN)
+                        UrunAdi = urunAdi,             // BİTKİ ADI (PLANT NAME)
+                        BilimselAd = bilimselAd,       // BİLİMSEL AD (SCIENTIFIC NAME)
                         Miktar = item.Miktar,
                         Tutar = item.Miktar * item.BirimFiyat,
                         Tarih = item.SatisTarihi,
@@ -122,10 +127,12 @@ namespace TohumBankasiOtomasyonu
             if (view != null)
             {
                 // Resim Sütunu Ayarı
+                // Image Column Setting
                 if (view.Columns["Resim"] != null) view.Columns["Resim"].Width = 60;
-                view.RowHeight = 60; // Satırları genişlet
+                view.RowHeight = 60; // Satırları genişlet (Expand rows)
 
                 // Para formatı
+                // Currency format
                 if (view.Columns["Tutar"] != null)
                 {
                     view.Columns["Tutar"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;

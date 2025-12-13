@@ -18,6 +18,7 @@ namespace TohumBankasiOtomasyonu
     {
         private UcAnaSayfa _anaSayfaControl;
         // Giriş yapan kullanıcıyı formun her yerinden erişebilmek için burada tutacağız
+        // We will keep the logged in user here to access from anywhere in the form
         // We'll store the logged-in user here to access them from anywhere in the form
         private Kullanicilar aktifKullanici = null;
         public Form1()
@@ -27,6 +28,7 @@ namespace TohumBankasiOtomasyonu
         private void AnaSayfayiYukle()
         {
             // Eğer zaten yüklüyse tekrar yükleme
+            // If already loaded, do not reload
             if (_anaSayfaControl == null)
             {
                 _anaSayfaControl = new UcAnaSayfa();
@@ -35,11 +37,13 @@ namespace TohumBankasiOtomasyonu
             }
 
             // Paneli temizle ve ana sayfayı göster
+            // Clear panel and show main page
             pnlAnaIcerik.Controls.Clear();
             pnlAnaIcerik.Controls.Add(_anaSayfaControl);
             _anaSayfaControl.BringToFront();
 
             // Verileri yükle/yenile
+            // Load/Refresh data
             _anaSayfaControl.DiliYenile();
         }
 
@@ -90,17 +94,19 @@ namespace TohumBankasiOtomasyonu
 
         // Bu metot, formdaki tüm metinleri o an seçili olan dile göre
         // .resx sözlük dosyasından yeniden yükler.
-        // This method reloads all texts on the form from the
-        // .resx dictionary file according to the currently selected language.
+        // This method reloads all texts on the form from the .resx dictionary file
+        // according to the currently selected language.
+
 
         private void UygulaDil()
         {
             // Sözlükten verileri çek
             // 'Resources' sınıfı, bizim .resx dosyalarımız için otomatik olarak oluşturuldu.
             // O anki dile (Culture) göre doğru sözlüğü kendisi seçer.
-            // Fetch data from the dictionary  
-            // The 'Resources' class was automatically generated for our .resx dictionary files.  
-            // It automatically selects the correct dictionary based on the current language (Culture).
+            // Fetch data from dictionary
+            // 'Resources' class is automatically generated for our .resx files.
+            // It automatically selects the correct dictionary based on current Culture.
+
 
             this.Text = Resources.Form1_Title;
 
@@ -232,7 +238,9 @@ namespace TohumBankasiOtomasyonu
 
             Thread.CurrentThread.CurrentUICulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;   // sayısal formatlar için
+            // for numeric formats
             Resources.Culture = culture;                     // <<< ÖNEMLİ EK
+            // <<< IMPORTANT ADDITION
 
             UygulaDil();
             AktifSayfayiYenile();
@@ -396,34 +404,46 @@ namespace TohumBankasiOtomasyonu
             {
                 // (Bu normalde olmamalı, ama güvenlik kontrolü olarak kalsın)
                 // (Bu hata mesajını da sözlüğe ekleyebiliriz: 'HataGirisGerekli')
+                // (This shouldn't happen normally, but keep as security check)
+                // (We can also add this error message to dictionary: 'ErrorLoginRequired')
                 XtraMessageBox.Show("Ayarları görmek için önce giriş yapmalısınız.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // 2. Formu, 'aktifKullanici' bilgisini göndererek aç
+            // 2. Open form sending 'aktifKullanici' info
             FormHesapAyarlari frmAyar = new FormHesapAyarlari(aktifKullanici);
 
             // 3. ShowDialog(), o form kapatılana kadar bu metodu duraklatır
+            // 3. ShowDialog() pauses this method until that form is closed
             frmAyar.ShowDialog();
 
             // 4. FormHesapAyarlari kapandı. Şimdi kod buradan devam eder.
             //    Güncelleme başarılı oldu mu?
+            // 4. FormHesapAyarlari closed. Code continues from here.
+            //    Was update successful?
             if (frmAyar.GuncellemeBasarili)
             {
                 // Evet, kullanıcının Adı, Soyadı veya E-postası değişmiş olabilir.
                 // Form1'deki 'aktifKullanici' nesnemiz artık "bayat" (stale) veriye sahip.
                 // Veritabanından en güncel veriyi tekrar çekmeliyiz.
+                // Yes, user's Name, Surname or Email might have changed.
+                // 'aktifKullanici' object in Form1 has "stale" data now.
+                // We must fetch the latest data from database again.
                 try
                 {
                     using (var db = new TohumBankasiContext())
                     {
                         // Find() komutu, birincil anahtara (KullaniciID) göre veriyi çeker
+                        // Find() command fetches data by primary key (KullaniciID)
                         this.aktifKullanici = db.Kullanicilars.Find(this.aktifKullanici.KullaniciId);
                     }
 
                     // (Gelecekte buraya, 'Hoşgeldiniz, [Yeni Ad]' yazan bir label'ı
                     // güncelleyen kodu da ekleyebiliriz.)
                     // Örn: GuncelleArayuz(aktifKullanici); // Label'ı tazelemek için
+                    // (In future we can add code here to update a label saying 'Welcome, [New Name]')
+                    // Ex: GuncelleArayuz(aktifKullanici); // To refresh label
                 }
                 catch (Exception ex)
                 {
@@ -438,6 +458,8 @@ namespace TohumBankasiOtomasyonu
             frmAdmin.ShowDialog();
             // Admin paneli kapandıktan sonra burası çalışır.
             // Ana Sayfa açıksa, oradaki vitrini (stokları, fiyatları) yenile.
+            // Runs after Admin panel closes.
+            // If Main Page is open, refresh showcase (stocks, prices) there.
             if (_anaSayfaControl != null)
             {
                 _anaSayfaControl.VitriniDoldur();
@@ -458,6 +480,9 @@ namespace TohumBankasiOtomasyonu
             // --- YENİ KISIM: OLAYI BAĞLA ---
             // FormSepet'teki "SatisYapildi" sinyaline abone oluyoruz.
             // Bu sinyal gelince "Sepet_SatisYapildi" metodu çalışacak.
+            // --- NEW PART: BIND EVENT ---
+            // We subscribe to "SatisYapildi" signal in FormSepet.
+            // When this signal comes, "Sepet_SatisYapildi" method will run.
             frm.SatisYapildi += Sepet_SatisYapildi;
 
             frm.ShowDialog();
@@ -465,6 +490,7 @@ namespace TohumBankasiOtomasyonu
         private void Sepet_SatisYapildi(object sender, EventArgs e)
         {
             // Ana Sayfa açıksa, vitrini (stokları) yenile
+            // If Main Page opens, refresh showcase (stocks)
             if (_anaSayfaControl != null)
             {
                 _anaSayfaControl.VitriniDoldur();
@@ -476,6 +502,9 @@ namespace TohumBankasiOtomasyonu
             // 1. Eğer zaten açıksa tekrar yükleme
             // (Bu kontrolü yapmak için _aktifModul gibi bir değişken tutabiliriz ama
             // şimdilik basitçe paneli temizleyip ekleyelim)
+            // 1. If already open, do not reload
+            // (We could keep a variable like _aktifModul to do this check but
+            // for now let's simply clear panel and add)
 
             pnlAnaIcerik.Controls.Clear();
             UcBitkiBilgi ucBilgi = new UcBitkiBilgi();
@@ -483,20 +512,25 @@ namespace TohumBankasiOtomasyonu
             pnlAnaIcerik.Controls.Add(ucBilgi);
         }
         // O an açık olan sayfayı bulup dilini yenileyen metot
+        // Method that finds currently open page and refreshes its language
         private void AktifSayfayiYenile()
         {
             // Panelde hiç kontrol yoksa çık
+            // If no control in panel, exit
             if (pnlAnaIcerik.Controls.Count == 0) return;
 
             // Panelin içindeki ilk kontrolü al (Genelde tek bir UserControl olur)
+            // Get first control inside panel (Usually there is a single UserControl)
             Control aktifKontrol = pnlAnaIcerik.Controls[0];
 
             // 1. Eğer aktif sayfa 'UcAnaSayfa' ise
+            // 1. If active page is 'UcAnaSayfa'
             if (aktifKontrol is UcAnaSayfa)
             {
                 ((UcAnaSayfa)aktifKontrol).DiliYenile();
             }
             // 2. Eğer aktif sayfa 'UcBitkiBilgi' ise (YENİ EKLENEN)
+            // 2. If active page is 'UcBitkiBilgi' (NEWLY ADDED)
             else if (aktifKontrol is UcBitkiBilgi)
             {
                 ((UcBitkiBilgi)aktifKontrol).DiliYenile();
@@ -506,6 +540,9 @@ namespace TohumBankasiOtomasyonu
                 // UcBitkiAsistani içinde 'DiliYenile' diye bir metot yoksa
                 // 'UygulaDil()' metodunu public yapıp onu da çağırabilirsiniz.
                 // Ancak en doğrusu oraya da bir 'DiliYenile' metodu eklemektir.
+                // If there is no method named 'DiliYenile' inside UcBitkiAsistani
+                // you can make 'UygulaDil()' public and call it too.
+                // But the best practice is adding a 'DiliYenile' method there too.
                 ((UcBitkiAsistani)aktifKontrol).DiliYenile();
             }
             else if (aktifKontrol is UcBitkiTakip)
@@ -517,15 +554,18 @@ namespace TohumBankasiOtomasyonu
         private void btnAnaSayfa_Click(object sender, EventArgs e)
         {
             // Ana sayfa modülünü yükle
+            // Load main page module
             AnaSayfayiYukle();
         }
 
         private void btnSiparisGecmisi_Click(object sender, EventArgs e)
         {
             // Güvenlik kontrolü
+            // Security check
             if (aktifKullanici == null) return;
 
             // Formu kullanıcı ile birlikte aç
+            // Open form with user
             FormSiparisGecmisi frm = new FormSiparisGecmisi(aktifKullanici);
             frm.ShowDialog();
         }
@@ -539,6 +579,7 @@ namespace TohumBankasiOtomasyonu
         private void btnAsistan_Click(object sender, EventArgs e)
         {
             // Asistan sayfasını yükle
+            // Load assistant page
             pnlAnaIcerik.Controls.Clear();
             UcBitkiAsistani uc = new UcBitkiAsistani();
             uc.Dock = DockStyle.Fill;
@@ -557,11 +598,13 @@ namespace TohumBankasiOtomasyonu
         private void btnKasaDepo_Click(object sender, EventArgs e)
         {
             // 'using' bloğu, süslü parantez bittiği anda formu RAM'den siler (Dispose eder).
+            // 'using' block deletes form from RAM (Disposes) as soon as curly brace ends.
             using (FormKasaDepo frm = new FormKasaDepo())
             {
                 frm.ShowDialog();
             }
             // Buraya gelindiğinde frm tamamen yok edilmiştir, COM4 serbest kalmıştır.
+            // When reached here, frm is completely destroyed, COM4 is released.
         }
 
 

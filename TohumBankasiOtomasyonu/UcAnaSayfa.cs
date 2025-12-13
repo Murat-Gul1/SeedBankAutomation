@@ -16,6 +16,7 @@ namespace TohumBankasiOtomasyonu
     public partial class UcAnaSayfa : DevExpress.XtraEditors.XtraUserControl
     {
         // Veritabanından çektiğimiz listeyi burada tutacağız
+        // We will keep the list we fetch from the database here
         private List<GaleriBitkisi> _galeriListesi = new List<GaleriBitkisi>();
 
         public UcAnaSayfa()
@@ -23,11 +24,13 @@ namespace TohumBankasiOtomasyonu
             InitializeComponent();
 
             // DÜZELTME 1: Olayı bağlama
+            // FIX 1: Binding the event
             sliderBitkiler.CurrentImageIndexChanged += SliderBitkiler_CurrentImageIndexChanged;
         }
 
 
         // Ana Metot: Verileri Çek ve Yükle
+        // Main Method: Fetch and Load Data
         public void GaleriYukle()
         {
             try
@@ -38,12 +41,14 @@ namespace TohumBankasiOtomasyonu
 
                     // --- 1. Veritabanı Sorgusu ---
                     // Burada OrderBy(Guid...) KULLANMIYORUZ. Veriyi düz çekiyoruz.
+                    // --- 1. Database Query ---
+                    // We DO NOT use OrderBy(Guid...) here. We fetch data directly.
                     var sorgu = (from b in db.Bitkilers
-                                 where b.Aktif == 1 // Sadece aktif bitkiler
+                                 where b.Aktif == 1 // Sadece aktif bitkiler (Only active plants)
                                  join g in db.BitkiGorselleris on b.BitkiId equals g.BitkiId
-                                 where g.AnaGorsel == 1 // Sadece ana görsel
+                                 where g.AnaGorsel == 1 // Sadece ana görsel (Only main image)
                                  join c in db.BitkiCevirileris on b.BitkiId equals c.BitkiId
-                                 where c.DilKodu == aktifDil // Aktif dildeki çeviri
+                                 where c.DilKodu == aktifDil // Aktif dildeki çeviri (Translation in active language)
                                  select new
                                  {
                                      b.BitkiId,
@@ -54,12 +59,16 @@ namespace TohumBankasiOtomasyonu
 
                     // --- 2. Veriyi Hafızaya Al ve Karıştır ---
                     // Önce ToList() diyerek veriyi SQL'den C#'a çekiyoruz.
+                    // --- 2. Load Data into Memory and Shuffle ---
+                    // We first fetch data from SQL to C# by saying ToList().
                     var tumListe = sorgu.ToList();
 
                     // Şimdi C# içinde karıştırıp 5 tane alıyoruz (Burada hata vermez)
+                    // Now we shuffle within C# and take 5 (This won't cause error here)
                     var hamVeri = tumListe.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
 
                     // --- 3. Slider'a Yükle ---
+                    // --- 3. Load to Slider ---
                     _galeriListesi.Clear();
                     sliderBitkiler.Images.Clear();
 
@@ -111,12 +120,16 @@ namespace TohumBankasiOtomasyonu
         // DÜZELTME 2: Metot ismini ve parametreyi düzelttik
         // (ImageChangedEventArgs -> EventArgs oldu)
         // (Metot ismi yukarıdaki += ile aynı oldu)
+        // FIX 2: We corrected the method name and parameter
+        // (ImageChangedEventArgs -> EventArgs)
+        // (Method name became the same as += above)
         private void SliderBitkiler_CurrentImageIndexChanged(object sender, EventArgs e)
         {
             BilgileriGuncelle(sliderBitkiler.CurrentImageIndex);
         }
 
         // Sağdaki yazıları güncelleyen yardımcı metot
+        // Helper method that updates text on the right
         private void BilgileriGuncelle(int index)
         {
             if (index >= 0 && index < _galeriListesi.Count)
@@ -124,13 +137,17 @@ namespace TohumBankasiOtomasyonu
                 var bitki = _galeriListesi[index];
 
                 // Başlık (Label)
+                // Title (Label)
                 lblAnaBaslik.Text = bitki.BitkiAdi;
 
                 // Açıklama (MemoEdit) - ARTIK METNİ KISALTMIYORUZ!
                 // MemoEdit kaydırma çubuğu olduğu için tüm metni basabiliriz.
+                // Description (MemoEdit) - WE ARE NOT SHORTENING THE TEXT ANYMORE!
+                // Since MemoEdit has a scroll bar, we can print the entire text.
                 memoAnaAciklama.Text = bitki.Aciklama;
 
                 // (İsteğe bağlı) İmleci başa al, bazen en altta kalabiliyor
+                // (Optional) Move cursor to start, sometimes it stays at the bottom
                 memoAnaAciklama.SelectionStart = 0;
                 memoAnaAciklama.ScrollToCaret();
             }
@@ -154,6 +171,7 @@ namespace TohumBankasiOtomasyonu
         public void VitriniDoldur()
         {
             // Paneli temizle (Eski kartları sil)
+            // Clear panel (Delete old cards)
             flowPanelUrunler.Controls.Clear();
 
             try
@@ -163,6 +181,7 @@ namespace TohumBankasiOtomasyonu
                     string aktifDil = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
                     // Aktif olan tüm bitkileri çek
+                    // Fetch all active plants
                     var bitkiler = (from b in db.Bitkilers
                                     where b.Aktif == 1
                                     join g in db.BitkiGorselleris on b.BitkiId equals g.BitkiId
@@ -180,10 +199,12 @@ namespace TohumBankasiOtomasyonu
                                     }).ToList();
 
                     // Her bitki için bir kart oluştur
+                    // Create a card for each plant
                     foreach (var bitki in bitkiler)
                     {
                         UcUrunKarti kart = new UcUrunKarti();
                         // Kartın verilerini doldur
+                        // Fill card data
                         kart.BilgileriDoldur(
                             bitki.BitkiId,
                             bitki.BitkiAdi,
@@ -194,9 +215,11 @@ namespace TohumBankasiOtomasyonu
                         );
 
                         // Kartlar birbirine yapışmasın diye boşluk verelim
+                        // Let's add spacing so cards don't stick to each other
                         kart.Margin = new Padding(10);
 
                         // KARTI PANELE EKLE
+                        // ADD CARD TO PANEL
                         flowPanelUrunler.Controls.Add(kart);
                     }
                 }
@@ -210,27 +233,37 @@ namespace TohumBankasiOtomasyonu
         private void KartlariOrtala()
         {
             // Eğer vitrinde hiç kart yoksa işlem yapma
+            // Do not process if there are no cards in the showcase
             if (flowPanelUrunler.Controls.Count == 0) return;
 
             // 1. Kartın Genişliğini Hesapla
             // Kart genişliği (200) + Margin (Sol 10 + Sağ 10 = 20) = 220
             // (Eğer kart boyutunu değiştirdiyseniz burayı ona göre güncelleyin)
+            // 1. Calculate Card Width
+            // Card width (200) + Margin (Left 10 + Right 10 = 20) = 220
+            // (If you changed card size, update here accordingly)
             int kartTamGenisligi = 220;
 
             // 2. Panelin Genişliği
+            // 2. Panel Width
             int panelGenisligi = flowPanelUrunler.ClientSize.Width;
 
             // 3. Bir satıra en fazla kaç kart sığar?
+            // 3. How many cards can fit in a row at most?
             int satirdakiKartSayisi = Math.Max(1, panelGenisligi / kartTamGenisligi);
 
             // 4. Bu kartlar toplam ne kadar yer kaplıyor?
+            // 4. How much space do these cards take up in total?
             int doluAlan = satirdakiKartSayisi * kartTamGenisligi;
 
             // 5. Kalan boşluğu bul ve ikiye böl (Sol boşluk = Sağ boşluk)
+            // 5. Find remaining space and divide by two (Left space = Right space)
             int solBosluk = (panelGenisligi - doluAlan) / 2;
 
             // 6. Panelin sol dolgusunu (Padding) ayarla
             // (Sol boşluk kadar it, üstten 10px boşluk bırak)
+            // 6. Set Panel's left padding
+            // (Push as much as left space, leave 10px space from top)
             flowPanelUrunler.Padding = new Padding(solBosluk, 10, 0, 0);
         }
 
@@ -244,13 +277,18 @@ namespace TohumBankasiOtomasyonu
 
             // 1. Yatay Ortalama (X)
             // Zemin genişliğinden kutu genişliğini çıkarıp ikiye bölüyoruz.
+            // 1. Horizontal Centering (X)
+            // We subtract box width from background width and divide by two.
             int x = (this.ClientSize.Width - pnlMerkezKutu.Width) / 2;
 
             // Sol kenara yapışmaması için güvenlik (Mobil gibi dar ekranlar için)
+            // Safety to prevent sticking to left edge (For narrow screens like mobile)
             if (x < 10) x = 10;
 
             // 2. Dikey Konum (Y)
             // Hep en üstten başlasın (Kaydırma çubuğu (Scrollbar) işi halledecek)
+            // 2. Vertical Position (Y)
+            // Always start from top (Scrollbar will handle the rest)
             int y = 10;
 
             pnlMerkezKutu.Location = new Point(x, y);

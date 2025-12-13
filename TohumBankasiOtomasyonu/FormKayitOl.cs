@@ -92,26 +92,32 @@ namespace TohumBankasiOtomasyonu
             try
             {
                 // --- 1. Validasyon: Zorunlu Alan Kontrolü ---
+                // --- 1. Validation: Mandatory Field Check ---
 
                 // .Trim() komutu, kullanıcının girdiği metnin başındaki/sonundaki boşlukları siler.
+                // .Trim() command removes leading/trailing spaces from user input.
                 string ad = txtAd.Text.Trim();
                 string soyad = txtSoyad.Text.Trim();
                 string kullaniciAdi = txtKayitKullaniciAdi.Text.Trim();
-                string sifre = txtKayitSifre.Text; // Şifrelerde .Trim() kullanmayız
+                string sifre = txtKayitSifre.Text; // Şifrelerde .Trim() kullanmayız (We don't use .Trim() for passwords)
                 string sifreTekrar = txtKayitSifreTekrar.Text;
                 string email = txtEmail.Text.Trim();
 
                 // Zorunlu alanların (DB'de NOT NULL olanlar) boş olup olmadığını kontrol et
+                // Check if mandatory fields (NOT NULL in DB) are empty
                 if (string.IsNullOrEmpty(ad) || string.IsNullOrEmpty(soyad) ||
                     string.IsNullOrEmpty(kullaniciAdi) || string.IsNullOrEmpty(sifre) ||
                     string.IsNullOrEmpty(sifreTekrar))
                 {
                     // Hata mesajını sözlükten çek
+                    // Get error message from dictionary
                     XtraMessageBox.Show(Resources.ZorunluAlanlarHata, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return; // Metottan çık, kayıt yapma
+                    // Exit method, do not register
                 }
 
                 // --- 2. Validasyon: Şifre Eşleşme Kontrolü ---
+                // --- 2. Validation: Password Match Check ---
                 if (sifre != sifreTekrar)
                 {
                     XtraMessageBox.Show(Resources.SifreEslesmeHata, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -120,9 +126,12 @@ namespace TohumBankasiOtomasyonu
 
                 // --- Veritabanı İşlemleri (EF Core) ---
                 // 'using' bloğu, işlem bitince veritabanı bağlantısını otomatik olarak kapatır.
+                // --- Database Operations (EF Core) ---
+                // 'using' block automatically closes database connection when process ends.
                 using (var db = new TohumBankasiContext())
                 {
                     // --- 3. Validasyon: Kullanıcı Adı Benzersiz mi? ---
+                    // --- 3. Validation: Is Username Unique? ---
                     bool kullaniciMevcut = db.Kullanicilars.Any(k => k.KullaniciAdi == kullaniciAdi);
                     if (kullaniciMevcut)
                     {
@@ -131,38 +140,46 @@ namespace TohumBankasiOtomasyonu
                     }
 
                     // --- 4. Güvenlik: Şifreyi Hash'leme ---
+                    // --- 4. Security: Hashing Password ---
                     string sifreHash = ComputeSha256Hash(sifre);
 
                     // --- 5. Kayıt: Yeni Kullanıcıyı Oluşturma ---
+                    // --- 5. Registration: Creating New User ---
                     Kullanicilar yeniKullanici = new Kullanicilar
                     {
                         Ad = ad,
                         Soyad = soyad,
                         KullaniciAdi = kullaniciAdi,
                         SifreHash = sifreHash,
-                        Email = string.IsNullOrEmpty(email) ? null : email, // E-posta boşsa DB'ye null yaz
-                        KullaniciTipi = "Kullanici" // Varsayılan kullanıcı tipi
+                        Email = string.IsNullOrEmpty(email) ? null : email, // E-posta boşsa DB'ye null yaz (Write null to DB if email is empty)
+                        KullaniciTipi = "Kullanici" // Varsayılan kullanıcı tipi (Default user type)
                     };
 
                     // --- 6. Kayıt: Veritabanına Ekleme ---
+                    // --- 6. Registration: Adding to Database ---
                     db.Kullanicilars.Add(yeniKullanici);
-                    db.SaveChanges(); // Değişiklikleri kaydet
+                    db.SaveChanges(); // Değişiklikleri kaydet (Save changes)
 
                     // --- 7. Geri Bildirim ve Formu Kapatma ---
+                    // --- 7. Feedback and Closing Form ---
 
                     // Başarı mesajı
+                    // Success message
                     XtraMessageBox.Show(Resources.KayitBasariliMesaj, Resources.BasariBaslik, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Form1'deki 'while' döngüsünün bilmesi için bayrağı kaldır
+                    // Raise flag so 'while' loop in Form1 knows
                     this.KayitBasarili = true;
 
                     // Bu formu (FormKayitOl) kapat
+                    // Close this form (FormKayitOl)
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
                 // Beklenmedik bir veritabanı hatası olursa
+                // If an unexpected database error occurs
                 XtraMessageBox.Show(Resources.GenelHata + " " + ex.Message, Resources.HataBaslik, MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }

@@ -15,17 +15,21 @@ namespace TohumBankasiOtomasyonu
     {
         public void DiliYenile()
         {
-            UygulaDil(); // Sabit metinleri (Başlık, sekmeler) güncelle
+            UygulaDil(); // Sabit metinleri (Başlık, sekmeler) güncelle (Update static texts (Title, tabs))
 
             // Eğer bir arama yapılmışsa ve detaylar açıksa, onları da yeni dille tekrar çek
             // (Bunu yapmak için en son seçilen bitki ID'sini bir değişkende tutmalıyız)
             // Şimdilik sadece arama kutusunu temizleyelim veya olduğu gibi bırakalım.
+            // If a search was made and details are open, fetch them again in the new language
+            // (To do this, we must keep the last selected plant ID in a variable)
+            // For now, let's just clear the search box or leave it as is.
             if (_aktifBitkiId > 0)
             {
                 BitkiDetayiniGetir(_aktifBitkiId);
             }
         }
         // Arama sonuçlarını tutmak için geçici bir sınıf
+        // Temporary class to hold search results
         private class AramaSonucu
         {
             public int Id { get; set; }
@@ -34,6 +38,7 @@ namespace TohumBankasiOtomasyonu
 
         List<AramaSonucu> _sonuclar = new List<AramaSonucu>();
         //  Şu an ekranda hangi bitki var? (Hafızada tutuyoruz)
+        //  Which plant is currently on screen? (Keeping in memory)
         private int _aktifBitkiId = 0;
         public UcBitkiBilgi()
         {
@@ -59,6 +64,7 @@ namespace TohumBankasiOtomasyonu
                 listAramaSonuclari.Visible = false;
 
                 // Varsayılan olarak ilk bitkiyi getir
+                // Get the first plant by default
                 using (var db = new TohumBankasiContext())
                 {
                     var ilkBitki = db.Bitkilers.FirstOrDefault(b => b.Aktif == 1);
@@ -68,13 +74,14 @@ namespace TohumBankasiOtomasyonu
                     }
                     else
                     {
-                        Temizle(); // Hiç bitki yoksa temiz kalsın
+                        Temizle(); // Hiç bitki yoksa temiz kalsın (Keep clean if no plants)
                     }
                 }
             }
         }
 
         // --- 1. ARAMA YAPILDIKÇA ÇALIŞAN KOD ---
+        // --- 1. CODE RUNNING AS SEARCH IS PERFORMED ---
         private void txtArama_EditValueChanged(object sender, EventArgs e)
         {
             string aranan = txtArama.Text.Trim().ToLower();
@@ -112,27 +119,35 @@ namespace TohumBankasiOtomasyonu
                     }
 
                     // --- KONUM VE BOYUT AYARLAMA (DÜZELTİLEN KISIM) ---
+                    // --- POSITION AND SIZE ADJUSTMENT (FIXED PART) ---
 
                     // 1. Arama kutusunun EKRAN üzerindeki gerçek konumunu bul
+                    // 1. Find the real position of the search box on the SCREEN
                     Point screenPoint = txtArama.PointToScreen(Point.Empty);
 
                     // 2. Bu konumu UserControl'ün (this) koordinatına çevir
+                    // 2. Convert this position to UserControl's (this) coordinates
                     Point formPoint = this.PointToClient(screenPoint);
 
                     // 3. Listeyi tam altına yerleştir
+                    // 3. Place list exactly below it
                     listAramaSonuclari.Location = new Point(formPoint.X, formPoint.Y + txtArama.Height);
 
                     // 4. Genişliği eşitle
+                    // 4. Equalize width
                     listAramaSonuclari.Width = txtArama.Width;
 
                     // 5. Yükseklik Ayarı (Çok küçülmesini istemiyorsanız burayı değiştirebiliriz)
                     // Mevcut: İçerik kadar büyür/küçülür.
                     // İsterseniz sabit yapabilirsiniz: listAramaSonuclari.Height = 200;
-                    int hesaplananYukseklik = (listAramaSonuclari.ItemHeight * bulunanlar.Count) + 15; // Biraz pay ekledim
-                    listAramaSonuclari.Height = Math.Max(hesaplananYukseklik, 50); // En az 50px olsun
+                    // 5. Height Adjustment (If you don't want it to shrink too much, we can change this)
+                    // Current: Grows/shrinks as much as content.
+                    // If you want, you can make it fixed: listAramaSonuclari.Height = 200;
+                    int hesaplananYukseklik = (listAramaSonuclari.ItemHeight * bulunanlar.Count) + 15; // Biraz pay ekledim (Added some padding)
+                    listAramaSonuclari.Height = Math.Max(hesaplananYukseklik, 50); // En az 50px olsun (At least 50px)
 
                     listAramaSonuclari.Visible = true;
-                    listAramaSonuclari.BringToFront(); // En öne getir (Resmin üzerinde dursun)
+                    listAramaSonuclari.BringToFront(); // En öne getir (Resmin üzerinde dursun) (Bring to front (Stay over image))
                 }
                 else
                 {
@@ -142,23 +157,28 @@ namespace TohumBankasiOtomasyonu
         }
 
         // --- 2. LİSTEDEN SEÇİM YAPILINCA ---
+        // --- 2. WHEN SELECTION IS MADE FROM LIST ---
         private void listAramaSonuclari_Click(object sender, EventArgs e)
         {
             if (listAramaSonuclari.SelectedIndex == -1) return;
 
             // Seçilen bitkinin ID'sini bul
+            // Find ID of selected plant
             int secilenIndex = listAramaSonuclari.SelectedIndex;
             int bitkiId = _sonuclar[secilenIndex].Id;
 
             // Detayları getir ve ekrana bas
+            // Fetch details and print to screen
             BitkiDetayiniGetir(bitkiId);
 
             // Listeyi gizle ve arama kutusunu güncelle
+            // Hide list and update search box
             listAramaSonuclari.Visible = false;
             txtArama.Text = _sonuclar[secilenIndex].GorunenMetin;
         }
 
         // --- 3. DETAYLARI GETİRME ---
+        // --- 3. FETCHING DETAILS ---
         private void BitkiDetayiniGetir(int id)
         {
             _aktifBitkiId = id;
@@ -167,9 +187,11 @@ namespace TohumBankasiOtomasyonu
                 string aktifDil = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
                 // Çeviri bilgilerini çek
+                // Fetch translation information
                 var ceviri = db.BitkiCevirileris.FirstOrDefault(c => c.BitkiId == id && c.DilKodu == aktifDil);
 
                 // Ana görseli çek
+                // Fetch main image
                 var gorsel = db.BitkiGorselleris.FirstOrDefault(g => g.BitkiId == id && g.AnaGorsel == 1);
 
                 if (ceviri != null)

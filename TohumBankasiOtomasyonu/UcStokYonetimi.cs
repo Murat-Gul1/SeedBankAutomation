@@ -21,6 +21,7 @@ namespace TohumBankasiOtomasyonu
         }
 
         // 1. Listeyi Getir
+        // 1. Get the List
         public void StoklariListele()
         {
             using (var db = new TohumBankasiContext())
@@ -28,10 +29,12 @@ namespace TohumBankasiOtomasyonu
                 string aktifDil = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
                 // Tüm bitkileri çek (Left Join mantığıyla, resmi olmasa da gelsin)
+                // Fetch all plants (Using Left Join logic, so even without image it returns)
                 var list = (from b in db.Bitkilers
                             join c in db.BitkiCevirileris on b.BitkiId equals c.BitkiId
                             where c.DilKodu == aktifDil
                             // Resim için Left Join
+                            // Left Join for Image
                             join g in db.BitkiGorselleris.Where(x => x.AnaGorsel == 1)
                                  on b.BitkiId equals g.BitkiId into gorselGrubu
                             from img in gorselGrubu.DefaultIfEmpty()
@@ -56,12 +59,15 @@ namespace TohumBankasiOtomasyonu
         }
 
         // 2. Renklendirme (RowStyle Olayı)
+        // 2. Coloring (RowStyle Event)
         // Tasarımcıda GridView -> Events -> RowStyle olayına bu kodu bağlayın!
+        // Connect this code to GridView -> Events -> RowStyle event in Designer!
         private void gridViewStok_RowStyle(object sender, RowStyleEventArgs e)
         {
             if (e.RowHandle >= 0)
             {
                 // "Stok" sütunundaki değeri al
+                // Get the value in "Stok" (Stock) column
                 var view = sender as GridView;
                 int stok = Convert.ToInt32(view.GetRowCellValue(e.RowHandle, "Stok"));
 
@@ -78,19 +84,23 @@ namespace TohumBankasiOtomasyonu
         }
 
         // 3. Satır Seçilince Sağ Tarafı Doldur (FocusedRowChanged Olayı)
+        // 3. Fill Right Side When Row Selected (FocusedRowChanged Event)
         // Tasarımcıda GridView -> Events -> FocusedRowChanged olayına bağlayın!
+        // Connect to GridView -> Events -> FocusedRowChanged event in Designer!
         private void gridViewStok_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             var view = sender as GridView;
             if (view.FocusedRowHandle >= 0) // Geçerli bir satır mı?
             {
                 // Seçili verileri al
+                // Get selected data
                 _seciliBitkiId = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "ID"));
                 string urunAdi = view.GetRowCellValue(view.FocusedRowHandle, "Urun").ToString();
                 int stok = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Stok"));
                 string resimYolu = view.GetRowCellValue(view.FocusedRowHandle, "ResimYolu")?.ToString();
 
                 // Sağ panele yaz
+                // Write to right panel
                 lblUrunAdi.Text = urunAdi;
                 lblMevcutStok.Text = $"Mevcut Stok: {stok}";
 
@@ -98,6 +108,7 @@ namespace TohumBankasiOtomasyonu
                 else lblMevcutStok.ForeColor = Color.Green;
 
                 // Resmi Yükle
+                // Load Image
                 if (!string.IsNullOrEmpty(resimYolu))
                 {
                     try
@@ -121,9 +132,11 @@ namespace TohumBankasiOtomasyonu
         }
 
         // 4. Stok Güncelleme Butonu
+        // 4. Stock Update Button
         private void btnStokGuncelle_Click(object sender, EventArgs e)
         {
             // 1. Bir bitki seçili mi kontrol et (_seciliBitkiId, FocusedRowChanged olayında doluyor)
+            // 1. Check if a plant is selected (_seciliBitkiId is filled in FocusedRowChanged event)
             if (_seciliBitkiId == 0)
             {
                 XtraMessageBox.Show("Lütfen listeden stok eklemek istediğiniz bitkiyi seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -131,6 +144,7 @@ namespace TohumBankasiOtomasyonu
             }
 
             // 2. Eklenecek miktarı al
+            // 2. Get amount to add
             int eklenecekMiktar = (int)numStokEkle.Value; // SpinEdit kullanıyorsanız .Value
 
             if (eklenecekMiktar <= 0)
@@ -144,19 +158,23 @@ namespace TohumBankasiOtomasyonu
                 using (var db = new TohumBankasiContext())
                 {
                     // 3. Veritabanından bitkiyi bul
+                    // 3. Find plant from database
                     var bitki = db.Bitkilers.Find(_seciliBitkiId);
 
                     if (bitki != null)
                     {
                         // 4. Stoğu Artır
+                        // 4. Increase Stock
                         bitki.StokAdedi += eklenecekMiktar;
 
                         // 5. Kaydet
+                        // 5. Save
                         db.SaveChanges();
 
                         XtraMessageBox.Show($"{eklenecekMiktar} adet stok eklendi!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         // 6. Temizlik ve Yenileme
+                        // 6. Cleanup and Refresh
                         numStokEkle.Value = 0;
                         StoklariListele(); // Listeyi yenile ki tablodaki renkler ve sayılar güncellensin
 
@@ -195,6 +213,7 @@ namespace TohumBankasiOtomasyonu
                     if (bitki != null)
                     {
                         // KRİTİK KONTROL: Stok eksiye düşmemeli
+                        // CRITICAL CHECK: Stock should not go negative
                         if (bitki.StokAdedi < dusulecekMiktar)
                         {
                             XtraMessageBox.Show($"Yetersiz stok! Mevcut stok ({bitki.StokAdedi}), düşmek istediğiniz miktardan ({dusulecekMiktar}) az.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -202,16 +221,19 @@ namespace TohumBankasiOtomasyonu
                         }
 
                         // Stoğu düş
+                        // Decrease stock
                         bitki.StokAdedi -= dusulecekMiktar;
                         db.SaveChanges();
 
                         XtraMessageBox.Show("Stok başarıyla düşüldü.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         // Ekranı Yenile
+                        // Refresh Screen
                         numStokEkle.Value = 0;
                         StoklariListele(); // Tabloyu güncelle
 
                         // Sağ paneldeki etiketi de güncelle
+                        // Update the label on the right panel too
                         lblMevcutStok.Text = $"Mevcut Stok: {bitki.StokAdedi}";
                         if (bitki.StokAdedi <= 0) lblMevcutStok.ForeColor = Color.Red;
                     }
